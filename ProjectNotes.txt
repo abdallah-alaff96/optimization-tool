@@ -17,6 +17,10 @@ then open folder from vscode (opti-tool)
 - Remove useless files - generated automatically ==> logo.svg tests files initial code in (APP.js | APP.CSS ) index.css and someothers
 - create 2 folders in src folder (components and pages)
 
-<!-- Step 4 (Create React APP) -->
-<!-- Step 5 (Create React APP) -->
-<!-- Step 6 (Create React APP) -->
+<!-- Notes -->
+
+- import * as FaIcons from "react-icons/fa";
+      <FaIcons.FaHubspot />
+  whereas "FaHubspot" is changable (icon name)
+
+- 
