@@ -1,10 +1,15 @@
 import React from "react";
-import { FaHubspot } from "react-icons/fa";
+import * as FaIcons from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
     <>
-      <div></div>
+      <div className="navbar">
+        <Link to="#" className="menu">
+          <FaIcons.FaBars />
+        </Link>
+      </div>
     </>
   );
 }
