@@ -2,6 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
+import Complaints from "./pages/Complaints";
+import Dip from "./pages/Dip";
+import Tch from "./pages/Tch";
 
 function App() {
   return (
@@ -9,7 +12,9 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" />
+          <Route path="/" element={<Dip />} />
+          <Route path="/tch" element={<Tch />} />
+          <Route path="/complaints" element={<Complaints />} />
         </Routes>
       </Router>
     </>

@@ -10,7 +10,7 @@ export const sidebarData = [
     cName: "nav-text",
   },
   {
-    title: "TCH Availability",
+    title: "TCH Avai.",
     path: "/tch",
     icon: <TbIcons.TbReportAnalytics />,
     cName: "nav-text",
