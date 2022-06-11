@@ -41,7 +41,7 @@ function Navbar() {
             </li>
             {listComponents}
           </ul>
-          <div class="legal">
+          <div className="legal">
             &copy; Eng.Abdallah Alaff. All rights reserved.
           </div>
         </nav>
