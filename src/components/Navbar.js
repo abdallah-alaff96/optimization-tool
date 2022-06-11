@@ -41,6 +41,9 @@ function Navbar() {
             </li>
             {listComponents}
           </ul>
+          <div class="legal">
+            &copy; Eng.Abdallah Alaff. All rights reserved.
+          </div>
         </nav>
       </IconContext.Provider>
     </>
