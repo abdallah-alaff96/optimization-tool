@@ -11,14 +11,16 @@
 .tch,
 .complaints {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 1rem;
   height: 90vh;
-  width: 90vw;
+  width: 95vw;
   margin: auto;
-  /* background-color: #ede9e9; */
-  border-radius: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 1rem;
 }
 
 body {

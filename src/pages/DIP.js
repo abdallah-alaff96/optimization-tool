@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import * as XLSX from "xlsx";
 import DipInputFile from "../components/DipInputFile";
 import DipTable from "../components/DipTable";
+import DipTransFile from "../components/DipTransFile";
+import "./Dip.css";
 
 function Dip() {
   const [myFile, setMyFile] = useState([]);
@@ -28,7 +30,10 @@ function Dip() {
   return (
     <>
       <div className="dip">
-        <DipInputFile inputFunc={handleFile} />
+        <div className="input-files-container">
+          <DipInputFile inputHandler={handleFile} />
+          <DipTransFile />
+        </div>
         <DipTable tableContent={myFile} />
       </div>
     </>

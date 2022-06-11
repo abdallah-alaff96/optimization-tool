@@ -30,7 +30,7 @@ function Navbar() {
           <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={sidebarToggle} />
           </Link>
-          <span className="navbar-text">RF Optimization Tool</span>
+          <span className="navbar-text">RF Optimization Tool 📶</span>
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={sidebarToggle}>
