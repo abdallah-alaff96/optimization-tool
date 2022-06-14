@@ -29,6 +29,8 @@ function DipTable(props) {
   console.log(newData);
 
   const headerKeysArr = newData.length == 0 ? [] : Object.keys(newData[0]);
+  console.log("header");
+  console.log(headerKeysArr);
 
   // Table Headers
   const theaders = headerKeysArr.map((headerName, index) => (
