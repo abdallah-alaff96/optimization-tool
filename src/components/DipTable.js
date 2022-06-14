@@ -17,6 +17,9 @@ function DipTable(props) {
         delete obj[key]; // delete the old key
       }
     }
+    // to reverse object
+    obj = Object.entries(obj).reverse(); //convert obj to Arr then reverse it
+    obj = Object.fromEntries(obj);
     return obj;
   };
 
@@ -25,11 +28,11 @@ function DipTable(props) {
   });
   console.log(newData);
 
-  const headerKeysArr = data.length == 0 ? [] : Object.keys(data[0]);
+  const headerKeysArr = newData.length == 0 ? [] : Object.keys(newData[0]);
 
   // Table Headers
   const theaders = headerKeysArr.map((headerName, index) => (
-    <th key={index}>{headerName}</th>
+    <th key={index}>{headerName.toUpperCase()}</th>
   ));
 
   // Table Data
@@ -46,7 +49,10 @@ function DipTable(props) {
     <>
       <Table striped bordered hover responsive>
         <thead>
-          <tr>{theaders}</tr>
+          <tr>
+            <th>#</th>
+            {theaders}
+          </tr>
         </thead>
         <tbody>{tData}</tbody>
       </Table>
