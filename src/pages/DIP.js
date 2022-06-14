@@ -54,7 +54,7 @@ function Dip() {
           <DipInputFile inputHandler={fileHandle} />
           <DipTransFile transHandler={transHandle} />
         </div>
-        <DipTable tableContent={myFile} />
+        <DipTable tableContent={myFile} tableTrans={transFile} />
       </div>
     </>
   );
