@@ -2,15 +2,15 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 
 function DipTable(props) {
-  // my trans
-  const transdata = props.tableTrans;
-  console.log(transdata);
-
   // my data
   const data = props.tableContent;
   const dataShallow = [...data];
 
-  // TO LOWER CASE
+  // my trans
+  const transData = props.tableTrans;
+  console.log(transData);
+
+  // TO LOWER CASE AND REMOVE THE SPACE
   const keysToLowerCase = (obj) => {
     var myKeys = Object.keys(obj);
     var n = myKeys.length;
@@ -18,7 +18,12 @@ function DipTable(props) {
       var key = myKeys[n]; // "cache" it, for less lookups to the array
       if (key !== key.toLowerCase()) {
         // might already be in its lower case version
-        obj[key.toLowerCase().replace(/\s+/g, "")] = obj[key]; // swap the value to a new lower case key
+        obj[
+          key
+            .toLowerCase()
+            .replace(/\s+/g, "")
+            .replace(/[^a-zA-Z0-9]/g, "")
+        ] = obj[key]; // swap the value to a new lower case key
         delete obj[key]; // delete the old key
       }
     }
@@ -27,14 +32,30 @@ function DipTable(props) {
     obj = Object.fromEntries(obj);
     return obj;
   };
-
-  const newData = dataShallow.map((row) => {
+  // DATA TO LOWERCASE
+  dataShallow.map((row) => {
     return keysToLowerCase(row);
   });
-  console.log(newData);
+  // TRANSDATA TO LOWERCASE
+  transData.map((row) => {
+    return keysToLowerCase(row);
+  });
+
+  // Remove BSC word from Number
+  dataShallow.map((obj) => {
+    obj.elem = obj.elem.replace(/\D/g, "");
+  });
+
+  // Remove RBL2 & ET
+  dataShallow.map((obj) => {
+    obj.dip = obj.dip.replace(/RBL2|ET/gi, "");
+    obj.bscdip = Number(obj.elem + obj.dip);
+    obj.sitename = transData.find((elm) => elm.con === 14100);
+  });
+  console.log(dataShallow);
 
   // Table Data
-  const tData = newData.map((eachRow, index) => (
+  const tData = dataShallow.map((eachRow, index) => (
     <tr key={index}>
       <td>{index}</td>
       <td>{eachRow.dip}</td>
@@ -100,11 +121,11 @@ export default DipTable;
 //   return obj;
 // };
 
-// const newData = dataShallow.map((row) => {
+// const dataShallow = dataShallow.map((row) => {
 //   return keysToLowerCase(row);
 // });
 
-// const headerKeysArr = newData.length == 0 ? [] : Object.keys(newData[0]);
+// const headerKeysArr = dataShallow.length == 0 ? [] : Object.keys(dataShallow[0]);
 
 // // Table Headers
 // const theaders = headerKeysArr.map((headerName, index) => (
