@@ -2,14 +2,22 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 
 function DipTable(props) {
-  const uasArr = props.tableContent.filter((row) => row.dip > 0);
+  const uasArr = props.tableContent.filter((row) => row.Dip > 0);
+  const headerKeysArr = uasArr.length == 0 ? [] : Object.keys(uasArr[0]);
+  console.log(headerKeysArr);
 
+  // header map
+  const theaders = headerKeysArr.map((headerName, index) => (
+    <th key={index}>{headerName}</th>
+  ));
+
+  // data map
   const tData = uasArr.map((eachRow, index) => (
     <tr key={index}>
       <td>{index}</td>
-      <td>{eachRow.name}</td>
-      <td>{eachRow.hour}</td>
-      <td>{eachRow.dip}</td>
+      <td>{eachRow.Name}</td>
+      <td>{eachRow.Hour}</td>
+      <td>{eachRow.Dip}</td>
     </tr>
   ));
 
@@ -17,12 +25,7 @@ function DipTable(props) {
     <>
       <Table striped bordered hover responsive>
         <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Hour</th>
-            <th>DIP</th>
-          </tr>
+          <tr>{theaders}</tr>
         </thead>
         <tbody>{tData}</tbody>
       </Table>

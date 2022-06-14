@@ -5,7 +5,7 @@ function DipTransFile(props) {
   return (
     <>
       <Form.Group controlId="formFile" className="mb-3 input-file-trans">
-        <Form.Label>And the updated "Transmission" file here ⬇️</Form.Label>
+        <Form.Label>Enter the updated "Transmission" file here ⬇️</Form.Label>
         <Form.Control type="file" size="sm" />
         {/* onChange={props.inputHandler} */}
       </Form.Group>
