@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import DipInputFile from "../components/DipInputFile";
 import DipTable from "../components/DipTable";
@@ -26,7 +26,6 @@ function Dip() {
     };
     reader.readAsArrayBuffer(file);
   };
-  console.log(myFile);
 
   // Trans Handler Function
   const transHandle = (e) => {
@@ -45,6 +44,8 @@ function Dip() {
     };
     reader.readAsArrayBuffer(file);
   };
+
+  console.log(myFile);
   console.log(transFile);
 
   return (

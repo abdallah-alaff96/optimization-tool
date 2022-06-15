@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Table from "react-bootstrap/Table";
 
 function DipTable(props) {
@@ -8,7 +8,6 @@ function DipTable(props) {
 
   // my trans
   const transData = props.tableTrans;
-  console.log(transData);
 
   // TO LOWER CASE AND REMOVE THE SPACE
   const keysToLowerCase = (obj) => {
@@ -32,28 +31,30 @@ function DipTable(props) {
     obj = Object.fromEntries(obj);
     return obj;
   };
-  // DATA TO LOWERCASE
-  dataShallow.map((row) => {
-    return keysToLowerCase(row);
-  });
+
   // TRANSDATA TO LOWERCASE
   transData.map((row) => {
     return keysToLowerCase(row);
   });
 
-  // Remove BSC word from Number
-  dataShallow.map((obj) => {
-    obj.elem = obj.elem.replace(/\D/g, "");
+  dataShallow.map((row) => {
+    // DATA TO LOWERCASE
+    keysToLowerCase(row);
+    // Remove RBL2 & ET
+    row.dip = row.dip.replace(/RBL2|ET/gi, "");
+    // keep only the number of BSC
+    row.elem = row.elem.replace(/\D/g, "");
+    // concatenate bsc with dip
+    row.bscdip = Number(row.elem + row.dip);
+    // VLOOKUP sitename from transData
+    row.sitename =
+      transData.length === 0
+        ? "no site name"
+        : transData.find((elm) => elm.con == row.bscdip).siteid;
   });
 
-  // Remove RBL2 & ET
-  dataShallow.map((obj) => {
-    obj.dip = obj.dip.replace(/RBL2|ET/gi, "");
-    obj.bscdip = Number(obj.elem + obj.dip);
-    obj.sitename = transData.find((elm) => elm.con === 14100);
-  });
   console.log(dataShallow);
-
+  console.log(transData);
   // Table Data
   const tData = dataShallow.map((eachRow, index) => (
     <tr key={index}>
