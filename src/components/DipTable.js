@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 function DipTable(props) {
   const data = props.tableContent;
@@ -77,27 +79,35 @@ function DipTable(props) {
 
   return (
     <>
-      <Table striped bordered hover responsive>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>DIP</th>
-            <th>BSC</th>
-            <th>Site Name</th>
-            <th>Date</th>
-            <th>Hour</th>
-            <th>SF</th>
-            <th>ES</th>
-            <th>SES</th>
-            <th>UAS</th>
-            <th>SFR</th>
-            <th>ESR</th>
-            <th>SESR</th>
-            <th>UASR</th>
-          </tr>
-        </thead>
-        <tbody>{tData}</tbody>
-      </Table>
+      <div className="table-container">
+        <ButtonGroup aria-label="Basic example">
+          <Button variant="secondary">Filtered sheet</Button>
+          <Button variant="secondary">UAS/UASR</Button>
+          <Button variant="secondary">SES/SESR</Button>
+          <Button variant="secondary">ES/ESR</Button>
+        </ButtonGroup>
+        <Table striped bordered hover responsive>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>DIP</th>
+              <th>BSC</th>
+              <th>Site Name</th>
+              <th>Date</th>
+              <th>Hour</th>
+              <th>SF</th>
+              <th>ES</th>
+              <th>SES</th>
+              <th>UAS</th>
+              <th>SFR</th>
+              <th>ESR</th>
+              <th>SESR</th>
+              <th>UASR</th>
+            </tr>
+          </thead>
+          <tbody>{tData}</tbody>
+        </Table>
+      </div>
     </>
   );
 }
