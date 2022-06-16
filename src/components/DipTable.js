@@ -46,7 +46,7 @@ function DipTable(props) {
     row.sitename =
       transData.length === 0
         ? "no site name"
-        : transData.find((elm) => elm.con == row.bscdip).siteid;
+        : transData.find((elm) => elm.con == row.bscdip)?.siteid;
   });
 
   console.log(data);
