@@ -2,11 +2,7 @@ import React, { useEffect } from "react";
 import Table from "react-bootstrap/Table";
 
 function DipTable(props) {
-  // my data
   const data = props.tableContent;
-  const dataShallow = [...data];
-
-  // my trans
   const transData = props.tableTrans;
 
   // TO LOWER CASE AND REMOVE THE SPACE
@@ -37,7 +33,7 @@ function DipTable(props) {
     return keysToLowerCase(row);
   });
 
-  dataShallow.map((row) => {
+  data.map((row) => {
     // DATA TO LOWERCASE
     keysToLowerCase(row);
     // Remove RBL2 & ET
@@ -53,10 +49,11 @@ function DipTable(props) {
         : transData.find((elm) => elm.con == row.bscdip).siteid;
   });
 
-  console.log(dataShallow);
+  console.log(data);
   console.log(transData);
+
   // Table Data
-  const tData = dataShallow.map((eachRow, index) => (
+  const tData = data.map((eachRow, index) => (
     <tr key={index}>
       <td>{index}</td>
       <td>{eachRow.dip}</td>

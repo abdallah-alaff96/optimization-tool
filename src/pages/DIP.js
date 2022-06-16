@@ -21,7 +21,6 @@ function Dip() {
       const firstWs = workbook.Sheets[firstWsName];
       const firstWsData = XLSX.utils.sheet_to_json(firstWs);
 
-      // My Actions
       setMyFile(firstWsData);
     };
     reader.readAsArrayBuffer(file);
@@ -39,7 +38,6 @@ function Dip() {
       const secondWs = workbook.Sheets[secondWsName];
       const secondWsData = XLSX.utils.sheet_to_json(secondWs);
 
-      // My Actions
       setTransFile(secondWsData);
     };
     reader.readAsArrayBuffer(file);
