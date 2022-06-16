@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 function DipTable(props) {
+  const [activeArr, setActiveArr] = useState([]);
   const data = props.tableContent;
   const transData = props.tableTrans;
 
@@ -57,8 +58,21 @@ function DipTable(props) {
   const sesArr = filteredData.filter((row) => row.ses > 2 || row.sesr > 2);
   const esArr = filteredData.filter((row) => row.es > 100 || row.esr > 100);
 
+  const filteredDataHandler = () => {
+    setActiveArr(filteredData);
+  };
+  const uasHandler = () => {
+    setActiveArr(uasArr);
+  };
+  const sesHandler = () => {
+    setActiveArr(sesArr);
+  };
+  const esHandler = () => {
+    setActiveArr(esArr);
+  };
+
   // Table Data
-  const tData = sesArr.map((eachRow, index) => (
+  const tData = activeArr.map((eachRow, index) => (
     <tr key={index}>
       <td>{index}</td>
       <td>{eachRow.dip}</td>
@@ -79,35 +93,41 @@ function DipTable(props) {
 
   return (
     <>
-      <div className="table-container">
-        <ButtonGroup aria-label="Basic example">
-          <Button variant="secondary">Filtered sheet</Button>
-          <Button variant="secondary">UAS/UASR</Button>
-          <Button variant="secondary">SES/SESR</Button>
-          <Button variant="secondary">ES/ESR</Button>
-        </ButtonGroup>
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>DIP</th>
-              <th>BSC</th>
-              <th>Site Name</th>
-              <th>Date</th>
-              <th>Hour</th>
-              <th>SF</th>
-              <th>ES</th>
-              <th>SES</th>
-              <th>UAS</th>
-              <th>SFR</th>
-              <th>ESR</th>
-              <th>SESR</th>
-              <th>UASR</th>
-            </tr>
-          </thead>
-          <tbody>{tData}</tbody>
-        </Table>
-      </div>
+      <ButtonGroup aria-label="Basic example">
+        <Button variant="secondary" onClick={filteredDataHandler}>
+          Filtered sheet
+        </Button>
+        <Button variant="secondary" onClick={uasHandler}>
+          UAS/UASR
+        </Button>
+        <Button variant="secondary" onClick={sesHandler}>
+          SES/SESR
+        </Button>
+        <Button variant="secondary" onClick={esHandler}>
+          ES/ESR
+        </Button>
+      </ButtonGroup>
+      <Table striped bordered hover responsive>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>DIP</th>
+            <th>BSC</th>
+            <th>Site Name</th>
+            <th>Date</th>
+            <th>Hour</th>
+            <th>SF</th>
+            <th>ES</th>
+            <th>SES</th>
+            <th>UAS</th>
+            <th>SFR</th>
+            <th>ESR</th>
+            <th>SESR</th>
+            <th>UASR</th>
+          </tr>
+        </thead>
+        <tbody>{tData}</tbody>
+      </Table>
     </>
   );
 }
