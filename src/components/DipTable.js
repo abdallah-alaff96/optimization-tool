@@ -45,15 +45,23 @@ function DipTable(props) {
     // VLOOKUP sitename from transData
     row.sitename =
       transData.length === 0
-        ? "no site name"
-        : transData.find((elm) => elm.con == row.bscdip)?.siteid;
+        ? "Waiting Trans. file update"
+        : transData.find((elm) => elm.con == row.bscdip)?.siteid ||
+          "Does not belong to Gaza sites";
   });
 
-  console.log(data);
-  console.log(transData);
+  const filteredData = data.filter((row) => row.sitename.startsWith("G"));
+  const uas = filteredData.filter((row) => row.uas > 0 || row.uasr > 0);
+  const ses = filteredData.filter((row) => row.ses > 2 || row.sesr > 2);
+  const es = filteredData.filter((row) => row.es > 50 || row.esr > 50);
+
+  console.log(filteredData);
+  console.log(uas);
+  console.log(ses);
+  console.log(es);
 
   // Table Data
-  const tData = data.map((eachRow, index) => (
+  const tData = filteredData.map((eachRow, index) => (
     <tr key={index}>
       <td>{index}</td>
       <td>{eachRow.dip}</td>
