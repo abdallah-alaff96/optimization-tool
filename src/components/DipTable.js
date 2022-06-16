@@ -51,17 +51,12 @@ function DipTable(props) {
   });
 
   const filteredData = data.filter((row) => row.sitename.startsWith("G"));
-  const uas = filteredData.filter((row) => row.uas > 0 || row.uasr > 0);
-  const ses = filteredData.filter((row) => row.ses > 2 || row.sesr > 2);
-  const es = filteredData.filter((row) => row.es > 50 || row.esr > 50);
-
-  console.log(filteredData);
-  console.log(uas);
-  console.log(ses);
-  console.log(es);
+  const uasArr = filteredData.filter((row) => row.uas > 0 || row.uasr > 0);
+  const sesArr = filteredData.filter((row) => row.ses > 2 || row.sesr > 2);
+  const esArr = filteredData.filter((row) => row.es > 100 || row.esr > 100);
 
   // Table Data
-  const tData = filteredData.map((eachRow, index) => (
+  const tData = sesArr.map((eachRow, index) => (
     <tr key={index}>
       <td>{index}</td>
       <td>{eachRow.dip}</td>
