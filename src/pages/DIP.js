@@ -43,8 +43,8 @@ function Dip() {
     reader.readAsArrayBuffer(file);
   };
 
-  console.log(myFile);
-  console.log(transFile);
+  // console.log(myFile);
+  // console.log(transFile);
 
   return (
     <>

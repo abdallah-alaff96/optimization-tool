@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
+import * as XLSX from "xlsx";
 
 function DipTable(props) {
   const [activeArr, setActiveArr] = useState([]);
@@ -58,6 +59,10 @@ function DipTable(props) {
   const sesArr = filteredData.filter((row) => row.ses > 2 || row.sesr > 2);
   const esArr = filteredData.filter((row) => row.es > 100 || row.esr > 100);
 
+  useEffect(() => {
+    setActiveArr(filteredData);
+  }, [data, transData]);
+
   const filteredDataHandler = () => {
     setActiveArr(filteredData);
   };
@@ -69,6 +74,59 @@ function DipTable(props) {
   };
   const esHandler = () => {
     setActiveArr(esArr);
+  };
+
+  //Write an Excel file
+  const handleExportDip = () => {
+    // Reorder the JSON file for Exporting Excel file
+    let orderForm = {
+      ossid: null,
+      elem: null,
+      dataavailability: null,
+      neversion: null,
+      dip: null,
+      bscdip: null,
+      sitename: null,
+      date: null,
+      hour: null,
+      dipnuav: null,
+      dipfuav: null,
+      sf: null,
+      es: null,
+      ses: null,
+      uas: null,
+      sfr: null,
+      esr: null,
+      sesr: null,
+      uasr: null,
+    };
+
+    const orderedFilteredData = filteredData.map((row) => {
+      return Object.assign(orderForm, row);
+    });
+    const orderedUasArr = uasArr.map((row) => {
+      return Object.assign(orderForm, row);
+    });
+    const orderedSesArr = sesArr.map((row) => {
+      return Object.assign(orderForm, row);
+    });
+    const orderedEsArr = esArr.map((row) => {
+      return Object.assign(orderForm, row);
+    });
+
+    var wb = XLSX.utils.book_new();
+    // CONVERT FROM JSON TO SHEET
+    var filteredDataSheet = XLSX.utils.json_to_sheet(orderedFilteredData);
+    var uasSheet = XLSX.utils.json_to_sheet(orderedUasArr);
+    var sesSheet = XLSX.utils.json_to_sheet(orderedSesArr);
+    var esSheet = XLSX.utils.json_to_sheet(orderedEsArr);
+    // APPEND SHEETS TO WB
+    XLSX.utils.book_append_sheet(wb, filteredDataSheet, "All affected sites");
+    XLSX.utils.book_append_sheet(wb, uasSheet, "UAS-UASR");
+    XLSX.utils.book_append_sheet(wb, sesSheet, "SES-SESR");
+    XLSX.utils.book_append_sheet(wb, esSheet, "ES-ESR");
+
+    XLSX.writeFile(wb, "DIP-Report.xlsx");
   };
 
   // Table Data
@@ -93,8 +151,12 @@ function DipTable(props) {
 
   return (
     <>
-      <ButtonGroup aria-label="Basic example">
-        <Button variant="secondary" onClick={filteredDataHandler}>
+      <Button variant="success" onClick={handleExportDip}>
+        Extract Data
+      </Button>
+
+      <ButtonGroup aria-label="aria-labelledby" size="sm">
+        <Button variant="primary" onClick={filteredDataHandler}>
           Filtered sheet
         </Button>
         <Button variant="secondary" onClick={uasHandler}>
@@ -107,6 +169,7 @@ function DipTable(props) {
           ES/ESR
         </Button>
       </ButtonGroup>
+
       <Table striped bordered hover responsive>
         <thead>
           <tr>
