@@ -27,9 +27,6 @@ function DipTable(props) {
         delete obj[key]; // delete the old key
       }
     }
-    // to reverse object
-    obj = Object.entries(obj).reverse(); //convert obj to Arr then reverse it
-    obj = Object.fromEntries(obj);
     return obj;
   };
 
@@ -65,6 +62,7 @@ function DipTable(props) {
     setActiveArr(filteredData);
   }, [data, transData]);
 
+  // Active Button Handlers
   const filteredDataHandler = () => {
     setActiveArr(filteredData);
   };
@@ -80,49 +78,67 @@ function DipTable(props) {
 
   //Write an Excel file
   const handleExportDip = () => {
+    const keysToUpperCase = (obj) => {
+      var keysArr = Object.keys(obj);
+      var n = keysArr.length;
+      while (n--) {
+        var key = keysArr[n]; // "cache" it, for less lookups to the array
+        if (key !== key.toUpperCase()) {
+          // might already be in its lower case version
+          obj[key.toUpperCase()] = obj[key]; // swap the value to a new lower case key
+          delete obj[key]; // delete the old key
+        }
+      }
+      return obj;
+    };
     // Reorder the JSON file for Exporting Excel file
     const orderHandler = (arr) => {
+      arr.map((row) => {
+        // TRANSDATA TO UpperCase()
+        keysToUpperCase(row);
+      });
+
       const newArr = arr.map(
         ({
-          uasr,
-          sesr,
-          esr,
-          sfr,
-          uas,
-          ses,
-          es,
-          sf,
-          dipfuav,
-          dipnuav,
-          hour,
-          date,
-          dip,
-          ne_version,
-          data_availability,
-          elem,
-          oss_id,
-          bsc_dip,
-          site_name,
+          UASR,
+          SESR,
+          ESR,
+          SFR,
+          UAS,
+          SES,
+          ES,
+          SF,
+          DIPFUAV,
+          DIPNUAV,
+          HOUR,
+          DATE,
+          DIP,
+          NE_VERSION,
+          DATA_AVAILABILITY,
+          ELEM,
+          OSS_ID,
+          BSC_DIP,
+          SITE_NAME,
         }) => ({
-          oss_id,
-          elem,
-          data_availability,
-          ne_version,
-          dip,
-          bsc_dip,
-          site_name,
-          date,
-          hour,
-          dipnuav,
-          dipfuav,
-          sf,
-          es,
-          ses,
-          uas,
-          sfr,
-          esr,
-          sesr,
-          uasr,
+          OSS_ID,
+          ELEM,
+          DATA_AVAILABILITY,
+          NE_VERSION,
+          DIP,
+          BSC_DIP,
+          SITE_NAME,
+          DATE,
+          HOUR,
+          DIPNUAV,
+          DIPFUAV,
+          SF,
+          ES,
+          SES,
+          UAS,
+          SFR,
+          ESR,
+          SESR,
+          UASR,
         })
       );
       return newArr;
