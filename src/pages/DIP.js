@@ -1,3 +1,4 @@
+"use strict";
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import DipInputFile from "../components/DipInputFile";

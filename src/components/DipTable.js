@@ -1,3 +1,4 @@
+"use strict";
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
@@ -20,8 +21,8 @@ function DipTable(props) {
         obj[
           key
             .toLowerCase()
-            .replace(/\s+/g, "")
-            .replace(/[^a-zA-Z0-9]/g, "")
+            .replace(/\s+/g, "_")
+            .replace(/[^a-zA-Z0-9]/g, "_")
         ] = obj[key]; // swap the value to a new lower case key
         delete obj[key]; // delete the old key
       }
@@ -32,9 +33,9 @@ function DipTable(props) {
     return obj;
   };
 
-  // TRANSDATA TO LOWERCASE
   transData.map((row) => {
-    return keysToLowerCase(row);
+    // TRANSDATA TO LOWERCASE
+    keysToLowerCase(row);
   });
 
   data.map((row) => {
@@ -45,16 +46,17 @@ function DipTable(props) {
     // keep only the number of BSC
     row.elem = row.elem.replace(/\D/g, "");
     // concatenate bsc with dip
-    row.bscdip = Number(row.elem + row.dip);
-    // VLOOKUP sitename from transData
-    row.sitename =
+    row.bsc_dip = Number(row.elem + row.dip);
+    // VLOOKUP site_name from transData
+    row.site_name =
       transData.length === 0
         ? "Waiting Trans. file update"
-        : transData.find((elm) => elm.con == row.bscdip)?.siteid ||
+        : transData.find((elm) => elm.con_ == row.bsc_dip)?.site_id ||
           "Does not belong to Gaza sites";
   });
 
-  const filteredData = data.filter((row) => row.sitename.startsWith("G"));
+  // filtering conditions the 4 sheets
+  const filteredData = data.filter((row) => row.site_name.startsWith("G"));
   const uasArr = filteredData.filter((row) => row.uas > 0 || row.uasr > 0);
   const sesArr = filteredData.filter((row) => row.ses > 2 || row.sesr > 2);
   const esArr = filteredData.filter((row) => row.es > 100 || row.esr > 100);
@@ -79,40 +81,60 @@ function DipTable(props) {
   //Write an Excel file
   const handleExportDip = () => {
     // Reorder the JSON file for Exporting Excel file
-    let orderForm = {
-      ossid: null,
-      elem: null,
-      dataavailability: null,
-      neversion: null,
-      dip: null,
-      bscdip: null,
-      sitename: null,
-      date: null,
-      hour: null,
-      dipnuav: null,
-      dipfuav: null,
-      sf: null,
-      es: null,
-      ses: null,
-      uas: null,
-      sfr: null,
-      esr: null,
-      sesr: null,
-      uasr: null,
+    const orderHandler = (arr) => {
+      const newArr = arr.map(
+        ({
+          uasr,
+          sesr,
+          esr,
+          sfr,
+          uas,
+          ses,
+          es,
+          sf,
+          dipfuav,
+          dipnuav,
+          hour,
+          date,
+          dip,
+          ne_version,
+          data_availability,
+          elem,
+          oss_id,
+          bsc_dip,
+          site_name,
+        }) => ({
+          oss_id,
+          elem,
+          data_availability,
+          ne_version,
+          dip,
+          bsc_dip,
+          site_name,
+          date,
+          hour,
+          dipnuav,
+          dipfuav,
+          sf,
+          es,
+          ses,
+          uas,
+          sfr,
+          esr,
+          sesr,
+          uasr,
+        })
+      );
+      return newArr;
     };
 
-    const orderedFilteredData = filteredData.map((row) => {
-      return Object.assign(orderForm, row);
-    });
-    const orderedUasArr = uasArr.map((row) => {
-      return Object.assign(orderForm, row);
-    });
-    const orderedSesArr = sesArr.map((row) => {
-      return Object.assign(orderForm, row);
-    });
-    const orderedEsArr = esArr.map((row) => {
-      return Object.assign(orderForm, row);
-    });
+    const orderedFilteredData = orderHandler(filteredData);
+    const orderedUasArr = orderHandler(uasArr);
+    const orderedSesArr = orderHandler(sesArr);
+    const orderedEsArr = orderHandler(esArr);
+
+    // console.log(filteredData);
+    // console.log(orderedFilteredData);
 
     var wb = XLSX.utils.book_new();
     // CONVERT FROM JSON TO SHEET
@@ -135,7 +157,7 @@ function DipTable(props) {
       <td>{index}</td>
       <td>{eachRow.dip}</td>
       <td>{eachRow.elem}</td>
-      <td>{eachRow.sitename}</td>
+      <td>{eachRow.site_name}</td>
       <td>{eachRow.date}</td>
       <td>{eachRow.hour}</td>
       <td>{eachRow.sf}</td>
@@ -196,32 +218,3 @@ function DipTable(props) {
 }
 
 export default DipTable;
-
-// const dataShallow = [...data];
-// const keysToLowerCase = (obj) => {
-//   var myKeys = Object.keys(obj);
-//   var n = myKeys.length;
-//   while (n--) {
-//     var key = myKeys[n]; // "cache" it, for less lookups to the array
-//     if (key !== key.toLowerCase()) {
-//       // might already be in its lower case version
-//       obj[key.toLowerCase().replace(/\s+/g, "")] = obj[key]; // swap the value to a new lower case key
-//       delete obj[key]; // delete the old key
-//     }
-//   }
-//   // to reverse object
-//   obj = Object.entries(obj).reverse(); //convert obj to Arr then reverse it
-//   obj = Object.fromEntries(obj);
-//   return obj;
-// };
-
-// const dataShallow = dataShallow.map((row) => {
-//   return keysToLowerCase(row);
-// });
-
-// const headerKeysArr = dataShallow.length == 0 ? [] : Object.keys(dataShallow[0]);
-
-// // Table Headers
-// const theaders = headerKeysArr.map((headerName, index) => (
-//   <th key={index}>{headerName.toUpperCase()}</th>
-// ));
