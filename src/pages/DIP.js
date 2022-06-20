@@ -1,5 +1,5 @@
 "use strict";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import * as XLSX from "xlsx";
 import DipInputFile from "../components/DipInputFile";
 import DipTable from "../components/DipTable";
@@ -17,7 +17,11 @@ function Dip() {
 
     reader.onload = (e) => {
       var data = e.target.result;
-      var workbook = XLSX.read(data, { type: "buffer" });
+      var workbook = XLSX.read(data, {
+        type: "buffer",
+        cellStyles: true,
+        cellFormula: true,
+      });
       const firstWsName = workbook.SheetNames[0];
       const firstWs = workbook.Sheets[firstWsName];
       const firstWsData = XLSX.utils.sheet_to_json(firstWs);
@@ -34,7 +38,11 @@ function Dip() {
 
     reader.onload = (e) => {
       var data = e.target.result;
-      var workbook = XLSX.read(data, { type: "buffer" });
+      var workbook = XLSX.read(data, {
+        type: "buffer",
+        cellStyles: true,
+        cellFormula: true,
+      });
       const secondWsName = workbook.SheetNames[1];
       const secondWs = workbook.Sheets[secondWsName];
       const secondWsData = XLSX.utils.sheet_to_json(secondWs);

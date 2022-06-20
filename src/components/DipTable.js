@@ -91,13 +91,12 @@ function DipTable(props) {
       }
       return obj;
     };
-    // Reorder the JSON file for Exporting Excel file
     const orderHandler = (arr) => {
+      // TO UpperCase()
       arr.map((row) => {
-        // TRANSDATA TO UpperCase()
         keysToUpperCase(row);
       });
-
+      // Reorder the JSON file for Exporting Excel file
       const newArr = arr.map(
         ({
           UASR,
@@ -158,13 +157,56 @@ function DipTable(props) {
     var uasSheet = XLSX.utils.json_to_sheet(orderedUasArr);
     var sesSheet = XLSX.utils.json_to_sheet(orderedSesArr);
     var esSheet = XLSX.utils.json_to_sheet(orderedEsArr);
+
+    const widthHandler = (sheet) => {
+      sheet["!cols"] = [
+        { wch: 10 },
+        { wch: 7 },
+        { wch: 18 },
+        { wch: 15 },
+        { wch: 7 },
+        { wch: 10 },
+        { wch: 10 },
+        { wch: 10 },
+        { wch: 7 },
+        { wch: 9 },
+        { wch: 9 },
+        { wch: 6 },
+        { wch: 6 },
+        { wch: 6 },
+        { wch: 6 },
+        { wch: 6 },
+        { wch: 6 },
+        { wch: 6 },
+        { wch: 6 },
+      ];
+    };
+    widthHandler(filteredDataSheet);
+    widthHandler(uasSheet);
+    widthHandler(sesSheet);
+    widthHandler(esSheet);
+
+    // styling sheets
+    filteredDataSheet["A1"].s = {
+      // set the style for target cell
+      font: {
+        sz: 24,
+        bold: true,
+      },
+      alignment: { horizontal: "center" },
+    };
+    console.log(filteredDataSheet);
+
     // APPEND SHEETS TO WB
     XLSX.utils.book_append_sheet(wb, filteredDataSheet, "All affected sites");
     XLSX.utils.book_append_sheet(wb, uasSheet, "UAS-UASR");
     XLSX.utils.book_append_sheet(wb, sesSheet, "SES-SESR");
     XLSX.utils.book_append_sheet(wb, esSheet, "ES-ESR");
 
-    XLSX.writeFile(wb, "DIP-Report.xlsx");
+    XLSX.writeFile(wb, "DIP-Report.xlsx", {
+      cellStyles: true,
+      cellDates: true,
+    });
   };
 
   // Table Data
