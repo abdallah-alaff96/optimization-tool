@@ -20,7 +20,8 @@ function Dip() {
       var workbook = XLSX.read(data, {
         type: "buffer",
         cellStyles: true,
-        cellFormula: true,
+        cellDates: true,
+        cellNF: true,
       });
       const firstWsName = workbook.SheetNames[0];
       const firstWs = workbook.Sheets[firstWsName];
@@ -52,7 +53,7 @@ function Dip() {
     reader.readAsArrayBuffer(file);
   };
 
-  // console.log(myFile);
+  console.log(myFile);
   // console.log(transFile);
 
   return (

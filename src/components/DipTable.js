@@ -78,6 +78,7 @@ function DipTable(props) {
 
   //Write an Excel file
   const handleExportDip = () => {
+    //UpperCase Function
     const keysToUpperCase = (obj) => {
       var keysArr = Object.keys(obj);
       var n = keysArr.length;
@@ -91,6 +92,7 @@ function DipTable(props) {
       }
       return obj;
     };
+    // function to order the object keys for extraction to excel
     const orderHandler = (arr) => {
       // TO UpperCase()
       arr.map((row) => {
@@ -142,15 +144,13 @@ function DipTable(props) {
       );
       return newArr;
     };
-
+    // call order function
     const orderedFilteredData = orderHandler(filteredData);
     const orderedUasArr = orderHandler(uasArr);
     const orderedSesArr = orderHandler(sesArr);
     const orderedEsArr = orderHandler(esArr);
 
-    // console.log(filteredData);
-    // console.log(orderedFilteredData);
-
+    // Creact new WB
     var wb = XLSX.utils.book_new();
     // CONVERT FROM JSON TO SHEET
     var filteredDataSheet = XLSX.utils.json_to_sheet(orderedFilteredData);
@@ -181,31 +181,34 @@ function DipTable(props) {
         { wch: 6 },
       ];
     };
+
     widthHandler(filteredDataSheet);
     widthHandler(uasSheet);
     widthHandler(sesSheet);
     widthHandler(esSheet);
 
-    // styling sheets
-    filteredDataSheet["A1"].s = {
-      // set the style for target cell
-      font: {
-        sz: 24,
-        bold: true,
-      },
-      alignment: { horizontal: "center" },
-    };
-    console.log(filteredDataSheet);
+    // // styling sheets (need pro version)
+
+    // filteredDataSheet["A1"].s = {
+    //   // set the style for target cell
+    //   font: {
+    //     sz: 24,
+    //     bold: true,
+    //   },
+    // };
 
     // APPEND SHEETS TO WB
+
     XLSX.utils.book_append_sheet(wb, filteredDataSheet, "All affected sites");
     XLSX.utils.book_append_sheet(wb, uasSheet, "UAS-UASR");
     XLSX.utils.book_append_sheet(wb, sesSheet, "SES-SESR");
     XLSX.utils.book_append_sheet(wb, esSheet, "ES-ESR");
 
     XLSX.writeFile(wb, "DIP-Report.xlsx", {
+      type: "buffer",
       cellStyles: true,
       cellDates: true,
+      cellNF: true,
     });
   };
 
@@ -216,7 +219,7 @@ function DipTable(props) {
       <td>{eachRow.dip}</td>
       <td>{eachRow.elem}</td>
       <td>{eachRow.site_name}</td>
-      <td>{eachRow.date}</td>
+      <td>{eachRow.date.toDateString()}</td>
       <td>{eachRow.hour}</td>
       <td>{eachRow.sf}</td>
       <td>{eachRow.es}</td>
