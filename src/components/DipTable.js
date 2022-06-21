@@ -7,6 +7,8 @@ import * as XLSX from "xlsx";
 
 function DipTable(props) {
   const [activeArr, setActiveArr] = useState([]);
+  const [activeExtractButton, setActiveExtractButton] = useState(false);
+
   const data = props.tableContent;
   const transData = props.tableTrans;
 
@@ -59,7 +61,10 @@ function DipTable(props) {
   const esArr = filteredData.filter((row) => row.es > 100 || row.esr > 100);
 
   useEffect(() => {
-    setActiveArr(filteredData);
+    if (data.length !== 0 && transData.length !== 0) {
+      setActiveArr(filteredData);
+      setActiveExtractButton(true);
+    }
   }, [data, transData]);
 
   // Active Button Handlers
@@ -234,46 +239,52 @@ function DipTable(props) {
 
   return (
     <>
-      <Button variant="success" onClick={handleExportDip}>
-        Extract Data
-      </Button>
+      {activeExtractButton && (
+        <Button variant="success" onClick={handleExportDip}>
+          Extract Data
+        </Button>
+      )}
 
-      <ButtonGroup aria-label="aria-labelledby" size="sm">
-        <Button variant="primary" onClick={filteredDataHandler}>
-          Filtered sheet
-        </Button>
-        <Button variant="secondary" onClick={uasHandler}>
-          UAS/UASR
-        </Button>
-        <Button variant="secondary" onClick={sesHandler}>
-          SES/SESR
-        </Button>
-        <Button variant="secondary" onClick={esHandler}>
-          ES/ESR
-        </Button>
-      </ButtonGroup>
+      {activeExtractButton && (
+        <ButtonGroup aria-label="aria-labelledby" size="sm">
+          <Button variant="primary" onClick={filteredDataHandler}>
+            Filtered sheet
+          </Button>
+          <Button variant="secondary" onClick={uasHandler}>
+            UAS/UASR
+          </Button>
+          <Button variant="secondary" onClick={sesHandler}>
+            SES/SESR
+          </Button>
+          <Button variant="secondary" onClick={esHandler}>
+            ES/ESR
+          </Button>
+        </ButtonGroup>
+      )}
 
-      <Table striped bordered hover responsive>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>DIP</th>
-            <th>BSC</th>
-            <th>Site Name</th>
-            <th>Date</th>
-            <th>Hour</th>
-            <th>SF</th>
-            <th>ES</th>
-            <th>SES</th>
-            <th>UAS</th>
-            <th>SFR</th>
-            <th>ESR</th>
-            <th>SESR</th>
-            <th>UASR</th>
-          </tr>
-        </thead>
-        <tbody>{tData}</tbody>
-      </Table>
+      {activeExtractButton && (
+        <Table striped bordered hover responsive>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>DIP</th>
+              <th>BSC</th>
+              <th>Site Name</th>
+              <th>Date</th>
+              <th>Hour</th>
+              <th>SF</th>
+              <th>ES</th>
+              <th>SES</th>
+              <th>UAS</th>
+              <th>SFR</th>
+              <th>ESR</th>
+              <th>SESR</th>
+              <th>UASR</th>
+            </tr>
+          </thead>
+          <tbody>{tData}</tbody>
+        </Table>
+      )}
     </>
   );
 }
