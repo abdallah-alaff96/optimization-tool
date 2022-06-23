@@ -1,0 +1,6 @@
+.header {
+  display: flex;
+  flex: 1 8%;
+  height: 20%;
+  background-color: aqua;
+}

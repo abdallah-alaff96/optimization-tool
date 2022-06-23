@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  justify-content: flex-start;
+  flex: 1 1 100%;
+  height: 100vh;
+
+  text-align: center;
+  background-color: tomato;
+}
+
+.left_block {
+  display: flex;
+  flex-direction: column;
+  flex: 1 12%;
+  padding: 1rem;
+  background-color: aquamarine;
+}
+.right_block {
+  display: flex;
+  flex-direction: column;
+  flex: 1 87%;
+}
