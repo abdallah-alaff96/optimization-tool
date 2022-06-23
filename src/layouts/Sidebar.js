@@ -15,16 +15,17 @@ function Sidebar() {
   const listComponents = sidebarData.map((item, index) => {
     return (
       <li key={index} className={item.cName}>
-        <Link to={item.path} className="menu-bars">
+        <Link to={item.path} className="list-button">
           {item.icon}
           <span>{item.title}</span>
         </Link>
       </li>
     );
   });
+
   return (
     <>
-      <IconContext.Provider value={{ color: "#ffff" }}>
+      <IconContext.Provider value={{ color: "#808191" }}>
         <nav className={sidebar ? "nav active" : "nav"}>
           <ul className="nav-list" onClick={sidebarToggle}>
             {/* <li className="nav-menu-toggle">

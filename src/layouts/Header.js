@@ -12,12 +12,11 @@ function Header() {
   return (
     <>
       <div className="header">
-        <div className="home-button">
-          <Link to="#" className="menu-bars">
-            <FaIcons.FaBars onClick={sidebarToggle} />
-          </Link>
-        </div>
-        <div className="navbar-text">RF Optimization Tool 📶</div>
+        <Link to="#" className="list-button">
+          <FaIcons.FaBars onClick={sidebarToggle} />
+        </Link>
+
+        <div className="title">RF Optimization Tool 📶</div>
       </div>
     </>
   );
