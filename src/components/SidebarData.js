@@ -4,13 +4,13 @@ import * as TbIcons from "react-icons/tb";
 
 export const sidebarData = [
   {
-    title: "DIP",
+    title: "DIP Report",
     path: "/",
     icon: <FaIcons.FaHubspot />,
     cName: "nav-list-item",
   },
   {
-    title: "TCH Avai.",
+    title: "TCH Report",
     path: "/tch",
     icon: <TbIcons.TbReportAnalytics />,
     cName: "nav-list-item",

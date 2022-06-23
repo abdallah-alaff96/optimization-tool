@@ -7,22 +7,6 @@
   font-family: "lato", sans-serif;
 }
 
-/* .dip,
-.tch,
-.complaints {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  font-size: 1rem;
-  height: 90vh;
-  width: 95vw;
-  margin: auto;
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  padding: 1rem;
-} */
-
 body {
   line-height: 1.6;
   background: #f5f5f5;
@@ -90,6 +74,9 @@ body {
 .content {
   display: flex;
   flex: 1 92%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   height: 80%;
 
   background-color: rgb(188, 217, 108);
