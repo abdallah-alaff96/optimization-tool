@@ -31,25 +31,25 @@ function Sidebar() {
     <>
       <Router>
         <IconContext.Provider value={{ color: "#ffff" }}>
-          <div className="navbar">
+          {/* <div className="home-button">
             <Link to="#" className="menu-bars">
               <FaIcons.FaBars onClick={sidebarToggle} />
             </Link>
-            <span className="navbar-text">RF Optimization Tool 📶</span>
-          </div>
-          <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-            <ul className="nav-menu-items" onClick={sidebarToggle}>
-              <li className="nav-menu-toggle">
+          </div> */}
+          {/* <div className="navbar-text">RF Optimization Tool 📶</div> */}
+          <nav className={sidebar ? "nav active" : "nav"}>
+            <ul className="nav-list" onClick={sidebarToggle}>
+              {/* <li className="nav-menu-toggle">
                 <Link to="#" className="menu-bars">
                   <AiIcons.AiOutlineClose />
                 </Link>
-              </li>
+              </li> */}
               {listComponents}
             </ul>
-            <div className="legal">
-              &copy; Eng.Abdallah Alaff. All rights reserved.
-            </div>
           </nav>
+          <div className="legal">
+            &copy; Eng.Abdallah Alaff. All rights reserved.
+          </div>
         </IconContext.Provider>
         <Routes>
           <Route path="/" element={<Dip />} />

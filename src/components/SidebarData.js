@@ -7,18 +7,18 @@ export const sidebarData = [
     title: "DIP",
     path: "/",
     icon: <FaIcons.FaHubspot />,
-    cName: "nav-text",
+    cName: "nav-list-item",
   },
   {
     title: "TCH Avai.",
     path: "/tch",
     icon: <TbIcons.TbReportAnalytics />,
-    cName: "nav-text",
+    cName: "nav-list-item",
   },
   {
     title: "Complaints",
     path: "/complaints",
     icon: <IoIcons.IoIosPeople />,
-    cName: "nav-text",
+    cName: "nav-list-item",
   },
 ];
