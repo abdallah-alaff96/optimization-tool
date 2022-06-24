@@ -4,7 +4,8 @@
   /* colors */
   --clr-burbble: #6c5dd3;
   --clr-gray: #808191;
-  --clr-white: #fcfcfc;
+  --clr-darkWhite: #fcfcfc;
+  --clr-white: #ffffff;
 
   /* font-size */
   --fz-small: 12px;
@@ -40,25 +41,24 @@ a:active {
   text-align: center;
   background-color: tomato;
 }
-
 .left_block {
   display: flex;
   flex-direction: column;
-  flex: 1 18%;
+  flex: 1 16%;
   padding: 1rem;
-  background-color: aquamarine;
+  background-color: var(--clr-white);
 }
 .right_block {
   display: flex;
   flex-direction: column;
-  flex: 1 82%;
+  flex: 1 84%;
 }
 .nav {
   display: flex;
   flex-direction: column;
   flex: 1 100%;
   max-width: 188px;
-  background-color: #fcfcfc;
+  background-color: var(--clr-white);
 }
 .close-button {
   display: flex;
@@ -67,8 +67,6 @@ a:active {
   display: flex;
   flex-direction: column;
   flex: 1 100%;
-
-  gap: 0.2rem;
   margin-top: 3rem;
   padding-left: 0;
 }
@@ -79,6 +77,7 @@ a:active {
   transition: all 0.3s;
   border-radius: 12px;
   font-size: 22px;
+  background-color: var(--clr-darkWhite);
 }
 .nav-list-item:hover {
   background-color: var(--clr-burbble);
@@ -102,7 +101,7 @@ a:active {
 
 /* all the children of .nav-list-item */
 .nav-list-item:hover > * {
-  color: var(--clr-white);
+  color: var(--clr-darkWhite);
 }
 
 .legal {
