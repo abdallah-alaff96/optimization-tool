@@ -4,7 +4,6 @@ import * as XLSX from "xlsx";
 import DipInputFile from "../components/DipInputFile";
 import DipTable from "../components/DipTable";
 import DipTransFile from "../components/DipTransFile";
-import Header from "../layouts/Header";
 import "./Dip.css";
 
 function Dip() {
@@ -59,7 +58,6 @@ function Dip() {
 
   return (
     <>
-      <Header />
       <div className="content dip">
         <div className="input-files-container">
           <DipInputFile inputHandler={fileHandle} />

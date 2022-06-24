@@ -7,6 +7,7 @@ import Tch from "./pages/Tch";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "./layouts/Header";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           </div>
 
           <div className="right_block">
+            <Header />
             <Routes>
               <Route path="/" element={<Dip />} />
               <Route path="/tch" element={<Tch />} />

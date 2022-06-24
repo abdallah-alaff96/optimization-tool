@@ -12,7 +12,7 @@ function Header() {
   return (
     <>
       <div className="header">
-        <Link to="#" className="list-button">
+        <Link to="#" className="icon">
           <FaIcons.FaBars onClick={sidebarToggle} />
         </Link>
 
