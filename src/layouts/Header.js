@@ -8,7 +8,7 @@ function Header({ ...props }) {
   return (
     <>
       <div className="header">
-        <Link to="#" className="list-icon">
+        <Link to="#" className="toggle-icon">
           <FaIcons.FaBars onClick={toggleFun} />
         </Link>
 
