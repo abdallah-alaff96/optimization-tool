@@ -11,12 +11,8 @@ import Header from "./layouts/Header";
 
 function App() {
   const [sidebar, setSidebar] = useState(true);
-
   // to Toggle sidebar
-  const sidebarToggle = () => {
-    setSidebar(!sidebar);
-    console.log(sidebar);
-  };
+  const sidebarToggle = () => setSidebar(!sidebar);
 
   return (
     <>
