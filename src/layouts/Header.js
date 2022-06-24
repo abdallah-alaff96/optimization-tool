@@ -1,19 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import "./Header.css";
 
-function Header() {
-  const [sidebar, setSidebar] = useState(false);
-
-  // to Toggle sidebar
-  const sidebarToggle = () => setSidebar(!sidebar);
-
+function Header({ ...props }) {
+  const { toggleFun } = props;
   return (
     <>
       <div className="header">
         <Link to="#" className="icon">
-          <FaIcons.FaBars onClick={sidebarToggle} />
+          <FaIcons.FaBars onClick={toggleFun} />
         </Link>
 
         <div className="title">RF Optimization Tool 📶</div>

@@ -35,29 +35,41 @@ a:active {
 .wrapper {
   display: flex;
   justify-content: flex-start;
-  flex: 1 1 100%;
+  flex: 1;
+  gap: 2px;
   height: 100vh;
-
+  position: relative;
   text-align: center;
   background-color: tomato;
 }
 .left_block {
   display: flex;
   flex-direction: column;
-  flex: 1 16%;
+  flex: 1;
   padding: 1rem;
   background-color: var(--clr-white);
+  overflow: hidden;
+  white-space: nowrap;
+  transition: all 0.2s;
 }
+
+.left_block.hide {
+  flex: 0.00001;
+  padding: 0;
+}
+
 .right_block {
   display: flex;
   flex-direction: column;
-  flex: 1 84%;
+  flex: 6;
+  gap: 2px;
+  overflow: hidden;
 }
 .nav {
   display: flex;
   flex-direction: column;
-  flex: 1 100%;
-  max-width: 188px;
+  flex: 1;
+  max-width: 200px;
   background-color: var(--clr-white);
 }
 .close-button {
@@ -66,7 +78,7 @@ a:active {
 .nav-list {
   display: flex;
   flex-direction: column;
-  flex: 1 100%;
+  flex: 1;
   margin-top: 3rem;
   padding-left: 0;
 }
@@ -76,7 +88,7 @@ a:active {
   list-style: none;
   transition: all 0.3s;
   border-radius: 12px;
-  font-size: 22px;
+  font-size: 25px;
   background-color: var(--clr-darkWhite);
 }
 .nav-list-item:hover {
@@ -86,7 +98,7 @@ a:active {
 .list-icon {
   display: flex;
   align-items: center;
-  flex: 1 100%;
+  flex: 1;
   gap: 0.5rem;
   color: var(--clr-gray);
   transition: all 0.3s;
@@ -95,8 +107,9 @@ a:active {
 .list-text {
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 22px;
+  letter-spacing: 1px;
 }
 
 /* all the children of .nav-list-item */
@@ -105,13 +118,13 @@ a:active {
 }
 
 .legal {
-  font-size: var(--fz-small);
+  font-size: 11px;
 }
 .header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  flex: 1 8%;
+  flex: 1;
   height: 20%;
   padding: 1rem;
 
@@ -123,7 +136,7 @@ a:active {
 }
 .content {
   display: flex;
-  flex: 1 92%;
+  flex: 20;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;

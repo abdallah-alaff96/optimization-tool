@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "./layouts/Sidebar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Complaints from "./pages/Complaints";
@@ -10,16 +10,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./layouts/Header";
 
 function App() {
+  const [sidebar, setSidebar] = useState(true);
+
+  // to Toggle sidebar
+  const sidebarToggle = () => {
+    setSidebar(!sidebar);
+    console.log(sidebar);
+  };
+
   return (
     <>
       <div className="wrapper">
         <Router>
-          <div className="left_block">
+          <div className={sidebar ? "left_block" : "left_block hide"}>
             <Sidebar />
           </div>
 
           <div className="right_block">
-            <Header />
+            <Header toggleFun={sidebarToggle} />
             <Routes>
               <Route path="/" element={<Dip />} />
               <Route path="/tch" element={<Tch />} />
