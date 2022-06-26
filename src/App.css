@@ -159,7 +159,7 @@ a:active {
 
   background-color: var(--clr-bg);
   padding: 1.5rem;
-  overflow: scroll;
+  overflow-y: auto;
 }
 
 .page-title {
