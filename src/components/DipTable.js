@@ -5,12 +5,12 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import * as XLSX from "xlsx";
 
-function DipTable(props) {
+function DipTable({ ...props }) {
   const [activeArr, setActiveArr] = useState([]);
   const [activeExtractButton, setActiveExtractButton] = useState(false);
 
-  const data = props.tableContent;
-  const transData = props.tableTrans;
+  const { tableContent: data } = props;
+  const { tableTrans: transData } = props;
 
   // TO LOWER CASE AND REMOVE THE SPACE
   const keysToLowerCase = (obj) => {
@@ -220,7 +220,6 @@ function DipTable(props) {
   // Table Data
   const tData = activeArr.map((eachRow, index) => (
     <tr key={index}>
-      <td>{index}</td>
       <td>{eachRow.dip}</td>
       <td>{eachRow.elem}</td>
       <td>{eachRow.site_name}</td>
@@ -240,50 +239,57 @@ function DipTable(props) {
   return (
     <>
       {activeExtractButton && (
-        <Button variant="success" onClick={handleExportDip}>
-          Extract Data
-        </Button>
-      )}
+        <div className="div-table-container">
+          <div className="dip-buttons-container">
+            <ButtonGroup
+              aria-label="aria-labelledby"
+              size="sm"
+              className="dip-button-group"
+            >
+              <Button variant="primary" onClick={filteredDataHandler}>
+                Filtered sheet
+              </Button>
+              <Button variant="secondary" onClick={uasHandler}>
+                UAS/UASR
+              </Button>
+              <Button variant="secondary" onClick={sesHandler}>
+                SES/SESR
+              </Button>
+              <Button variant="secondary" onClick={esHandler}>
+                ES/ESR
+              </Button>
+            </ButtonGroup>
 
-      {activeExtractButton && (
-        <ButtonGroup aria-label="aria-labelledby" size="sm">
-          <Button variant="primary" onClick={filteredDataHandler}>
-            Filtered sheet
-          </Button>
-          <Button variant="secondary" onClick={uasHandler}>
-            UAS/UASR
-          </Button>
-          <Button variant="secondary" onClick={sesHandler}>
-            SES/SESR
-          </Button>
-          <Button variant="secondary" onClick={esHandler}>
-            ES/ESR
-          </Button>
-        </ButtonGroup>
-      )}
+            <Button
+              variant="success"
+              onClick={handleExportDip}
+              className="dip-extract-button"
+            >
+              Extract Data
+            </Button>
+          </div>
 
-      {activeExtractButton && (
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>DIP</th>
-              <th>BSC</th>
-              <th>Site Name</th>
-              <th>Date</th>
-              <th>Hour</th>
-              <th>SF</th>
-              <th>ES</th>
-              <th>SES</th>
-              <th>UAS</th>
-              <th>SFR</th>
-              <th>ESR</th>
-              <th>SESR</th>
-              <th>UASR</th>
-            </tr>
-          </thead>
-          <tbody>{tData}</tbody>
-        </Table>
+          <Table striped bordered hover className="dip-table">
+            <thead>
+              <tr>
+                <th>DIP</th>
+                <th>BSC</th>
+                <th>Site Name</th>
+                <th>Date</th>
+                <th>Hour</th>
+                <th>SF</th>
+                <th>ES</th>
+                <th>SES</th>
+                <th>UAS</th>
+                <th>SFR</th>
+                <th>ESR</th>
+                <th>SESR</th>
+                <th>UASR</th>
+              </tr>
+            </thead>
+            <tbody>{tData}</tbody>
+          </Table>
+        </div>
       )}
     </>
   );

@@ -1,5 +1,5 @@
 "use strict";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import DipInputFile from "../components/DipInputFile";
 import DipTable from "../components/DipTable";
@@ -9,6 +9,7 @@ import "./Dip.css";
 function Dip() {
   const [myFile, setMyFile] = useState([]);
   const [transFile, setTransFile] = useState([]);
+  const [filesToggle, setFilesToggle] = useState(true);
 
   // File Handler Function
   const fileHandle = (e) => {
@@ -53,15 +54,19 @@ function Dip() {
     reader.readAsArrayBuffer(file);
   };
 
-  // console.log(myFile);
-  // console.log(transFile);
+  useEffect(() => {
+    if (myFile.length !== 0 && transFile.length !== 0) {
+      setFilesToggle(false);
+    }
+  }, [myFile, transFile]);
 
   return (
     <>
+      <div className="page-title"> ➡️ DIP Report</div>
       <div className="content dip">
         <div className="input-files-container">
-          <DipInputFile inputHandler={fileHandle} />
-          <DipTransFile transHandler={transHandle} />
+          {filesToggle && <DipInputFile inputHandler={fileHandle} />}
+          {filesToggle && <DipTransFile transHandler={transHandle} />}
         </div>
         <DipTable tableContent={myFile} tableTrans={transFile} />
       </div>

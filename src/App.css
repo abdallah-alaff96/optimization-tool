@@ -2,7 +2,7 @@
 
 :root {
   /* colors */
-  --clr-burbble: #6c5dd3;
+  --clr-blue: #00a6ed;
   --clr-gray: #808191;
   --clr-darkWhite: #fcfcfc;
   --clr-white: #ffffff;
@@ -91,9 +91,19 @@ a:active {
   background-color: var(--clr-darkWhite);
 }
 .nav-list-item:hover {
-  background-color: var(--clr-burbble);
+  background-color: var(--clr-blue);
   cursor: pointer;
 }
+.nav-list-item.active {
+  background-color: var(--clr-blue);
+  cursor: pointer;
+}
+
+/* all the children of .nav-list-item */
+.nav-list-item.active > * {
+  color: var(--clr-darkWhite);
+}
+
 .list-icon {
   display: flex;
   align-items: center;
@@ -144,9 +154,18 @@ a:active {
   display: flex;
   flex: 20;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   height: 80%;
 
   background-color: var(--clr-bg);
+  padding: 1.5rem;
+  overflow: scroll;
+}
+
+.page-title {
+  display: flex;
+  justify-content: flex-start;
+  padding: 1rem 0 0 1rem;
+  text-decoration: underline;
+  font-style: italic;
 }
