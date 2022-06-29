@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Form from "react-bootstrap/Form";
+
 import * as XLSX from "xlsx";
 
 function DipTable({ ...props }) {
   const [activeArr, setActiveArr] = useState([]);
+  const [search, setSearch] = useState("");
   const [activeExtractButton, setActiveExtractButton] = useState(false);
 
   const { tableContent: data } = props;
@@ -62,10 +65,12 @@ function DipTable({ ...props }) {
 
   useEffect(() => {
     if (data.length !== 0 && transData.length !== 0) {
-      setActiveArr(filteredData);
+      setActiveArr(
+        filteredData.filter((row) => row.site_name.includes(search))
+      );
       setActiveExtractButton(true);
     }
-  }, [data, transData]);
+  }, [data, transData, search]);
 
   // Active Button Handlers
   const filteredDataHandler = () => {
@@ -79,6 +84,11 @@ function DipTable({ ...props }) {
   };
   const esHandler = () => {
     setActiveArr(esArr);
+  };
+
+  // Seach bar handler
+  const searchHandler = (event) => {
+    setSearch(event.target.value);
   };
 
   //Write an Excel file
@@ -216,9 +226,9 @@ function DipTable({ ...props }) {
       cellNF: true,
     });
   };
-
+  // console.log(Object?.keys(activeArr[0])[0]);
   // Table Data
-  const tData = activeArr.map((eachRow, index) => (
+  const tData = activeArr?.map((eachRow, index) => (
     <tr key={index}>
       <td>{eachRow.dip}</td>
       <td>{eachRow.elem}</td>
@@ -259,6 +269,14 @@ function DipTable({ ...props }) {
                 ES/ESR
               </Button>
             </ButtonGroup>
+
+            <Form.Control
+              size="sm"
+              type="text"
+              placeholder="Search..."
+              className="search-input"
+              onChange={searchHandler}
+            />
 
             <Button
               variant="success"

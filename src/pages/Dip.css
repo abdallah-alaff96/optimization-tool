@@ -16,10 +16,15 @@
 .dip-buttons-container {
   display: flex;
   width: 100%;
+  align-items: center;
   justify-content: space-between;
   margin-bottom: 0.2rem;
 }
 
 .dip-table {
   width: 100%;
+}
+
+.search-input {
+  flex: 0.3;
 }
