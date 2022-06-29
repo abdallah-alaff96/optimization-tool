@@ -3,7 +3,8 @@ import React from "react";
 function Complaints() {
   return (
     <>
-      <div className="content complaints">Complaints</div>
+      <div className="page-title"> ➡️ Complaints Report</div>
+      <div className="content complaints"></div>
     </>
   );
 }

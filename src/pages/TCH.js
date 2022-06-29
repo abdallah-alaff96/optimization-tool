@@ -3,7 +3,8 @@ import React from "react";
 function Tch() {
   return (
     <>
-      <div className="content tch">Tch</div>
+      <div className="page-title"> ➡️ TCH Report</div>
+      <div className="content tch"></div>
     </>
   );
 }
