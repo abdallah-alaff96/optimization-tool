@@ -23,4 +23,20 @@ then open folder from vscode (opti-tool)
       <FaIcons.FaHubspot />
   whereas "FaHubspot" is changable (icon name)
 
-- 
+
+
+Highlights :
+
+- to select switch between object elements according to key name:
+
+      const namingHandler = (index) => {
+        const sheetNames = {
+          0: "All affected sites",
+          1: "UAS-UASR",
+          2: "SES-SESR",
+          3: "ES-ESR",
+        };
+        return sheetNames[index];
+      };
+
+      XLSX.utils.book_append_sheet(wb, sheet, namingHandler(index));

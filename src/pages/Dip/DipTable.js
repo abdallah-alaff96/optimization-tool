@@ -141,9 +141,10 @@ function DipTable({ ...props }) {
       );
       return newArr;
     };
+
     // Creact new WB
     var wb = XLSX.utils.book_new();
-
+    // create excelData
     const excelData = [filteredData, uasArr, sesArr, esArr];
     excelData.map((arr, index) => {
       // call order function
@@ -177,13 +178,13 @@ function DipTable({ ...props }) {
       widthHandler(sheet);
 
       const namingHandler = (index) => {
-        return index === 0
-          ? "All affected sites"
-          : index === 1
-          ? "UAS-UASR"
-          : index === 2
-          ? "SES-SESR"
-          : "ES-ESR";
+        const sheetNames = {
+          0: "All affected sites",
+          1: "UAS-UASR",
+          2: "SES-SESR",
+          3: "ES-ESR",
+        };
+        return sheetNames[index];
       };
 
       XLSX.utils.book_append_sheet(wb, sheet, namingHandler(index));
