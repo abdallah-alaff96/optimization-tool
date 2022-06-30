@@ -1,12 +1,11 @@
 "use strict";
 import React, { useEffect, useState } from "react";
 import TableComp from "../../components/TableComp";
-import * as XLSX from "xlsx";
 import { KeysToLowerCase } from "../../handlers/KeysToLowerCase";
-import { KeysToUpperCase } from "../../handlers/KeysToUpperCase";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Form from "react-bootstrap/Form";
+import ExportButton from "../../components/ExportButton";
 
 function DipTable({ ...props }) {
   const [activeArr, setActiveArr] = useState([]);
@@ -89,117 +88,6 @@ function DipTable({ ...props }) {
 
   let excelData = [filteredData, uasArr, sesArr, esArr];
 
-  /////////////Write an Excel file
-  const handleExportDip = (eData) => {
-    console.log(eData);
-    // function to order the object keys for extraction to excel
-    const orderHandler = (arr) => {
-      // TO UpperCase()
-      arr.map((row) => {
-        KeysToUpperCase(row);
-      });
-      // Reorder the JSON file for Exporting Excel file
-      const newArr = arr.map(
-        ({
-          UASR,
-          SESR,
-          ESR,
-          SFR,
-          UAS,
-          SES,
-          ES,
-          SF,
-          DIPFUAV,
-          DIPNUAV,
-          HOUR,
-          DATE,
-          DIP,
-          NE_VERSION,
-          DATA_AVAILABILITY,
-          ELEM,
-          OSS_ID,
-          BSC_DIP,
-          SITE_NAME,
-        }) => ({
-          OSS_ID,
-          ELEM,
-          DATA_AVAILABILITY,
-          NE_VERSION,
-          DIP,
-          BSC_DIP,
-          SITE_NAME,
-          DATE,
-          HOUR,
-          DIPNUAV,
-          DIPFUAV,
-          SF,
-          ES,
-          SES,
-          UAS,
-          SFR,
-          ESR,
-          SESR,
-          UASR,
-        })
-      );
-      return newArr;
-    };
-
-    // Creact new WB
-    var wb = XLSX.utils.book_new();
-    // create excelData
-    eData.map((arr, index) => {
-      // call order function
-      const orderArr = orderHandler(arr);
-      // CONVERT FROM JSON TO SHEET
-      var sheet = XLSX.utils.json_to_sheet(orderArr);
-
-      const widthHandler = (sheet) => {
-        sheet["!cols"] = [
-          { wch: 10 },
-          { wch: 7 },
-          { wch: 18 },
-          { wch: 15 },
-          { wch: 7 },
-          { wch: 10 },
-          { wch: 10 },
-          { wch: 10 },
-          { wch: 7 },
-          { wch: 9 },
-          { wch: 9 },
-          { wch: 6 },
-          { wch: 6 },
-          { wch: 6 },
-          { wch: 6 },
-          { wch: 6 },
-          { wch: 6 },
-          { wch: 6 },
-          { wch: 6 },
-        ];
-      };
-      widthHandler(sheet);
-
-      const namingHandler = (index) => {
-        const dipSheetName = {
-          0: "All affected sites",
-          1: "UAS-UASR",
-          2: "SES-SESR",
-          3: "ES-ESR",
-        };
-        return dipSheetName[index];
-      };
-
-      XLSX.utils.book_append_sheet(wb, sheet, namingHandler(index));
-    });
-
-    XLSX.writeFile(wb, "DIP-Report.xlsx", {
-      type: "buffer",
-      cellStyles: true,
-      cellDates: true,
-      cellNF: true,
-    });
-  };
-
   return (
     <>
       {activeExtractButton && (
@@ -231,14 +119,7 @@ function DipTable({ ...props }) {
               className="search-input"
               onChange={searchHandler}
             />
-
-            <Button
-              variant="success"
-              onClick={() => handleExportDip(excelData)}
-              className="dip-extract-button"
-            >
-              Extract Data
-            </Button>
+            <ExportButton excelD={excelData} />
           </div>
 
           <TableComp
