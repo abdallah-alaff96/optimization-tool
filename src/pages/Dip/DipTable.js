@@ -87,8 +87,11 @@ function DipTable({ ...props }) {
     setSearch(event.target.value);
   };
 
+  let excelData = [filteredData, uasArr, sesArr, esArr];
+
   /////////////Write an Excel file
-  const handleExportDip = () => {
+  const handleExportDip = (eData) => {
+    console.log(eData);
     // function to order the object keys for extraction to excel
     const orderHandler = (arr) => {
       // TO UpperCase()
@@ -145,12 +148,12 @@ function DipTable({ ...props }) {
     // Creact new WB
     var wb = XLSX.utils.book_new();
     // create excelData
-    const excelData = [filteredData, uasArr, sesArr, esArr];
-    excelData.map((arr, index) => {
+    eData.map((arr, index) => {
       // call order function
       const orderArr = orderHandler(arr);
       // CONVERT FROM JSON TO SHEET
       var sheet = XLSX.utils.json_to_sheet(orderArr);
+
       const widthHandler = (sheet) => {
         sheet["!cols"] = [
           { wch: 10 },
@@ -174,17 +177,16 @@ function DipTable({ ...props }) {
           { wch: 6 },
         ];
       };
-
       widthHandler(sheet);
 
       const namingHandler = (index) => {
-        const sheetNames = {
+        const dipSheetName = {
           0: "All affected sites",
           1: "UAS-UASR",
           2: "SES-SESR",
           3: "ES-ESR",
         };
-        return sheetNames[index];
+        return dipSheetName[index];
       };
 
       XLSX.utils.book_append_sheet(wb, sheet, namingHandler(index));
@@ -232,7 +234,7 @@ function DipTable({ ...props }) {
 
             <Button
               variant="success"
-              onClick={handleExportDip}
+              onClick={() => handleExportDip(excelData)}
               className="dip-extract-button"
             >
               Extract Data

@@ -17,7 +17,7 @@ function TableComp({ ...props }) {
         <td>{rowObj.dip}</td>
         <td>{rowObj.elem}</td>
         <td>{rowObj.site_name}</td>
-        <td>{rowObj.date.toDateString()}</td>
+        <td>{rowObj?.date?.toDateString()}</td>
         <td>{rowObj.hour}</td>
         <td>{rowObj.sf}</td>
         <td>{rowObj.es}</td>
