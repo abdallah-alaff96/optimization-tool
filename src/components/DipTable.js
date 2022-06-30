@@ -226,8 +226,10 @@ function DipTable({ ...props }) {
       cellNF: true,
     });
   };
+
   // console.log(Object?.keys(activeArr[0])[0]);
   // Table Data
+
   const tData = activeArr?.map((eachRow, index) => (
     <tr key={index}>
       <td>{eachRow.dip}</td>
@@ -273,7 +275,7 @@ function DipTable({ ...props }) {
             <Form.Control
               size="sm"
               type="text"
-              placeholder="Search..."
+              placeholder="Site Name..."
               className="search-input"
               onChange={searchHandler}
             />
