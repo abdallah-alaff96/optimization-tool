@@ -87,7 +87,7 @@ function DipTable({ ...props }) {
     setSearch(event.target.value);
   };
 
-  //Write an Excel file
+  /////////////Write an Excel file
   const handleExportDip = () => {
     // function to order the object keys for extraction to excel
     const orderHandler = (arr) => {
@@ -141,54 +141,53 @@ function DipTable({ ...props }) {
       );
       return newArr;
     };
-    // call order function
-    const orderedFilteredData = orderHandler(filteredData);
-    const orderedUasArr = orderHandler(uasArr);
-    const orderedSesArr = orderHandler(sesArr);
-    const orderedEsArr = orderHandler(esArr);
-
     // Creact new WB
     var wb = XLSX.utils.book_new();
-    // CONVERT FROM JSON TO SHEET
-    var filteredDataSheet = XLSX.utils.json_to_sheet(orderedFilteredData);
-    var uasSheet = XLSX.utils.json_to_sheet(orderedUasArr);
-    var sesSheet = XLSX.utils.json_to_sheet(orderedSesArr);
-    var esSheet = XLSX.utils.json_to_sheet(orderedEsArr);
 
-    const widthHandler = (sheet) => {
-      sheet["!cols"] = [
-        { wch: 10 },
-        { wch: 7 },
-        { wch: 18 },
-        { wch: 15 },
-        { wch: 7 },
-        { wch: 10 },
-        { wch: 10 },
-        { wch: 10 },
-        { wch: 7 },
-        { wch: 9 },
-        { wch: 9 },
-        { wch: 6 },
-        { wch: 6 },
-        { wch: 6 },
-        { wch: 6 },
-        { wch: 6 },
-        { wch: 6 },
-        { wch: 6 },
-        { wch: 6 },
-      ];
-    };
+    const excelData = [filteredData, uasArr, sesArr, esArr];
+    excelData.map((arr, index) => {
+      // call order function
+      const orderArr = orderHandler(arr);
+      // CONVERT FROM JSON TO SHEET
+      var sheet = XLSX.utils.json_to_sheet(orderArr);
+      const widthHandler = (sheet) => {
+        sheet["!cols"] = [
+          { wch: 10 },
+          { wch: 7 },
+          { wch: 18 },
+          { wch: 15 },
+          { wch: 7 },
+          { wch: 10 },
+          { wch: 10 },
+          { wch: 10 },
+          { wch: 7 },
+          { wch: 9 },
+          { wch: 9 },
+          { wch: 6 },
+          { wch: 6 },
+          { wch: 6 },
+          { wch: 6 },
+          { wch: 6 },
+          { wch: 6 },
+          { wch: 6 },
+          { wch: 6 },
+        ];
+      };
 
-    widthHandler(filteredDataSheet);
-    widthHandler(uasSheet);
-    widthHandler(sesSheet);
-    widthHandler(esSheet);
+      widthHandler(sheet);
 
-    // APPEND SHEETS TO WB
-    XLSX.utils.book_append_sheet(wb, filteredDataSheet, "All affected sites");
-    XLSX.utils.book_append_sheet(wb, uasSheet, "UAS-UASR");
-    XLSX.utils.book_append_sheet(wb, sesSheet, "SES-SESR");
-    XLSX.utils.book_append_sheet(wb, esSheet, "ES-ESR");
+      const namingHandler = (index) => {
+        return index === 0
+          ? "All affected sites"
+          : index === 1
+          ? "UAS-UASR"
+          : index === 2
+          ? "SES-SESR"
+          : "ES-ESR";
+      };
+
+      XLSX.utils.book_append_sheet(wb, sheet, namingHandler(index));
+    });
 
     XLSX.writeFile(wb, "DIP-Report.xlsx", {
       type: "buffer",
