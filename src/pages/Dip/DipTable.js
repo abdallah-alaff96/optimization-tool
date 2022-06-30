@@ -1,8 +1,9 @@
 "use strict";
 import React, { useEffect, useState } from "react";
-import TableHandler from "./TableHandler";
+import TableComp from "../../components/TableComp";
 import * as XLSX from "xlsx";
-
+import { KeysToLowerCase } from "../../handlers/KeysToLowerCase";
+import { KeysToUpperCase } from "../../handlers/KeysToUpperCase";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Form from "react-bootstrap/Form";
@@ -29,35 +30,15 @@ function DipTable({ ...props }) {
   const { tableContent: data } = props;
   const { tableTrans: transData } = props;
 
-  // TO LOWER CASE AND REMOVE THE SPACE
-  const keysToLowerCase = (obj) => {
-    var myKeys = Object.keys(obj);
-    var n = myKeys.length;
-    while (n--) {
-      var key = myKeys[n]; // "cache" it, for less lookups to the array
-      if (key !== key.toLowerCase()) {
-        // might already be in its lower case version
-        obj[
-          key
-            .toLowerCase()
-            .replace(/\s+/g, "_")
-            .replace(/[^a-zA-Z0-9]/g, "_")
-        ] = obj[key]; // swap the value to a new lower case key
-        delete obj[key]; // delete the old key
-      }
-    }
-    return obj;
-  };
-
+  // Edit trans Arr
   transData.map((row) => {
-    // TRANSDATA TO LOWERCASE
-    keysToLowerCase(row);
+    KeysToLowerCase(row);
   });
 
   // Edit data Arr
   data.map((row) => {
     // DATA TO LOWERCASE
-    keysToLowerCase(row);
+    KeysToLowerCase(row);
     // Remove RBL2 & ET
     row.dip = row.dip.replace(/RBL2|ET/gi, "");
     // keep only the number of BSC
@@ -108,25 +89,11 @@ function DipTable({ ...props }) {
 
   //Write an Excel file
   const handleExportDip = () => {
-    //UpperCase Function
-    const keysToUpperCase = (obj) => {
-      var keysArr = Object.keys(obj);
-      var n = keysArr.length;
-      while (n--) {
-        var key = keysArr[n]; // "cache" it, for less lookups to the array
-        if (key !== key.toUpperCase()) {
-          // might already be in its lower case version
-          obj[key.toUpperCase()] = obj[key]; // swap the value to a new lower case key
-          delete obj[key]; // delete the old key
-        }
-      }
-      return obj;
-    };
     // function to order the object keys for extraction to excel
     const orderHandler = (arr) => {
       // TO UpperCase()
       arr.map((row) => {
-        keysToUpperCase(row);
+        KeysToUpperCase(row);
       });
       // Reorder the JSON file for Exporting Excel file
       const newArr = arr.map(
@@ -272,7 +239,7 @@ function DipTable({ ...props }) {
             </Button>
           </div>
 
-          <TableHandler
+          <TableComp
             dataArr={activeArr}
             headerArr={dipheaderArr}
             refTableName={"dip"}

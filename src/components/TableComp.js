@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 
-function TableHandler({ ...props }) {
+function TableComp({ ...props }) {
   const { dataArr, headerArr, refTableName } = props;
   let tData;
 
@@ -43,4 +43,4 @@ function TableHandler({ ...props }) {
   );
 }
 
-export default TableHandler;
+export default TableComp;

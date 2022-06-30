@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Sidebar from "./layouts/Sidebar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Complaints from "./pages/Complaints";
-import Dip from "./pages/Dip";
-import Tch from "./pages/Tch";
+import Complaints from "./pages/Complaints/Complaints";
+import Dip from "./pages/Dip/Dip";
+import Tch from "./pages/Tch/Tch";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";

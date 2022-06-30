@@ -1,7 +1,7 @@
 "use strict";
 import React, { useEffect, useState } from "react";
-import InputFileHandler from "../components/InputFileHandler";
-import DipTable from "../components/DipTable";
+import InputFileComp from "../../components/InputFileComp";
+import DipTable from "./DipTable";
 import "./Dip.css";
 
 function Dip() {
@@ -31,13 +31,13 @@ function Dip() {
       <div className="content dip">
         <div className="input-files-container">
           {filesToggle && (
-            <InputFileHandler
+            <InputFileComp
               onHandler={dipInputFileHandler}
               refSheetNumber={0}
             />
           )}
           {filesToggle && (
-            <InputFileHandler
+            <InputFileComp
               onHandler={transInputFileHandler}
               refSheetNumber={1}
             />

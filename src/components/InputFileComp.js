@@ -2,7 +2,7 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import * as XLSX from "xlsx";
 
-function InputFileHandler({ ...props }) {
+function InputFileComp({ ...props }) {
   const { onHandler, refSheetNumber } = props;
 
   // File Handler Function
@@ -38,4 +38,4 @@ function InputFileHandler({ ...props }) {
   );
 }
 
-export default InputFileHandler;
+export default InputFileComp;
