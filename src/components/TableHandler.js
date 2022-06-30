@@ -2,31 +2,35 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 
 function TableHandler({ ...props }) {
-  const { dataArr, headerArr } = props;
+  const { dataArr, headerArr, refTableName } = props;
+  let tData;
 
   // Table Header
   const tableHeader = headerArr?.map((headerName, index) => {
-    <th key={index}>{headerName}</th>;
+    return <th key={index}>{headerName}</th>;
   });
 
   // Table Data
-  const tData = dataArr?.map((eachRow, index) => (
-    <tr key={index}>
-      <td>{eachRow.dip}</td>
-      <td>{eachRow.elem}</td>
-      <td>{eachRow.site_name}</td>
-      <td>{eachRow.date.toDateString()}</td>
-      <td>{eachRow.hour}</td>
-      <td>{eachRow.sf}</td>
-      <td>{eachRow.es}</td>
-      <td>{eachRow.ses}</td>
-      <td>{eachRow.uas}</td>
-      <td>{eachRow.sfr}</td>
-      <td>{eachRow.esr}</td>
-      <td>{eachRow.sesr}</td>
-      <td>{eachRow.uasr}</td>
-    </tr>
-  ));
+  if (refTableName === "dip") {
+    tData = dataArr?.map((rowObj, index) => (
+      <tr key={index}>
+        <td>{rowObj.dip}</td>
+        <td>{rowObj.elem}</td>
+        <td>{rowObj.site_name}</td>
+        <td>{rowObj.date.toDateString()}</td>
+        <td>{rowObj.hour}</td>
+        <td>{rowObj.sf}</td>
+        <td>{rowObj.es}</td>
+        <td>{rowObj.ses}</td>
+        <td>{rowObj.uas}</td>
+        <td>{rowObj.sfr}</td>
+        <td>{rowObj.esr}</td>
+        <td>{rowObj.sesr}</td>
+        <td>{rowObj.uasr}</td>
+      </tr>
+    ));
+  }
+
   return (
     <>
       <Table striped bordered hover className="dip-table">

@@ -1,17 +1,31 @@
 "use strict";
 import React, { useEffect, useState } from "react";
 import TableHandler from "./TableHandler";
+import * as XLSX from "xlsx";
+
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Form from "react-bootstrap/Form";
-
-import * as XLSX from "xlsx";
 
 function DipTable({ ...props }) {
   const [activeArr, setActiveArr] = useState([]);
   const [search, setSearch] = useState("");
   const [activeExtractButton, setActiveExtractButton] = useState(false);
-
+  const dipheaderArr = [
+    "DIP",
+    "BSC",
+    "Site Name",
+    "Date",
+    "Hour",
+    "SF",
+    "ES",
+    "SES",
+    "UAS",
+    "SFR",
+    "ESR",
+    "SESR",
+    "UASR",
+  ];
   const { tableContent: data } = props;
   const { tableTrans: transData } = props;
 
@@ -217,23 +231,6 @@ function DipTable({ ...props }) {
     });
   };
 
-  // console.log(Object?.keys(activeArr[0])[0]);
-  const dipheaderArr = [
-    "DIP",
-    "BSC",
-    "Site Name",
-    "Date",
-    "Hour",
-    "SF",
-    "ES",
-    "SES",
-    "UAS",
-    "SFR",
-    "ESR",
-    "SESR",
-    "UASR",
-  ];
-
   return (
     <>
       {activeExtractButton && (
@@ -275,7 +272,11 @@ function DipTable({ ...props }) {
             </Button>
           </div>
 
-          <TableHandler dataArr={activeArr} headerArr={dipheaderArr} />
+          <TableHandler
+            dataArr={activeArr}
+            headerArr={dipheaderArr}
+            refTableName={"dip"}
+          />
         </div>
       )}
     </>
