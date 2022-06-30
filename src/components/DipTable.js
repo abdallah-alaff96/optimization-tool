@@ -1,6 +1,6 @@
 "use strict";
 import React, { useEffect, useState } from "react";
-import Table from "react-bootstrap/Table";
+import TableHandler from "./TableHandler";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Form from "react-bootstrap/Form";
@@ -218,25 +218,21 @@ function DipTable({ ...props }) {
   };
 
   // console.log(Object?.keys(activeArr[0])[0]);
-  // Table Data
-
-  const tData = activeArr?.map((eachRow, index) => (
-    <tr key={index}>
-      <td>{eachRow.dip}</td>
-      <td>{eachRow.elem}</td>
-      <td>{eachRow.site_name}</td>
-      <td>{eachRow.date.toDateString()}</td>
-      <td>{eachRow.hour}</td>
-      <td>{eachRow.sf}</td>
-      <td>{eachRow.es}</td>
-      <td>{eachRow.ses}</td>
-      <td>{eachRow.uas}</td>
-      <td>{eachRow.sfr}</td>
-      <td>{eachRow.esr}</td>
-      <td>{eachRow.sesr}</td>
-      <td>{eachRow.uasr}</td>
-    </tr>
-  ));
+  const dipheaderArr = [
+    "DIP",
+    "BSC",
+    "Site Name",
+    "Date",
+    "Hour",
+    "SF",
+    "ES",
+    "SES",
+    "UAS",
+    "SFR",
+    "ESR",
+    "SESR",
+    "UASR",
+  ];
 
   return (
     <>
@@ -279,26 +275,7 @@ function DipTable({ ...props }) {
             </Button>
           </div>
 
-          <Table striped bordered hover className="dip-table">
-            <thead>
-              <tr>
-                <th>DIP</th>
-                <th>BSC</th>
-                <th>Site Name</th>
-                <th>Date</th>
-                <th>Hour</th>
-                <th>SF</th>
-                <th>ES</th>
-                <th>SES</th>
-                <th>UAS</th>
-                <th>SFR</th>
-                <th>ESR</th>
-                <th>SESR</th>
-                <th>UASR</th>
-              </tr>
-            </thead>
-            <tbody>{tData}</tbody>
-          </Table>
+          <TableHandler dataArr={activeArr} headerArr={dipheaderArr} />
         </div>
       )}
     </>
