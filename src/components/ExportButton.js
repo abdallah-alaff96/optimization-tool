@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 function ExportButton({ ...props }) {
   const { excelD } = props;
 
-  /////////////Write an Excel file
+  //Write an Excel file
   const handleExportDip = (excelData) => {
     // function to order the object keys for extraction to excel
     const orderHandler = (arr) => {

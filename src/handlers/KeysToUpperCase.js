@@ -1,5 +1,5 @@
 // TO UPPER CASE AND REMOVE THE SPACE
-export function KeysToUpperCase(obj) {
+export default function KeysToUpperCase(obj) {
   var keysArr = Object.keys(obj);
   var n = keysArr.length;
   while (n--) {
