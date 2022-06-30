@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from "react";
 import TableComp from "../../components/TableComp";
 import { KeysToLowerCase } from "../../handlers/KeysToLowerCase";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Form from "react-bootstrap/Form";
 import ExportButton from "../../components/ExportButton";
+import ButtonGroupComp from "../../components/ButtonGroupComp";
 
 function DipTable({ ...props }) {
   const [activeArr, setActiveArr] = useState([]);
@@ -93,25 +92,10 @@ function DipTable({ ...props }) {
       {activeExtractButton && (
         <div className="div-table-container">
           <div className="dip-buttons-container">
-            <ButtonGroup
-              aria-label="aria-labelledby"
-              size="sm"
-              className="dip-button-group"
-            >
-              <Button variant="primary" onClick={filteredDataHandler}>
-                Filtered sheet
-              </Button>
-              <Button variant="secondary" onClick={uasHandler}>
-                UAS/UASR
-              </Button>
-              <Button variant="secondary" onClick={sesHandler}>
-                SES/SESR
-              </Button>
-              <Button variant="secondary" onClick={esHandler}>
-                ES/ESR
-              </Button>
-            </ButtonGroup>
-
+            <ButtonGroupComp
+              funcArr={[filteredDataHandler, uasHandler, sesHandler, esHandler]}
+              titleArr={["Filtered sheet", "UAS/UASR", "SES/SESR", "ES/ESR"]}
+            />
             <Form.Control
               size="sm"
               type="text"
