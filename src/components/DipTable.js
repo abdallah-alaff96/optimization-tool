@@ -40,6 +40,7 @@ function DipTable({ ...props }) {
     keysToLowerCase(row);
   });
 
+  // Edit data Arr
   data.map((row) => {
     // DATA TO LOWERCASE
     keysToLowerCase(row);
@@ -202,18 +203,7 @@ function DipTable({ ...props }) {
     widthHandler(sesSheet);
     widthHandler(esSheet);
 
-    // // styling sheets (need pro version)
-
-    // filteredDataSheet["A1"].s = {
-    //   // set the style for target cell
-    //   font: {
-    //     sz: 24,
-    //     bold: true,
-    //   },
-    // };
-
     // APPEND SHEETS TO WB
-
     XLSX.utils.book_append_sheet(wb, filteredDataSheet, "All affected sites");
     XLSX.utils.book_append_sheet(wb, uasSheet, "UAS-UASR");
     XLSX.utils.book_append_sheet(wb, sesSheet, "SES-SESR");
