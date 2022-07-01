@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import InputFileComp from "../../components/InputFileComp";
-import TchTable from "./TchTable";
+import TchReport from "./TchReport";
 import "./Tch.css";
 
 function Tch() {
@@ -31,7 +31,7 @@ function Tch() {
             />
           )}
         </div>
-        <TchTable tableContent={myFile} />
+        <TchReport tableContent={myFile} />
       </div>
     </>
   );

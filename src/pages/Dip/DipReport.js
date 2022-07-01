@@ -1,4 +1,3 @@
-"use strict";
 import React, { useEffect, useState } from "react";
 import TableComp from "../../components/TableComp";
 import { KeysToLowerCase } from "../../handlers/KeysToLowerCase";
@@ -7,6 +6,9 @@ import ExportButton from "../../components/ExportButton";
 import ButtonGroupComp from "../../components/ButtonGroupComp";
 
 function DipTable({ ...props }) {
+  const { tableContent: data } = props;
+  const { tableTrans: transData } = props;
+
   const [activeArr, setActiveArr] = useState([]);
   const [search, setSearch] = useState("");
   const [activeExtractButton, setActiveExtractButton] = useState(false);
@@ -25,8 +27,6 @@ function DipTable({ ...props }) {
     "SESR",
     "UASR",
   ];
-  const { tableContent: data } = props;
-  const { tableTrans: transData } = props;
 
   // Edit trans Arr
   transData.map((row) => {

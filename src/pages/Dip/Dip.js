@@ -1,7 +1,6 @@
-"use strict";
 import React, { useEffect, useState } from "react";
 import InputFileComp from "../../components/InputFileComp";
-import DipTable from "./DipTable";
+import DipReport from "./DipReport";
 import "./Dip.css";
 
 function Dip() {
@@ -45,7 +44,7 @@ function Dip() {
             />
           )}
         </div>
-        <DipTable tableContent={myFile} tableTrans={transFile} />
+        <DipReport tableContent={myFile} tableTrans={transFile} />
       </div>
     </>
   );
