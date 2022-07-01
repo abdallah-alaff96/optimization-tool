@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import * as XLSX from "xlsx";
 
 function InputFileComp({ ...props }) {
-  const { onHandler, refSheetNumber } = props;
+  const { onHandler, refSheetNumber, fileName } = props;
 
   // File Handler Function
   const fileHandle = (e) => {
@@ -31,7 +31,7 @@ function InputFileComp({ ...props }) {
   return (
     <>
       <Form.Group controlId="formFile" className="mb-3 input-file-dip">
-        <Form.Label>Enter the "DIP" file here ⬇️</Form.Label>
+        <Form.Label>{`Enter "${fileName}" file here ⬇️`}</Form.Label>
         <Form.Control type="file" onChange={fileHandle} size="sm" />
       </Form.Group>
     </>

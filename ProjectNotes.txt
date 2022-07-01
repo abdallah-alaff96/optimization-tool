@@ -40,3 +40,11 @@ Highlights :
       };
 
       XLSX.utils.book_append_sheet(wb, sheet, namingHandler(index));
+
+-  all the children of .nav-list-item :
+
+.nav-list-item:hover > * {
+  color: var(--clr-darkWhite);
+}
+
+- 

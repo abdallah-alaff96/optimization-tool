@@ -33,7 +33,7 @@ function TableComp({ ...props }) {
 
   return (
     <>
-      <Table striped bordered hover className="dip-table">
+      <Table striped bordered hover className="table">
         <thead>
           <tr>{tableHeader}</tr>
         </thead>

@@ -34,12 +34,14 @@ function Dip() {
             <InputFileComp
               onHandler={dipInputFileHandler}
               refSheetNumber={0}
+              fileName={"DIP"}
             />
           )}
           {filesToggle && (
             <InputFileComp
               onHandler={transInputFileHandler}
               refSheetNumber={1}
+              fileName={"Transmission update"}
             />
           )}
         </div>
