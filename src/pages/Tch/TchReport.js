@@ -11,6 +11,21 @@ function TchTable({ ...props }) {
   const [activeArr, setActiveArr] = useState([]);
   const [search, setSearch] = useState("");
   const [activeExtractButton, setActiveExtractButton] = useState(false);
+  const dipheaderArr = [
+    "DIP",
+    "BSC",
+    "Site Name",
+    "Date",
+    "Hour",
+    "SF",
+    "ES",
+    "SES",
+    "UAS",
+    "SFR",
+    "ESR",
+    "SESR",
+    "UASR",
+  ];
 
   data?.map((row) => KeysToLowerCase(row));
 
@@ -37,17 +52,47 @@ function TchTable({ ...props }) {
     (row) => !row.cell_down_time_min && row.cell_down_time_min !== 0
   );
 
-  // console.log(filteredData);
-  console.log(haltedCells);
+  useEffect(() => {
+    if (data.length !== 0) {
+      setActiveArr(data);
+      setActiveExtractButton(true);
+    }
+  }, [data, search]);
+
+  // Active Button Handlers
+  const dataHandler = () => {
+    setActiveArr(data);
+  };
+  const uasHandler = () => {
+    setActiveArr(lowTchAvaCells);
+  };
+  const sesHandler = () => {
+    setActiveArr(downCells);
+  };
+  const esHandler = () => {
+    setActiveArr(haltedCells);
+  };
+
+  // Seach bar handler
+  const searchHandler = (event) => {
+    setSearch(event.target.value);
+  };
+
+  let excelData = [data, lowTchAvaCells, downCells, haltedCells];
 
   return (
     <>
-      {/* {activeExtractButton && (
+      {activeExtractButton && (
         <div className="div-table-container">
           <div className="dip-buttons-container">
             <ButtonGroupComp
-              funcArr={[filteredDataHandler, uasHandler, sesHandler, esHandler]}
-              titleArr={["Filtered sheet", "UAS/UASR", "SES/SESR", "ES/ESR"]}
+              funcArr={[dataHandler, uasHandler, sesHandler, esHandler]}
+              titleArr={[
+                "All affected cells",
+                "Low TCH Ava.",
+                "Down Cells",
+                "Halted Cells",
+              ]}
             />
             <Form.Control
               size="sm"
@@ -65,7 +110,7 @@ function TchTable({ ...props }) {
             refTableName={"dip"}
           />
         </div>
-      )} */}
+      )}
     </>
   );
 }
