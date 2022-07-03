@@ -21,9 +21,9 @@ function TchTable({ ...props }) {
     row.date = moment(row.date).add(1, "hours")._d;
   });
 
-  const filteredData = data?.filter(
-    (row) => row.date.toDateString() === today.toDateString()
-  );
+  const filteredData = data
+    ?.filter((row) => row.date.toDateString() === today.toDateString())
+    ?.filter((row) => row.hour === 6 || row.hour === 7);
   console.log(filteredData);
 
   return (
