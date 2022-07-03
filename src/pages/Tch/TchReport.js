@@ -33,8 +33,12 @@ function TchTable({ ...props }) {
     (row) => row.cell_down_time_min === 0 && row.tch_availability__ < 92
   );
 
+  const haltedCells = filteredData?.filter(
+    (row) => !row.cell_down_time_min && row.cell_down_time_min !== 0
+  );
+
   // console.log(filteredData);
-  console.log(lowTchAvaCells);
+  console.log(haltedCells);
 
   return (
     <>
