@@ -24,7 +24,17 @@ function TchTable({ ...props }) {
   const filteredData = data
     ?.filter((row) => row.date.toDateString() === today.toDateString())
     ?.filter((row) => row.hour === 6 || row.hour === 7);
-  console.log(filteredData);
+
+  const downCells = filteredData?.filter(
+    (row) => row.cell_down_time_min > 0 && row.cell_down_time_min < 100
+  );
+
+  const lowTchAvaCells = filteredData?.filter(
+    (row) => row.cell_down_time_min === 0 && row.tch_availability__ < 92
+  );
+
+  // console.log(filteredData);
+  console.log(lowTchAvaCells);
 
   return (
     <>
