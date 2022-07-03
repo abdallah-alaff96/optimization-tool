@@ -13,7 +13,7 @@ function InputFileComp({ ...props }) {
     reader.onload = (e) => {
       var data = e.target.result;
       var workbook = XLSX.read(data, {
-        type: "buffer",
+        type: "binary",
         cellStyles: true,
         cellDates: true,
         cellNF: true,

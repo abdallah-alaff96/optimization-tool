@@ -4,12 +4,29 @@ import { KeysToLowerCase } from "../../handlers/KeysToLowerCase";
 import Form from "react-bootstrap/Form";
 import ExportButton from "../../components/ExportButton";
 import ButtonGroupComp from "../../components/ButtonGroupComp";
+import moment from "moment";
 
 function TchTable({ ...props }) {
   const { tableContent: data } = props;
   const [activeArr, setActiveArr] = useState([]);
   const [search, setSearch] = useState("");
   const [activeExtractButton, setActiveExtractButton] = useState(false);
+
+  data?.map((row) => KeysToLowerCase(row));
+
+  // filtering conditions the 4 sheets
+  const today = new Date();
+
+  const filteredData = data?.map((row) => {
+    row.date = moment(row.date).add(1, "hours")._d;
+    console.log(row);
+  });
+
+  // ?.filter(
+  //   (row) => row.date.toDateString() === today.toDateString()
+  // );
+  // console.log(data);
+  // console.log(filteredData);
 
   return (
     <>

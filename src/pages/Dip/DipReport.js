@@ -35,7 +35,7 @@ function DipTable({ ...props }) {
 
   // Edit data Arr
   data.map((row) => {
-    // DATA TO LOWERCASE
+    // Keys TO LOWERCASE
     KeysToLowerCase(row);
     // Remove RBL2 & ET
     row.dip = row.dip.replace(/RBL2|ET/gi, "");

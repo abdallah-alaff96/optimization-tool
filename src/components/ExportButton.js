@@ -108,7 +108,7 @@ function ExportButton({ ...props }) {
     });
 
     XLSX.writeFile(wb, "DIP-Report.xlsx", {
-      type: "buffer",
+      type: "binary",
       cellStyles: true,
       cellDates: true,
       cellNF: true,
