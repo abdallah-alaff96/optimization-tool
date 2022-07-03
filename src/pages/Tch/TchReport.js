@@ -17,16 +17,14 @@ function TchTable({ ...props }) {
   // filtering conditions the 4 sheets
   const today = new Date();
 
-  const filteredData = data?.map((row) => {
+  data?.map((row) => {
     row.date = moment(row.date).add(1, "hours")._d;
-    console.log(row);
   });
 
-  // ?.filter(
-  //   (row) => row.date.toDateString() === today.toDateString()
-  // );
-  // console.log(data);
-  // console.log(filteredData);
+  const filteredData = data?.filter(
+    (row) => row.date.toDateString() === today.toDateString()
+  );
+  console.log(filteredData);
 
   return (
     <>
