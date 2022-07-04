@@ -12,19 +12,18 @@ function TchTable({ ...props }) {
   const [search, setSearch] = useState("");
   const [activeExtractButton, setActiveExtractButton] = useState(false);
   const dipheaderArr = [
-    "DIP",
-    "BSC",
-    "Site Name",
+    "Cell Name",
     "Date",
     "Hour",
-    "SF",
-    "ES",
-    "SES",
-    "UAS",
-    "SFR",
-    "ESR",
-    "SESR",
-    "UASR",
+    "Number of TCH's",
+    "TCH drop Rate %",
+    "Subscriber Percived TCH Congestion %",
+    "TCH traffic Erlang",
+    "SDCCH availability",
+    "SDCCH drop Rate %",
+    "TCH availability %",
+    "No of Accumulated Disabled TRX by BTSPS",
+    "Cell Down Time Min",
   ];
 
   data?.map((row) => KeysToLowerCase(row));
@@ -79,7 +78,7 @@ function TchTable({ ...props }) {
   };
 
   let excelData = [data, lowTchAvaCells, downCells, haltedCells];
-
+  console.log(activeArr);
   return (
     <>
       {activeExtractButton && (
@@ -107,7 +106,7 @@ function TchTable({ ...props }) {
           <TableComp
             dataArr={activeArr}
             headerArr={dipheaderArr}
-            refTableName={"dip"}
+            refTableName={"tch"}
           />
         </div>
       )}

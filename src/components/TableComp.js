@@ -29,11 +29,28 @@ function TableComp({ ...props }) {
         <td>{rowObj.uasr}</td>
       </tr>
     ));
+  } else if (refTableName === "tch") {
+    tData = dataArr?.map((rowObj, index) => (
+      <tr key={index}>
+        <td>{rowObj.cell_name}</td>
+        <td>{rowObj?.date?.toDateString()}</td>
+        <td>{rowObj.hour}</td>
+        <td>{rowObj.number_of_tch_s}</td>
+        <td>{rowObj.tch_drop_rate__}</td>
+        <td>{rowObj.subscriber_percived_tch_congestion__}</td>
+        <td>{rowObj.tch_traffic_erlang}</td>
+        <td>{rowObj.sdcch_availability}</td>
+        <td>{rowObj.sdcch_drop_rate__}</td>
+        <td>{rowObj.tch_availability__}</td>
+        <td>{rowObj.number_of_accumulated_disabled_trx_by_btsps}</td>
+        <td>{rowObj.cell_down_time_min}</td>
+      </tr>
+    ));
   }
 
   return (
     <>
-      <Table striped bordered hover className="table">
+      <Table striped bordered hover responsive className="table">
         <thead>
           <tr>{tableHeader}</tr>
         </thead>
