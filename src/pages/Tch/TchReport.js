@@ -35,9 +35,12 @@ function TchTable({ ...props }) {
     row.date = moment(row.date).add(1, "hours")._d;
   });
 
-  const filteredData = data
-    ?.filter((row) => row.date.toDateString() === today.toDateString())
-    ?.filter((row) => row.hour === 6 || row.hour === 7);
+  const shallowData = JSON.parse(JSON.stringify(data));
+
+  const filteredData = shallowData?.filter(
+    (row) => row.hour === 6 || row.hour === 7
+  );
+  // ?.filter((row) => row.date === today)
 
   const downCells = filteredData?.filter(
     (row) => row.cell_down_time_min > 0 && row.cell_down_time_min < 100
@@ -51,6 +54,11 @@ function TchTable({ ...props }) {
     (row) => !row.cell_down_time_min && row.cell_down_time_min !== 0
   );
 
+  console.log(filteredData);
+  console.log(downCells);
+  console.log(lowTchAvaCells);
+  console.log(haltedCells);
+
   useEffect(() => {
     if (data.length !== 0) {
       setActiveArr(data);
@@ -62,13 +70,13 @@ function TchTable({ ...props }) {
   const dataHandler = () => {
     setActiveArr(data);
   };
-  const uasHandler = () => {
+  const lowTchHandler = () => {
     setActiveArr(lowTchAvaCells);
   };
-  const sesHandler = () => {
+  const downCellsHandler = () => {
     setActiveArr(downCells);
   };
-  const esHandler = () => {
+  const haltedCellsHandler = () => {
     setActiveArr(haltedCells);
   };
 
@@ -78,14 +86,18 @@ function TchTable({ ...props }) {
   };
 
   let excelData = [data, lowTchAvaCells, downCells, haltedCells];
-  console.log(activeArr);
   return (
     <>
       {activeExtractButton && (
         <div className="div-table-container">
           <div className="dip-buttons-container">
             <ButtonGroupComp
-              funcArr={[dataHandler, uasHandler, sesHandler, esHandler]}
+              funcArr={[
+                dataHandler,
+                lowTchHandler,
+                downCellsHandler,
+                haltedCellsHandler,
+              ]}
               titleArr={[
                 "All affected cells",
                 "Low TCH Ava.",

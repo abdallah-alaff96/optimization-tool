@@ -4,7 +4,6 @@ import Table from "react-bootstrap/Table";
 function TableComp({ ...props }) {
   const { dataArr, headerArr, refTableName } = props;
   let tData;
-
   // Table Header
   const tableHeader = headerArr?.map((headerName, index) => {
     return <th key={index}>{headerName}</th>;
@@ -33,7 +32,7 @@ function TableComp({ ...props }) {
     tData = dataArr?.map((rowObj, index) => (
       <tr key={index}>
         <td>{rowObj.cell_name}</td>
-        <td>{rowObj?.date?.toDateString()}</td>
+        {/* <td>{rowObj?.date?.toDateString()}</td> */}
         <td>{rowObj.hour}</td>
         <td>{rowObj.number_of_tch_s}</td>
         <td>{rowObj.tch_drop_rate__}</td>
