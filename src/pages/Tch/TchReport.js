@@ -29,18 +29,20 @@ function TchTable({ ...props }) {
   data?.map((row) => KeysToLowerCase(row));
 
   // filtering conditions the 4 sheets
-  const today = new Date();
+  const today = new Date().toDateString();
 
   data?.map((row) => {
     row.date = moment(row.date).add(1, "hours")._d;
   });
 
   const shallowData = JSON.parse(JSON.stringify(data));
+  shallowData.map((row) => {
+    row.date = new Date(Date.parse(row.date)).toDateString();
+  });
 
-  const filteredData = shallowData?.filter(
-    (row) => row.hour === 6 || row.hour === 7
-  );
-  // ?.filter((row) => row.date === today)
+  const filteredData = shallowData
+    ?.filter((row) => row.date === today)
+    ?.filter((row) => row.hour === 6 || row.hour === 7);
 
   const downCells = filteredData?.filter(
     (row) => row.cell_down_time_min > 0 && row.cell_down_time_min < 100
@@ -53,22 +55,27 @@ function TchTable({ ...props }) {
   const haltedCells = filteredData?.filter(
     (row) => !row.cell_down_time_min && row.cell_down_time_min !== 0
   );
+  haltedCells?.map((row) => (row.cell_down_time_min = "Halted"));
+  const futureDate = new Date();
 
-  console.log(filteredData);
-  console.log(downCells);
-  console.log(lowTchAvaCells);
-  console.log(haltedCells);
+  // console.log(data);
+  // console.log(new Date(Date.parse(shallowData[0]?.date)).toDateString(), today);
+  // console.log(shallowData);
+  // console.log(filteredData);
+  // console.log(downCells);
+  // console.log(lowTchAvaCells);
+  // console.log(haltedCells);
 
   useEffect(() => {
     if (data.length !== 0) {
-      setActiveArr(data);
+      setActiveArr(shallowData);
       setActiveExtractButton(true);
     }
   }, [data, search]);
 
   // Active Button Handlers
   const dataHandler = () => {
-    setActiveArr(data);
+    setActiveArr(shallowData);
   };
   const lowTchHandler = () => {
     setActiveArr(lowTchAvaCells);
@@ -85,7 +92,7 @@ function TchTable({ ...props }) {
     setSearch(event.target.value);
   };
 
-  let excelData = [data, lowTchAvaCells, downCells, haltedCells];
+  let excelData = [shallowData, lowTchAvaCells, downCells, haltedCells];
   return (
     <>
       {activeExtractButton && (
