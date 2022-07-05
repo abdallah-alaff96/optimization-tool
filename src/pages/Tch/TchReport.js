@@ -41,6 +41,7 @@ function TchTable({ ...props }) {
       +row.subscriber_percived_tch_congestion__.toFixed(2);
   });
 
+  // create shallow copy of data arr for editing
   const shallowData = JSON.parse(JSON.stringify(data));
   shallowData.map((row) => {
     row.date = new Date(Date.parse(row.date)).toDateString();
@@ -91,6 +92,8 @@ function TchTable({ ...props }) {
   };
 
   let excelData = [shallowData, lowTchAvaCells, downCells, haltedCells];
+  console.log(shallowData);
+
   return (
     <>
       {activeExtractButton && (

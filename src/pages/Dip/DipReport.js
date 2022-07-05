@@ -103,7 +103,7 @@ function DipTable({ ...props }) {
               className="search-input"
               onChange={searchHandler}
             />
-            <ExportButton excelD={excelData} />
+            <ExportButton excelD={excelData} refReprot={"dip"} />
           </div>
 
           <TableComp

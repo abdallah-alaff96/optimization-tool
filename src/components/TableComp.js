@@ -4,7 +4,6 @@ import Table from "react-bootstrap/Table";
 function TableComp({ ...props }) {
   const { dataArr, headerArr, refTableName } = props;
   let tData;
-  console.log(dataArr);
   // Table Header
   const tableHeader = headerArr?.map((headerName, index) => {
     return <th key={index}>{headerName}</th>;
