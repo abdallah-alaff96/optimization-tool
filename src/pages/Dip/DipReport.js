@@ -90,8 +90,8 @@ function DipTable({ ...props }) {
   return (
     <>
       {activeExtractButton && (
-        <div className="div-table-container">
-          <div className="dip-buttons-container">
+        <div className="table-container">
+          <div className="buttons-container">
             <ButtonGroupComp
               funcArr={[filteredDataHandler, uasHandler, sesHandler, esHandler]}
               titleArr={["Filtered sheet", "UAS/UASR", "SES/SESR", "ES/ESR"]}

@@ -157,7 +157,6 @@ a:active {
   height: 80%;
 
   background-color: var(--clr-bg);
-  padding: 1.5rem;
   overflow-y: auto;
 }
 
@@ -167,4 +166,32 @@ a:active {
   padding: 1rem 0 0 1rem;
   text-decoration: underline;
   font-style: italic;
+}
+
+/* TchReport & DipReprot styles */
+.input-files-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.buttons-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+
+.search-input {
+  flex: 0.3;
 }

@@ -7,7 +7,7 @@ function ExportButton({ ...props }) {
   const { excelD } = props;
 
   //Write an Excel file
-  const handleExportDip = (excelData) => {
+  const handleExport = (excelData) => {
     // function to order the object keys for extraction to excel
     const orderHandler = (arr) => {
       arr.map((row) => {
@@ -118,7 +118,7 @@ function ExportButton({ ...props }) {
   return (
     <Button
       variant="success"
-      onClick={() => handleExportDip(excelD)}
+      onClick={() => handleExport(excelD)}
       className="dip-extract-button"
     >
       Extract Data
