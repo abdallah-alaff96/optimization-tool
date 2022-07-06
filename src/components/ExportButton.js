@@ -151,17 +151,27 @@ function ExportButton({ ...props }) {
       };
       widthHandler(sheet);
       // 3
-      const namingHandler = (index) => {
-        const dipSheetName = {
-          0: "All affected sites",
-          1: "UAS-UASR",
-          2: "SES-SESR",
-          3: "ES-ESR",
-        };
-        return dipSheetName[index];
+      const namingHandler = (index, refReprot) => {
+        if (refReprot === "dip") {
+          const dipSheetName = {
+            0: "All affected sites",
+            1: "UAS-UASR",
+            2: "SES-SESR",
+            3: "ES-ESR",
+          };
+          return dipSheetName[index];
+        } else if (refReprot === "tch") {
+          const tchSheetName = {
+            0: "All affected cells",
+            1: "Low TCH Availability",
+            2: "Down Cells",
+            3: "Halted Cells",
+          };
+          return tchSheetName[index];
+        }
       };
 
-      XLSX.utils.book_append_sheet(wb, sheet, namingHandler(index));
+      XLSX.utils.book_append_sheet(wb, sheet, namingHandler(index, refReprot));
     });
 
     XLSX.writeFile(

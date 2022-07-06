@@ -32,6 +32,7 @@ function TchTable({ ...props }) {
   const today = new Date().toDateString();
 
   data?.map((row) => {
+    // to add one 1 day to the entered date (fixing sheetJS date)
     row.date = moment(row.date).add(1, "hours")._d;
     row.sdcch_traffic__erlang_ = +row.sdcch_traffic__erlang_.toFixed(2);
     row.call_setup_success_rate = +row.call_setup_success_rate.toFixed(2);
@@ -48,8 +49,8 @@ function TchTable({ ...props }) {
   });
 
   const filteredData = shallowData
-    ?.filter((row) => row.date === today)
-    ?.filter((row) => row.hour === 6 || row.hour === 7);
+    ?.filter((row) => row.hour === 6 || row.hour === 7)
+    ?.filter((row) => today === row.date);
 
   const downCells = filteredData?.filter(
     (row) => row.cell_down_time_min > 0 && row.cell_down_time_min < 100
@@ -63,7 +64,6 @@ function TchTable({ ...props }) {
     (row) => !row.cell_down_time_min && row.cell_down_time_min !== 0
   );
   haltedCells?.map((row) => (row.cell_down_time_min = "Halted"));
-  const futureDate = new Date();
 
   useEffect(() => {
     if (data.length !== 0) {
@@ -92,8 +92,7 @@ function TchTable({ ...props }) {
   };
 
   let excelData = [shallowData, lowTchAvaCells, downCells, haltedCells];
-  console.log(shallowData);
-
+  console.log(excelData);
   return (
     <>
       {activeExtractButton && (
@@ -120,7 +119,7 @@ function TchTable({ ...props }) {
               className="search-input"
               onChange={searchHandler}
             />
-            <ExportButton excelD={excelData} />
+            <ExportButton excelD={excelData} refReprot={"tch"} />
           </div>
 
           <TableComp
