@@ -5,115 +5,15 @@ import Button from "react-bootstrap/Button";
 
 function ExportButton({ ...props }) {
   const { excelD, refReprot } = props;
-
+  console.log(excelD);
   //Write an Excel file
   const handleExport = (excelData, refReprot) => {
     // function to order the object keys for extraction to excel
-    const orderHandler = (arr, refReprot) => {
+    const orderHandler = (arr) => {
       arr.map((row) => {
         KeysToUpperCase(row);
       });
-      // Reorder the JSON file for Exporting Excel file
-      // 1
-      if (refReprot === "dip") {
-        const newArr = arr.map(
-          ({
-            UASR,
-            SESR,
-            ESR,
-            SFR,
-            UAS,
-            SES,
-            ES,
-            SF,
-            DIPFUAV,
-            DIPNUAV,
-            HOUR,
-            DATE,
-            DIP,
-            NE_VERSION,
-            DATA_AVAILABILITY,
-            ELEM,
-            OSS_ID,
-            BSC_DIP,
-            SITE_NAME,
-          }) => ({
-            OSS_ID,
-            ELEM,
-            DATA_AVAILABILITY,
-            NE_VERSION,
-            DIP,
-            BSC_DIP,
-            SITE_NAME,
-            DATE,
-            HOUR,
-            DIPNUAV,
-            DIPFUAV,
-            SF,
-            ES,
-            SES,
-            UAS,
-            SFR,
-            ESR,
-            SESR,
-            UASR,
-          })
-        );
-        return newArr;
-      } else if (refReprot === "tch") {
-        const newArr = arr.map(
-          ({
-            call_setup_success_rate,
-            cell_down_time_min,
-            cell_name,
-            date,
-            hour,
-            lac,
-            number_of_accumulated_disabled_trx_by_btsps,
-            number_of_sdcch_s,
-            number_of_tch_s,
-            sdcch_availability,
-            sdcch_congestion_rate,
-            sdcch_drop_rate__,
-            sdcch_mean_holding_time_sec,
-            sdcch_time_congestion,
-            sdcch_traffic__erlang_,
-            subscriber_percived_tch_congestion__,
-            tch_assignment_success_rate__,
-            tch_avail_with_ps__,
-            tch_availability__,
-            tch_drop_rate__,
-            tch_traffic_erlang,
-            tch_traffic_fr_erlang,
-            tch_traffic_hr_erlang,
-          }) => ({
-            cell_name,
-            date,
-            hour,
-            call_setup_success_rate,
-            sdcch_availability,
-            number_of_sdcch_s,
-            sdcch_traffic__erlang_,
-            sdcch_time_congestion,
-            sdcch_congestion_rate,
-            sdcch_drop_rate__,
-            sdcch_mean_holding_time_sec,
-            tch_availability__,
-            number_of_tch_s,
-            tch_traffic_erlang,
-            tch_traffic_fr_erlang,
-            tch_traffic_hr_erlang,
-            subscriber_percived_tch_congestion__,
-            tch_drop_rate__,
-            tch_assignment_success_rate__,
-            tch_avail_with_ps__,
-            number_of_accumulated_disabled_trx_by_btsps,
-            cell_down_time_min,
-            lac,
-          })
-        );
-        return newArr;
-      }
+      return arr;
     };
 
     // Creact new WB
@@ -198,3 +98,104 @@ function ExportButton({ ...props }) {
 }
 
 export default ExportButton;
+
+// Reorder the JSON file for Exporting Excel file
+// if (refReprot === "dip") {
+//   const newArr = arr.map(
+//     ({
+//       UASR,
+//       SESR,
+//       ESR,
+//       SFR,
+//       UAS,
+//       SES,
+//       ES,
+//       SF,
+//       DIPFUAV,
+//       DIPNUAV,
+//       HOUR,
+//       DATE,
+//       DIP,
+//       NE_VERSION,
+//       DATA_AVAILABILITY,
+//       ELEM,
+//       OSS_ID,
+//       BSC_DIP,
+//       SITE_NAME,
+//     }) => ({
+//       OSS_ID,
+//       ELEM,
+//       DATA_AVAILABILITY,
+//       NE_VERSION,
+//       DIP,
+//       BSC_DIP,
+//       SITE_NAME,
+//       DATE,
+//       HOUR,
+//       DIPNUAV,
+//       DIPFUAV,
+//       SF,
+//       ES,
+//       SES,
+//       UAS,
+//       SFR,
+//       ESR,
+//       SESR,
+//       UASR,
+//     })
+//   );
+//   return newArr;
+// } else return arr;
+
+// else if (refReprot === "tch") {
+//   const newArr = arr.map(
+//     ({
+//       call_setup_success_rate,
+//       cell_down_time_min,
+//       cell_name,
+//       date,
+//       hour,
+//       lac,
+//       number_of_accumulated_disabled_trx_by_btsps,
+//       number_of_sdcch_s,
+//       number_of_tch_s,
+//       sdcch_availability,
+//       sdcch_congestion_rate,
+//       sdcch_drop_rate__,
+//       sdcch_mean_holding_time_sec,
+//       sdcch_time_congestion,
+//       sdcch_traffic__erlang_,
+//       subscriber_percived_tch_congestion__,
+//       tch_assignment_success_rate__,
+//       tch_avail_with_ps__,
+//       tch_availability__,
+//       tch_drop_rate__,
+//       tch_traffic_erlang,
+//       tch_traffic_fr_erlang,
+//       tch_traffic_hr_erlang,
+//     }) => ({
+//       cell_name,
+//       date,
+//       hour,
+//       call_setup_success_rate,
+//       sdcch_availability,
+//       number_of_sdcch_s,
+//       sdcch_traffic__erlang_,
+//       sdcch_time_congestion,
+//       sdcch_congestion_rate,
+//       sdcch_drop_rate__,
+//       sdcch_mean_holding_time_sec,
+//       tch_availability__,
+//       number_of_tch_s,
+//       tch_traffic_erlang,
+//       tch_traffic_fr_erlang,
+//       tch_traffic_hr_erlang,
+//       subscriber_percived_tch_congestion__,
+//       tch_drop_rate__,
+//       tch_assignment_success_rate__,
+//       tch_avail_with_ps__,
+//       number_of_accumulated_disabled_trx_by_btsps,
+//       cell_down_time_min,
+//       lac,
+//     })
+//   );

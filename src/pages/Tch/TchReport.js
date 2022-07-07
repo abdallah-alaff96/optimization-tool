@@ -92,7 +92,6 @@ function TchTable({ ...props }) {
   };
 
   let excelData = [shallowData, lowTchAvaCells, downCells, haltedCells];
-  console.log(excelData);
   return (
     <>
       {activeExtractButton && (
