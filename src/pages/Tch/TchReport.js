@@ -10,6 +10,7 @@ function TchTable({ ...props }) {
   const { tableContent: data } = props;
   const [activeArr, setActiveArr] = useState([]);
   const [search, setSearch] = useState("");
+  const [activateSearch, setActivateSearch] = useState(true);
   const [activeExtractButton, setActiveExtractButton] = useState(false);
   const dipheaderArr = [
     "Cell Name",
@@ -65,9 +66,13 @@ function TchTable({ ...props }) {
   );
   haltedCells?.map((row) => (row.cell_down_time_min = "Halted"));
 
+  let excelData = [shallowData, lowTchAvaCells, downCells, haltedCells];
+  // console.log(excelData);
+  console.log(filteredData);
+
   useEffect(() => {
     if (data.length !== 0) {
-      setActiveArr(shallowData);
+      setActiveArr(shallowData.filter((row) => row.cell_name.includes(search)));
       setActiveExtractButton(true);
     }
   }, [data, search]);
@@ -75,15 +80,19 @@ function TchTable({ ...props }) {
   // Active Button Handlers
   const dataHandler = () => {
     setActiveArr(shallowData);
+    setActivateSearch(true);
   };
   const lowTchHandler = () => {
     setActiveArr(lowTchAvaCells);
+    setActivateSearch(false);
   };
   const downCellsHandler = () => {
     setActiveArr(downCells);
+    setActivateSearch(false);
   };
   const haltedCellsHandler = () => {
     setActiveArr(haltedCells);
+    setActivateSearch(false);
   };
 
   // Seach bar handler
@@ -91,7 +100,9 @@ function TchTable({ ...props }) {
     setSearch(event.target.value);
   };
 
-  let excelData = [shallowData, lowTchAvaCells, downCells, haltedCells];
+  // console.log(excelData);
+  // console.log(activeArr);
+
   return (
     <>
       {activeExtractButton && (
@@ -111,13 +122,15 @@ function TchTable({ ...props }) {
                 "Halted Cells",
               ]}
             />
-            <Form.Control
-              size="sm"
-              type="text"
-              placeholder="Site Name..."
-              className="search-input"
-              onChange={searchHandler}
-            />
+            {activateSearch && (
+              <Form.Control
+                size="sm"
+                type="text"
+                placeholder="Site Name..."
+                className="search-input"
+                onChange={searchHandler}
+              />
+            )}
             <ExportButton excelD={excelData} refReprot={"tch"} />
           </div>
 

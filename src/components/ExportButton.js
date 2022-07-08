@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 
 function ExportButton({ ...props }) {
   const { excelD, refReprot } = props;
-  console.log(excelD);
+
   //Write an Excel file
   const handleExport = (excelData, refReprot) => {
     // function to order the object keys for extraction to excel

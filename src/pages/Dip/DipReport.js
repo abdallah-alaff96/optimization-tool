@@ -6,11 +6,10 @@ import ExportButton from "../../components/ExportButton";
 import ButtonGroupComp from "../../components/ButtonGroupComp";
 
 function DipTable({ ...props }) {
-  const { tableContent: data } = props;
-  const { tableTrans: transData } = props;
-
+  const { tableContent: data, tableTrans: transData } = props;
   const [activeArr, setActiveArr] = useState([]);
   const [search, setSearch] = useState("");
+  const [activateSearch, setActivateSearch] = useState(true);
   const [activeExtractButton, setActiveExtractButton] = useState(false);
   const dipheaderArr = [
     "DIP",
@@ -69,15 +68,19 @@ function DipTable({ ...props }) {
   // Active Button Handlers
   const filteredDataHandler = () => {
     setActiveArr(filteredData);
+    setActivateSearch(true);
   };
   const uasHandler = () => {
     setActiveArr(uasArr);
+    setActivateSearch(false);
   };
   const sesHandler = () => {
     setActiveArr(sesArr);
+    setActivateSearch(false);
   };
   const esHandler = () => {
     setActiveArr(esArr);
+    setActivateSearch(false);
   };
 
   // Seach bar handler
@@ -96,13 +99,15 @@ function DipTable({ ...props }) {
               funcArr={[filteredDataHandler, uasHandler, sesHandler, esHandler]}
               titleArr={["Filtered sheet", "UAS/UASR", "SES/SESR", "ES/ESR"]}
             />
-            <Form.Control
-              size="sm"
-              type="text"
-              placeholder="Site Name..."
-              className="search-input"
-              onChange={searchHandler}
-            />
+            {activateSearch && (
+              <Form.Control
+                size="sm"
+                type="text"
+                placeholder="Site Name..."
+                className="search-input"
+                onChange={searchHandler}
+              />
+            )}
             <ExportButton excelD={excelData} refReprot={"dip"} />
           </div>
 
