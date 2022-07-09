@@ -44,14 +44,14 @@ function TchTable({ ...props }) {
   });
 
   // create shallow copy of data arr for editing
-  const shallowData = JSON.parse(JSON.stringify(data));
-  shallowData.map((row) => {
+  const allAffectedCellsArr = JSON.parse(JSON.stringify(data));
+  allAffectedCellsArr.map((row) => {
     row.date = new Date(Date.parse(row.date)).toDateString();
   });
 
-  const filteredData = shallowData
-    ?.filter((row) => row.hour === 6 || row.hour === 7)
-    ?.filter((row) => today === row.date);
+  const filteredData = allAffectedCellsArr?.filter(
+    (row) => (row.hour === 6 || row.hour === 7) && today === row.date
+  );
 
   const downCells = filteredData?.filter(
     (row) => row.cell_down_time_min > 0 && row.cell_down_time_min < 100
@@ -66,20 +66,22 @@ function TchTable({ ...props }) {
   );
   haltedCells?.map((row) => (row.cell_down_time_min = "Halted"));
 
-  let excelData = [shallowData, lowTchAvaCells, downCells, haltedCells];
-  // console.log(excelData);
-  console.log(filteredData);
+  let excelData = [allAffectedCellsArr, lowTchAvaCells, downCells, haltedCells];
+  console.log(excelData);
+  // console.log(allAffectedCellsArr);
 
   useEffect(() => {
     if (data.length !== 0) {
-      setActiveArr(shallowData.filter((row) => row.cell_name.includes(search)));
+      setActiveArr(
+        allAffectedCellsArr.filter((row) => row.cell_name.includes(search))
+      );
       setActiveExtractButton(true);
     }
   }, [data, search]);
 
   // Active Button Handlers
   const dataHandler = () => {
-    setActiveArr(shallowData);
+    setActiveArr(allAffectedCellsArr);
     setActivateSearch(true);
   };
   const lowTchHandler = () => {
