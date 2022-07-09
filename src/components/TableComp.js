@@ -41,7 +41,6 @@ function TableComp({ ...props }) {
         <td>{rowObj.sdcch_availability}</td>
         <td>{rowObj.sdcch_drop_rate__}</td>
         <td>{rowObj.tch_availability__}</td>
-        {/* <td>{rowObj.number_of_accumulated_disabled_trx_by_btsps}</td> */}
         <td>{rowObj.cell_down_time_min}</td>
       </tr>
     ));

@@ -12,6 +12,7 @@ function TchTable({ ...props }) {
   const [search, setSearch] = useState("");
   const [activateSearch, setActivateSearch] = useState(true);
   const [activeExtractButton, setActiveExtractButton] = useState(false);
+  const today = new Date().toDateString();
   const dipheaderArr = [
     "Cell Name",
     "Date",
@@ -23,14 +24,10 @@ function TchTable({ ...props }) {
     "SDCCH ava. %",
     "SDCCH drop Rate %",
     "TCH ava. %",
-    // "# of Acc.Dis. TRX by BTSPS",
     "Down Time MIN",
   ];
 
   data?.map((row) => KeysToLowerCase(row));
-
-  // filtering conditions the 4 sheets
-  const today = new Date().toDateString();
 
   data?.map((row) => {
     // to add one 1 day to the entered date (fixing sheetJS date)
@@ -68,7 +65,6 @@ function TchTable({ ...props }) {
 
   let excelData = [allAffectedCellsArr, lowTchAvaCells, downCells, haltedCells];
   console.log(excelData);
-  // console.log(allAffectedCellsArr);
 
   useEffect(() => {
     if (data.length !== 0) {
@@ -101,9 +97,6 @@ function TchTable({ ...props }) {
   const searchHandler = (event) => {
     setSearch(event.target.value);
   };
-
-  // console.log(excelData);
-  // console.log(activeArr);
 
   return (
     <>
