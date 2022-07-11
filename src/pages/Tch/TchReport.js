@@ -29,20 +29,17 @@ function TchTable({ ...props }) {
 
   data?.map((row) => KeysToLowerCase(row));
 
-  data?.map((row) => {
+  // create shallow copy of data arr for editing
+  const allAffectedCellsArr = JSON?.parse(JSON?.stringify(data));
+  allAffectedCellsArr?.map((row) => {
     // to add one 1 day to the entered date (fixing sheetJS date)
-    row.date = moment(row.date).add(1, "hours")._d;
     row.sdcch_traffic__erlang_ = +row.sdcch_traffic__erlang_.toFixed(2);
     row.call_setup_success_rate = +row.call_setup_success_rate.toFixed(2);
     row.tch_traffic_erlang = +row.tch_traffic_erlang.toFixed(2);
     row.tch_drop_rate__ = +row.tch_drop_rate__.toFixed(2);
     row.subscriber_percived_tch_congestion__ =
       +row.subscriber_percived_tch_congestion__.toFixed(2);
-  });
-
-  // create shallow copy of data arr for editing
-  const allAffectedCellsArr = JSON.parse(JSON.stringify(data));
-  allAffectedCellsArr.map((row) => {
+    row.date = moment(row.date).add(1, "hours")._d;
     row.date = new Date(Date.parse(row.date)).toDateString();
   });
 
