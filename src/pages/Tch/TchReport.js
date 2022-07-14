@@ -33,12 +33,21 @@ function TchTable({ ...props }) {
   const allAffectedCellsArr = JSON?.parse(JSON?.stringify(data));
   allAffectedCellsArr?.map((row) => {
     // to add one 1 day to the entered date (fixing sheetJS date)
-    row.sdcch_traffic__erlang_ = +row.sdcch_traffic__erlang_.toFixed(2);
-    row.call_setup_success_rate = +row.call_setup_success_rate.toFixed(2);
-    row.tch_traffic_erlang = +row.tch_traffic_erlang.toFixed(2);
-    row.tch_drop_rate__ = +row.tch_drop_rate__.toFixed(2);
-    row.subscriber_percived_tch_congestion__ =
-      +row.subscriber_percived_tch_congestion__.toFixed(2);
+    row.sdcch_traffic__erlang_ = parseFloat(
+      row?.sdcch_traffic__erlang_
+    )?.toFixed(2);
+    row.tch_availability__ = parseFloat(row?.tch_availability__)?.toFixed(2);
+    row.sdcch_drop_rate__ = parseFloat(row?.sdcch_drop_rate__)?.toFixed(2);
+    row.number_of_tch_s = parseFloat(row?.number_of_tch_s)?.toFixed(2);
+    row.sdcch_availability = parseFloat(row?.sdcch_availability)?.toFixed(2);
+    row.call_setup_success_rate = parseFloat(
+      row?.call_setup_success_rate
+    )?.toFixed(2);
+    row.tch_traffic_erlang = parseFloat(row?.tch_traffic_erlang)?.toFixed(2);
+    row.tch_drop_rate__ = parseFloat(row?.tch_drop_rate__)?.toFixed(2);
+    row.subscriber_percived_tch_congestion__ = parseFloat(
+      row?.subscriber_percived_tch_congestion__
+    )?.toFixed(2);
     row.date = moment(row.date).add(1, "hours")._d;
     row.date = new Date(Date.parse(row.date)).toDateString();
   });
@@ -61,9 +70,10 @@ function TchTable({ ...props }) {
   haltedCells?.map((row) => (row.cell_down_time_min = "Halted"));
 
   let excelData = [allAffectedCellsArr, lowTchAvaCells, downCells, haltedCells];
-  console.log(excelData);
 
   useEffect(() => {
+    console.log("effect ran");
+
     if (data.length !== 0) {
       setActiveArr(
         allAffectedCellsArr.filter((row) => row.cell_name.includes(search))
@@ -94,6 +104,7 @@ function TchTable({ ...props }) {
   const searchHandler = (event) => {
     setSearch(event.target.value);
   };
+  console.log("TCH Report renders");
 
   return (
     <>

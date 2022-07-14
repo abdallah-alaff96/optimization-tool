@@ -4,11 +4,13 @@ import { KeysToLowerCase } from "../../handlers/KeysToLowerCase";
 import Form from "react-bootstrap/Form";
 import ExportButton from "../../components/ExportButton";
 import ButtonGroupComp from "../../components/ButtonGroupComp";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 function DipTable({ ...props }) {
   const { tableContent: data, tableTrans: transData } = props;
   const [activeArr, setActiveArr] = useState([]);
   const [search, setSearch] = useState("");
+  const [activeSpinner, setActiveSpinner] = useState(false);
   const [activateSearch, setActivateSearch] = useState(true);
   const [activeExtractButton, setActiveExtractButton] = useState(false);
   const dipheaderArr = [
@@ -67,18 +69,22 @@ function DipTable({ ...props }) {
 
   // Active Button Handlers
   const filteredDataHandler = () => {
+    setActiveSpinner(true);
     setActiveArr(filteredData);
     setActivateSearch(true);
   };
   const uasHandler = () => {
+    setActiveSpinner(true);
     setActiveArr(uasArr);
     setActivateSearch(false);
   };
   const sesHandler = () => {
+    setActiveSpinner(true);
     setActiveArr(sesArr);
     setActivateSearch(false);
   };
   const esHandler = () => {
+    setActiveSpinner(true);
     setActiveArr(esArr);
     setActivateSearch(false);
   };
@@ -89,7 +95,7 @@ function DipTable({ ...props }) {
   };
 
   let excelData = [filteredData, uasArr, sesArr, esArr];
-
+  console.log("DIP renders");
   return (
     <>
       {activeExtractButton && (
@@ -108,6 +114,7 @@ function DipTable({ ...props }) {
                 onChange={searchHandler}
               />
             )}
+            {activeSpinner && <LoadingSpinner />}
             <ExportButton excelD={excelData} refReprot={"dip"} />
           </div>
 

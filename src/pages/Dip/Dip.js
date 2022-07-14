@@ -11,7 +11,6 @@ function Dip() {
   // Dip file Handler
   const dipInputFileHandler = (data) => {
     setMyFile(data);
-    console.log(data);
   };
 
   // Trans file Handler
