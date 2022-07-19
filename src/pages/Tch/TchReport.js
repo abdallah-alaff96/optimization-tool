@@ -8,6 +8,14 @@ import moment from "moment";
 
 function TchTable({ ...props }) {
   const { tableContent: data } = props;
+
+  const [allAffectedCellsArr, setAllAffectedCellsArr] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [lowTchAvaCells, setlowTchAvaCells] = useState([]);
+  const [downCells, setdownCells] = useState([]);
+  const [haltedCells, setHaltedCells] = useState([]);
+  const [excelData, setexcelData] = useState([]);
+
   const [activeArr, setActiveArr] = useState([]);
   const [search, setSearch] = useState("");
   const [activateSearch, setActivateSearch] = useState(true);
@@ -27,56 +35,77 @@ function TchTable({ ...props }) {
     "Down Time MIN",
   ];
 
-  data?.map((row) => KeysToLowerCase(row));
-
-  // create shallow copy of data arr for editing
-  const allAffectedCellsArr = JSON?.parse(JSON?.stringify(data));
-  allAffectedCellsArr?.map((row) => {
-    // to add one 1 day to the entered date (fixing sheetJS date)
-    row.sdcch_traffic__erlang_ = parseFloat(
-      row?.sdcch_traffic__erlang_
-    )?.toFixed(2);
-    row.tch_availability__ = parseFloat(row?.tch_availability__)?.toFixed(2);
-    row.sdcch_drop_rate__ = parseFloat(row?.sdcch_drop_rate__)?.toFixed(2);
-    row.number_of_tch_s = parseFloat(row?.number_of_tch_s)?.toFixed(2);
-    row.sdcch_availability = parseFloat(row?.sdcch_availability)?.toFixed(2);
-    row.call_setup_success_rate = parseFloat(
-      row?.call_setup_success_rate
-    )?.toFixed(2);
-    row.tch_traffic_erlang = parseFloat(row?.tch_traffic_erlang)?.toFixed(2);
-    row.tch_drop_rate__ = parseFloat(row?.tch_drop_rate__)?.toFixed(2);
-    row.subscriber_percived_tch_congestion__ = parseFloat(
-      row?.subscriber_percived_tch_congestion__
-    )?.toFixed(2);
-    row.date = moment(row.date).add(1, "hours")._d;
-    row.date = new Date(Date.parse(row.date)).toDateString();
-  });
-
-  const filteredData = allAffectedCellsArr?.filter(
-    (row) => (row.hour === 6 || row.hour === 7) && today === row.date
-  );
-
-  const downCells = filteredData?.filter(
-    (row) => row.cell_down_time_min > 0 && row.cell_down_time_min < 100
-  );
-
-  const lowTchAvaCells = filteredData?.filter(
-    (row) => row.cell_down_time_min === 0 && row.tch_availability__ < 92
-  );
-
-  const haltedCells = filteredData?.filter(
-    (row) => !row.cell_down_time_min && row.cell_down_time_min !== 0
-  );
-  haltedCells?.map((row) => (row.cell_down_time_min = "Halted"));
-
-  let excelData = [allAffectedCellsArr, lowTchAvaCells, downCells, haltedCells];
-
   useEffect(() => {
-    console.log("effect ran");
-
     if (data.length !== 0) {
+      data?.map((row) => KeysToLowerCase(row));
+
+      // create shallow copy of data arr for editing
+      const temporaryAllAffectedCellsArr = JSON?.parse(JSON?.stringify(data));
+      temporaryAllAffectedCellsArr?.map((row) => {
+        // to add one 1 day to the entered date (fixing sheetJS date)
+        row.sdcch_traffic__erlang_ = parseFloat(
+          row?.sdcch_traffic__erlang_
+        )?.toFixed(2);
+        row.tch_availability__ = parseFloat(row?.tch_availability__)?.toFixed(
+          2
+        );
+        row.sdcch_drop_rate__ = parseFloat(row?.sdcch_drop_rate__)?.toFixed(2);
+        row.number_of_tch_s = parseFloat(row?.number_of_tch_s)?.toFixed(2);
+        row.sdcch_availability = parseFloat(row?.sdcch_availability)?.toFixed(
+          2
+        );
+        row.call_setup_success_rate = parseFloat(
+          row?.call_setup_success_rate
+        )?.toFixed(2);
+        row.tch_traffic_erlang = parseFloat(row?.tch_traffic_erlang)?.toFixed(
+          2
+        );
+        row.tch_drop_rate__ = parseFloat(row?.tch_drop_rate__)?.toFixed(2);
+        row.subscriber_percived_tch_congestion__ = parseFloat(
+          row?.subscriber_percived_tch_congestion__
+        )?.toFixed(2);
+        row.date = moment(row.date).add(1, "hours")._d;
+        row.date = new Date(Date.parse(row.date)).toDateString();
+      });
+
+      const temporaryFilteredData = temporaryAllAffectedCellsArr?.filter(
+        (row) => (row.hour === 6 || row.hour === 7) && today === row.date
+      );
+
+      const temporarydownCells = temporaryFilteredData?.filter(
+        (row) => row.cell_down_time_min > 0 && row.cell_down_time_min < 100
+      );
+
+      const temporaryLowTchAvaCells = temporaryFilteredData?.filter(
+        (row) => row.cell_down_time_min === 0 && row.tch_availability__ < 92
+      );
+
+      const temporaryHaltedCells = temporaryFilteredData?.filter(
+        (row) => !row.cell_down_time_min && row.cell_down_time_min !== 0
+      );
+      temporaryHaltedCells?.map((row) => (row.cell_down_time_min = "Halted"));
+
+      const temporaryExcelData = [
+        temporaryAllAffectedCellsArr,
+        temporaryLowTchAvaCells,
+        temporarydownCells,
+        temporaryHaltedCells,
+      ];
+
+      // set new state values
+      setAllAffectedCellsArr(temporaryAllAffectedCellsArr);
+      setFilteredData(temporaryFilteredData);
+      setlowTchAvaCells(temporaryLowTchAvaCells);
+      setdownCells(temporarydownCells);
+      setHaltedCells(temporaryHaltedCells);
+      setexcelData(temporaryExcelData);
+
+      console.log("useEffect renders", temporaryExcelData);
+
       setActiveArr(
-        allAffectedCellsArr.filter((row) => row.cell_name.includes(search))
+        temporaryAllAffectedCellsArr.filter((row) =>
+          row.cell_name.includes(search)
+        )
       );
       setActiveExtractButton(true);
     }
@@ -102,9 +131,11 @@ function TchTable({ ...props }) {
 
   // Seach bar handler
   const searchHandler = (event) => {
+    console.log("SearchHandler");
     setSearch(event.target.value);
   };
-  console.log("TCH Report renders");
+
+  console.log("component rendered", excelData);
 
   return (
     <>
