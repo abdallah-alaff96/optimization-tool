@@ -21,6 +21,7 @@ function TchTable({ ...props }) {
   const [search, setSearch] = useState("");
   const [activateSearch, setActivateSearch] = useState(true);
   const [activeExtractButton, setActiveExtractButton] = useState(false);
+
   const today = new Date().toDateString();
   const dipheaderArr = [
     "Cell Name",
@@ -100,17 +101,22 @@ function TchTable({ ...props }) {
       setdownCells(temporarydownCells);
       setHaltedCells(temporaryHaltedCells);
       setexcelData(temporaryExcelData);
+      setActiveArr(temporaryAllAffectedCellsArr);
 
       console.log("useEffect renders", temporaryExcelData);
 
-      setActiveArr(
-        temporaryAllAffectedCellsArr.filter((row) =>
-          row.cell_name.includes(search)
-        )
-      );
       setActiveExtractButton(true);
     }
-  }, [data, search]);
+  }, [data]);
+
+  useEffect(() => {
+    if (data.length !== 0) {
+      setActiveArr(
+        allAffectedCellsArr.filter((row) => row.cell_name.includes(search))
+      );
+      console.log("useEffect Search");
+    }
+  }, [search]);
 
   // Active Button Handlers
   const dataHandler = () => {
@@ -134,7 +140,7 @@ function TchTable({ ...props }) {
 
   // Seach button handler
   const searchButtonHandler = (searchedSite) => {
-    console.log(searchedSite);
+    setSearch(searchedSite);
   };
 
   return (

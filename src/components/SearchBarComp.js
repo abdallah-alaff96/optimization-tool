@@ -15,14 +15,13 @@ function SearchBarComp({ ...props }) {
   console.log("searchedSites renders");
 
   return (
-    <InputGroup className="col-6">
+    <InputGroup className="search-input">
       <FormControl
         aria-label="Search"
         aria-describedby="basic-addon2"
         size="sm"
         type="text"
         placeholder="Site Name..."
-        className="search-input"
         onChange={searchInputHandler}
       />
       <Button
