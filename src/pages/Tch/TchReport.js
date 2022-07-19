@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import ExportButton from "../../components/ExportButton";
 import ButtonGroupComp from "../../components/ButtonGroupComp";
 import moment from "moment";
+import SearchBarComp from "../../components/SearchBarComp";
 
 function TchTable({ ...props }) {
   const { tableContent: data } = props;
@@ -129,13 +130,12 @@ function TchTable({ ...props }) {
     setActivateSearch(false);
   };
 
-  // Seach bar handler
-  const searchHandler = (event) => {
-    console.log("SearchHandler");
-    setSearch(event.target.value);
-  };
-
   console.log("component rendered", excelData);
+
+  // Seach button handler
+  const searchButtonHandler = (searchedSite) => {
+    console.log(searchedSite);
+  };
 
   return (
     <>
@@ -157,13 +157,7 @@ function TchTable({ ...props }) {
               ]}
             />
             {activateSearch && (
-              <Form.Control
-                size="sm"
-                type="text"
-                placeholder="Site Name..."
-                className="search-input"
-                onChange={searchHandler}
-              />
+              <SearchBarComp onClickHandler={searchButtonHandler} />
             )}
             <ExportButton excelD={excelData} refReprot={"tch"} />
           </div>
