@@ -1,27 +1,36 @@
 import React, { useEffect, useState } from "react";
 import TableComp from "../../components/TableComp";
 import { KeysToLowerCase } from "../../handlers/KeysToLowerCase";
-import Form from "react-bootstrap/Form";
 import ExportButton from "../../components/ExportButton";
 import ButtonGroupComp from "../../components/ButtonGroupComp";
 import moment from "moment";
 import SearchBarComp from "../../components/SearchBarComp";
 
-function TchTable({ ...props }) {
+function TchReport({ ...props }) {
   const { tableContent: data } = props;
 
+  // states for data arrays
   const [allAffectedCellsArr, setAllAffectedCellsArr] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
   const [lowTchAvaCells, setlowTchAvaCells] = useState([]);
   const [downCells, setdownCells] = useState([]);
   const [haltedCells, setHaltedCells] = useState([]);
   const [excelData, setexcelData] = useState([]);
 
+  // states for active|search|Extraction
   const [activeArr, setActiveArr] = useState([]);
   const [search, setSearch] = useState("");
   const [activateSearch, setActivateSearch] = useState(true);
   const [activeExtractButton, setActiveExtractButton] = useState(false);
 
+  // states for Infinite scroll
+  const [count, setCount] = useState({
+    prev: 0,
+    next: 20,
+  });
+  const [hasMore, setHasMore] = useState(true);
+  const [current, setCurrent] = useState([]);
+
+  // other constants
   const today = new Date().toDateString();
   const dipheaderArr = [
     "Cell Name",
@@ -96,12 +105,12 @@ function TchTable({ ...props }) {
 
       // set new state values
       setAllAffectedCellsArr(temporaryAllAffectedCellsArr);
-      setFilteredData(temporaryFilteredData);
       setlowTchAvaCells(temporaryLowTchAvaCells);
       setdownCells(temporarydownCells);
       setHaltedCells(temporaryHaltedCells);
       setexcelData(temporaryExcelData);
       setActiveArr(temporaryAllAffectedCellsArr);
+      setCurrent(temporaryAllAffectedCellsArr.slice(count.prev, count.next));
 
       console.log("useEffect renders", temporaryExcelData);
 
@@ -114,9 +123,28 @@ function TchTable({ ...props }) {
       setActiveArr(
         allAffectedCellsArr.filter((row) => row.cell_name.includes(search))
       );
-      console.log("useEffect Search");
+      // console.log("useEffect Search");
     }
   }, [search]);
+
+  const getMoreData = () => {
+    // console.log("getMoreData()");
+    if (current.length === activeArr.length) {
+      console.log("no more data");
+      setHasMore(false);
+      return;
+    }
+    setTimeout(() => {
+      // console.log("timeout function runs");
+      setCurrent(
+        current.concat(activeArr.slice(count.prev + 10, count.next + 10))
+      );
+    }, 3000);
+    setCount((prevState) => ({
+      prev: prevState.prev + 10,
+      next: prevState.next + 10,
+    }));
+  };
 
   // Active Button Handlers
   const dataHandler = () => {
@@ -136,12 +164,15 @@ function TchTable({ ...props }) {
     setActivateSearch(false);
   };
 
-  console.log("component rendered", excelData);
+  // console.log("component rendered", excelData, current);
 
   // Seach button handler
   const searchButtonHandler = (searchedSite) => {
     setSearch(searchedSite);
   };
+
+  console.log("current.length:", current.length);
+  console.log("active.length:", activeArr.length);
 
   return (
     <>
@@ -169,9 +200,13 @@ function TchTable({ ...props }) {
           </div>
 
           <TableComp
-            dataArr={activeArr}
+            dataArr={current}
             headerArr={dipheaderArr}
             refTableName={"tch"}
+            dataLength={current.length}
+            next={getMoreData}
+            hasMore={hasMore}
+            loader={<h4>Loading...</h4>}
           />
         </div>
       )}
@@ -179,4 +214,4 @@ function TchTable({ ...props }) {
   );
 }
 
-export default TchTable;
+export default TchReport;

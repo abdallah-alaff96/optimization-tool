@@ -1,8 +1,18 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function TableComp({ ...props }) {
-  const { dataArr, headerArr, refTableName } = props;
+  const {
+    dataArr,
+    headerArr,
+    refTableName,
+    dataLength,
+    next,
+    hasMore,
+    loader,
+  } = props;
+
   let tData;
   // Table Header
   const tableHeader = headerArr?.map((headerName, index) => {
@@ -45,15 +55,23 @@ function TableComp({ ...props }) {
       </tr>
     ));
   }
-
+  console.log("hasMore? ", hasMore);
   return (
     <>
-      <Table striped bordered hover className="my_table" size="sm">
-        <thead>
-          <tr>{tableHeader}</tr>
-        </thead>
-        <tbody>{tData}</tbody>
-      </Table>
+      <InfiniteScroll
+        dataLength={dataLength}
+        next={next}
+        hasMore={hasMore}
+        loader={loader}
+      >
+        <Table striped bordered hover className="my_table" size="sm">
+          <thead>
+            <tr>{tableHeader}</tr>
+          </thead>
+
+          <tbody>{tData}</tbody>
+        </Table>
+      </InfiniteScroll>
     </>
   );
 }
