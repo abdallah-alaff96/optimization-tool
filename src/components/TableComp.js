@@ -1,17 +1,9 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
-import InfiniteScroll from "react-infinite-scroll-component";
+import { FixedSizeList as List } from "react-window";
 
 function TableComp({ ...props }) {
-  const {
-    dataArr,
-    headerArr,
-    refTableName,
-    dataLength,
-    next,
-    hasMore,
-    loader,
-  } = props;
+  const { dataArr, headerArr, refTableName, dataLength } = props;
 
   let tData;
   // Table Header
@@ -39,40 +31,37 @@ function TableComp({ ...props }) {
       </tr>
     ));
   } else if (refTableName === "tch") {
-    tData = dataArr?.map((rowObj, index) => (
-      <tr key={index}>
-        <td>{rowObj.cell_name}</td>
-        <td>{rowObj.date}</td>
-        <td>{rowObj.hour}</td>
-        <td>{rowObj.number_of_tch_s}</td>
-        <td>{rowObj.tch_drop_rate__}</td>
-        <td>{rowObj.subscriber_percived_tch_congestion__}</td>
-        <td>{rowObj.tch_traffic_erlang}</td>
-        <td>{rowObj.sdcch_availability}</td>
-        <td>{rowObj.sdcch_drop_rate__}</td>
-        <td>{rowObj.tch_availability__}</td>
-        <td>{rowObj.cell_down_time_min}</td>
+    tData = ({ index, key }) => (
+      <tr key={key}>
+        <td>{dataArr[index].cell_name}</td>
+        <td>{dataArr[index].date}</td>
+        <td>{dataArr[index].hour}</td>
+        <td>{dataArr[index].number_of_tch_s}</td>
+        <td>{dataArr[index].tch_drop_rate__}</td>
+        <td>{dataArr[index].subscriber_percived_tch_congestion__}</td>
+        <td>{dataArr[index].tch_traffic_erlang}</td>
+        <td>{dataArr[index].sdcch_availability}</td>
+        <td>{dataArr[index].sdcch_drop_rate__}</td>
+        <td>{dataArr[index].tch_availability__}</td>
+        <td>{dataArr[index].cell_down_time_min}</td>
       </tr>
-    ));
+    );
   }
-  console.log("hasMore? ", hasMore);
+  // console.log("hasMore? ", hasMore);
   return (
-    <>
-      <InfiniteScroll
-        dataLength={dataLength}
-        next={next}
-        hasMore={hasMore}
-        loader={loader}
-      >
-        <Table striped bordered hover className="my_table" size="sm">
-          <thead>
-            <tr>{tableHeader}</tr>
-          </thead>
+    <React.Fragment>
+      <Table striped bordered hover className="my_table" size="sm">
+        <thead>
+          <tr>{tableHeader}</tr>
+        </thead>
 
-          <tbody>{tData}</tbody>
-        </Table>
-      </InfiniteScroll>
-    </>
+        <tbody>
+          <List width={900} height={700} itemCount={dataLength} itemSize={120}>
+            {tData}
+          </List>
+        </tbody>
+      </Table>
+    </React.Fragment>
   );
 }
 

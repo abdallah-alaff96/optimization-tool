@@ -22,17 +22,9 @@ function TchReport({ ...props }) {
   const [activateSearch, setActivateSearch] = useState(true);
   const [activeExtractButton, setActiveExtractButton] = useState(false);
 
-  // states for Infinite scroll
-  const [count, setCount] = useState({
-    prev: 0,
-    next: 20,
-  });
-  const [hasMore, setHasMore] = useState(true);
-  const [current, setCurrent] = useState([]);
-
   // other constants
   const today = new Date().toDateString();
-  const dipheaderArr = [
+  const headerArr = [
     "Cell Name",
     "Date",
     "Hour",
@@ -110,7 +102,6 @@ function TchReport({ ...props }) {
       setHaltedCells(temporaryHaltedCells);
       setexcelData(temporaryExcelData);
       setActiveArr(temporaryAllAffectedCellsArr);
-      setCurrent(temporaryAllAffectedCellsArr.slice(count.prev, count.next));
 
       console.log("useEffect renders", temporaryExcelData);
 
@@ -126,25 +117,6 @@ function TchReport({ ...props }) {
       // console.log("useEffect Search");
     }
   }, [search]);
-
-  const getMoreData = () => {
-    // console.log("getMoreData()");
-    if (current.length === activeArr.length) {
-      console.log("no more data");
-      setHasMore(false);
-      return;
-    }
-    setTimeout(() => {
-      // console.log("timeout function runs");
-      setCurrent(
-        current.concat(activeArr.slice(count.prev + 10, count.next + 10))
-      );
-    }, 3000);
-    setCount((prevState) => ({
-      prev: prevState.prev + 10,
-      next: prevState.next + 10,
-    }));
-  };
 
   // Active Button Handlers
   const dataHandler = () => {
@@ -170,9 +142,6 @@ function TchReport({ ...props }) {
   const searchButtonHandler = (searchedSite) => {
     setSearch(searchedSite);
   };
-
-  console.log("current.length:", current.length);
-  console.log("active.length:", activeArr.length);
 
   return (
     <>
@@ -200,13 +169,10 @@ function TchReport({ ...props }) {
           </div>
 
           <TableComp
-            dataArr={current}
-            headerArr={dipheaderArr}
+            dataArr={activeArr}
+            headerArr={headerArr}
             refTableName={"tch"}
-            dataLength={current.length}
-            next={getMoreData}
-            hasMore={hasMore}
-            loader={<h4>Loading...</h4>}
+            dataLength={activeArr.length}
           />
         </div>
       )}
