@@ -71,7 +71,7 @@ function TableComp({ ...props }) {
             />
           ))}
 
-          <tbody>{children}</tbody>
+          <tbody className="report_tbody">{children}</tbody>
         </Table>
       )}
     </StickyListContext.Consumer>
@@ -131,7 +131,7 @@ function TableComp({ ...props }) {
       height={500}
       innerElementType={innerElementType}
       itemCount={dataLength}
-      itemSize={50}
+      itemSize={20}
       stickyIndices={[0]}
       width={1200}
     >

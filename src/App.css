@@ -196,13 +196,19 @@ a:active {
   flex: 0.5;
 }
 
+.report_tbody {
+  position: relative;
+  top: -21px;
+}
+
 .row_header {
   display: flex;
 }
 
 .row_header > * {
   display: flex;
-  margin: auto;
+  justify-content: center;
+  align-items: center;
   flex: 1;
 }
 
@@ -212,6 +218,7 @@ a:active {
 
 .row_data > * {
   display: flex;
-  margin: auto;
+  justify-content: center;
+  align-items: center;
   flex: 1;
 }
