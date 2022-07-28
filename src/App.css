@@ -195,3 +195,23 @@ a:active {
 .search-input {
   flex: 0.5;
 }
+
+.row_header {
+  display: flex;
+}
+
+.row_header > * {
+  display: flex;
+  margin: auto;
+  flex: 1;
+}
+
+.row_data {
+  display: flex;
+}
+
+.row_data > * {
+  display: flex;
+  margin: auto;
+  flex: 1;
+}

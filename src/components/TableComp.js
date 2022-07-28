@@ -25,7 +25,7 @@ function TableComp({ ...props }) {
 
   // We will need two simple elements to render StickyRow and Row elements. You can add td elements here.
   const Row = ({ index, style }) => (
-    <tr key={index} className="row" style={style}>
+    <tr key={index} style={style} className="row_data">
       <td>{dataArr[index].cell_name}</td>
       <td>{dataArr[index].date}</td>
       <td>{dataArr[index].hour}</td>
@@ -42,7 +42,7 @@ function TableComp({ ...props }) {
 
   const StickyRow = ({ index, style }) => (
     <thead>
-      <tr className="sticky" style={style}>
+      <tr style={style} className="row_header">
         {headerArr?.map((headerName, index) => {
           return <th key={index}>{headerName}</th>;
         })}
@@ -131,9 +131,9 @@ function TableComp({ ...props }) {
       height={500}
       innerElementType={innerElementType}
       itemCount={dataLength}
-      itemSize={70}
+      itemSize={50}
       stickyIndices={[0]}
-      width={1000}
+      width={1200}
     >
       {Row}
     </StickyList>
