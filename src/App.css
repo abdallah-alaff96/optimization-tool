@@ -199,7 +199,7 @@ a:active {
 /* --------TableComp styles-------- */
 .report_tbody {
   position: relative;
-  top: -31px;
+  top: 0px;
 }
 
 .row_header {

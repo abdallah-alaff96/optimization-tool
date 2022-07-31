@@ -11,7 +11,7 @@ function TableComp({ ...props }) {
   // ItemWrapper renders only the non-sticky rows using the method passed in the main render function(ie- {Row}). This takes care of rendering the table data.
   const ItemWrapper = ({ data, index, style }) => {
     const { ItemRenderer, stickyIndices } = data;
-    if (stickyIndices && stickyIndices.includes(index)) {
+    if (stickyIndices && stickyIndices.includes(index + 1)) {
       return null;
     }
     return <ItemRenderer index={index} style={style} />;
