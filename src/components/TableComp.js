@@ -56,17 +56,11 @@ function TableComp({ ...props }) {
   }
 
   const StickyRow = ({ index, style }) => (
-    <thead>
-      <tr style={style} className="row_header">
-        {headerArr?.map((headerName, index) => {
-          return (
-            <th key={index} className={index === 1 ? "date_header" : ""}>
-              {headerName}
-            </th>
-          );
-        })}
-      </tr>
-    </thead>
+    <tr className="sticky_header" style={style}>
+      {headerArr.map((header, index) => (
+        <th className={index === 1 ? "date_sticky_header" : ""}>{header}</th>
+      ))}
+    </tr>
   );
 
   // To render the table headers, we need a custom innerElementType.
@@ -81,7 +75,6 @@ function TableComp({ ...props }) {
               style={{ top: index * 35, left: 0, width: "100%", height: 60 }}
             />
           ))}
-
           <tbody className="report_tbody">{children}</tbody>
         </Table>
       )}
