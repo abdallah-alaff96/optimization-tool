@@ -197,18 +197,13 @@ a:active {
 }
 
 /* --------TableComp styles-------- */
-/* .report_tbody {
+.report_tbody {
   position: relative;
   top: 0px;
 }
 
 .sticky_header {
-  position: sticky !important;
-  position: -webkit-sticky !important;
-  z-index: 2;
   display: flex;
-  flex: 1;
-  background-color: white;
 }
 
 .sticky_header > * {

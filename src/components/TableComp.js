@@ -58,7 +58,9 @@ function TableComp({ ...props }) {
   const StickyRow = ({ index, style }) => (
     <tr className="sticky_header" style={style}>
       {headerArr.map((header, index) => (
-        <th className={index === 1 ? "date_sticky_header" : ""}>{header}</th>
+        <th key={index} className={index === 1 ? "date_sticky_header" : ""}>
+          {header}
+        </th>
       ))}
     </tr>
   );
@@ -68,13 +70,15 @@ function TableComp({ ...props }) {
     <StickyListContext.Consumer>
       {({ stickyIndices }) => (
         <Table ref={ref} {...rest} striped bordered hover size="sm">
-          {stickyIndices.map((index) => (
-            <StickyRow
-              index={index}
-              key={index}
-              style={{ top: index * 35, left: 0, width: "100%", height: 60 }}
-            />
-          ))}
+          <thead>
+            {stickyIndices.map((index) => (
+              <StickyRow
+                index={index}
+                key={index}
+                style={{ top: index * 35, left: 0, width: "100%", height: 60 }}
+              />
+            ))}
+          </thead>
           <tbody className="report_tbody">{children}</tbody>
         </Table>
       )}
