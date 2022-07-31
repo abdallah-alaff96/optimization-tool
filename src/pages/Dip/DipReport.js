@@ -13,8 +13,6 @@ function DipTable({ ...props }) {
   const [activateSearch, setActivateSearch] = useState(true);
   const [activeExtractButton, setActiveExtractButton] = useState(false);
   const dipheaderArr = [
-    "DIP",
-    "BSC",
     "Site Name",
     "Date",
     "Hour",
@@ -26,6 +24,8 @@ function DipTable({ ...props }) {
     "ESR",
     "SESR",
     "UASR",
+    "DIP",
+    "BSC",
   ];
 
   // Edit trans Arr
@@ -118,6 +118,7 @@ function DipTable({ ...props }) {
 
           <TableComp
             dataArr={activeArr}
+            dataLength={activeArr.length}
             headerArr={dipheaderArr}
             refTableName={"dip"}
           />

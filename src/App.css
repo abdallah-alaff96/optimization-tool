@@ -197,6 +197,9 @@ a:active {
 }
 
 /* --------TableComp styles-------- */
+.my_table {
+  /* height: 500px; */
+}
 .report_tbody {
   position: relative;
   top: -31px;

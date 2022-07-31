@@ -24,21 +24,42 @@ function TableComp({ ...props }) {
   };
 
   // We will need two simple elements to render StickyRow and Row elements. You can add td elements here.
-  const Row = ({ index, style }) => (
-    <tr key={index} style={style} className="row_data">
-      <td>{dataArr[index].cell_name}</td>
-      <td className="date_data">{dataArr[index].date}</td>
-      <td>{dataArr[index].hour}</td>
-      <td>{dataArr[index].number_of_tch_s}</td>
-      <td>{dataArr[index].tch_drop_rate__}</td>
-      <td>{dataArr[index].subscriber_percived_tch_congestion__}</td>
-      <td>{dataArr[index].tch_traffic_erlang}</td>
-      <td>{dataArr[index].sdcch_availability}</td>
-      <td>{dataArr[index].sdcch_drop_rate__}</td>
-      <td>{dataArr[index].tch_availability__}</td>
-      <td>{dataArr[index].cell_down_time_min}</td>
-    </tr>
-  );
+  let Row;
+  if (refTableName === "tch") {
+    Row = ({ index, style }) => (
+      <tr key={index} style={style} className="row_data">
+        <td>{dataArr[index].cell_name}</td>
+        <td className="date_data">{dataArr[index].date}</td>
+        <td>{dataArr[index].hour}</td>
+        <td>{dataArr[index].number_of_tch_s}</td>
+        <td>{dataArr[index].tch_drop_rate__}</td>
+        <td>{dataArr[index].subscriber_percived_tch_congestion__}</td>
+        <td>{dataArr[index].tch_traffic_erlang}</td>
+        <td>{dataArr[index].sdcch_availability}</td>
+        <td>{dataArr[index].sdcch_drop_rate__}</td>
+        <td>{dataArr[index].tch_availability__}</td>
+        <td>{dataArr[index].cell_down_time_min}</td>
+      </tr>
+    );
+  } else if (refTableName === "dip") {
+    Row = ({ index, style }) => (
+      <tr key={index} style={style} className="row_data">
+        <td>{dataArr[index].site_name}</td>
+        <td className="date_data">{dataArr[index]?.date?.toDateString()}</td>
+        <td>{dataArr[index].hour}</td>
+        <td>{dataArr[index].sf}</td>
+        <td>{dataArr[index].es}</td>
+        <td>{dataArr[index].ses}</td>
+        <td>{dataArr[index].uas}</td>
+        <td>{dataArr[index].sfr}</td>
+        <td>{dataArr[index].esr}</td>
+        <td>{dataArr[index].sesr}</td>
+        <td>{dataArr[index].uasr}</td>
+        <td>{dataArr[index].dip}</td>
+        <td>{dataArr[index].elem}</td>
+      </tr>
+    );
+  }
 
   const StickyRow = ({ index, style }) => (
     <thead>
@@ -58,7 +79,15 @@ function TableComp({ ...props }) {
   const innerElementType = forwardRef(({ children, ...rest }, ref) => (
     <StickyListContext.Consumer>
       {({ stickyIndices }) => (
-        <Table ref={ref} {...rest} striped bordered hover size="sm">
+        <Table
+          ref={ref}
+          {...rest}
+          striped
+          bordered
+          hover
+          size="sm"
+          className="my_table"
+        >
           {stickyIndices.map((index) => (
             <StickyRow
               index={index}
@@ -129,7 +158,7 @@ function TableComp({ ...props }) {
       itemCount={dataLength}
       itemSize={30}
       stickyIndices={[0]}
-      width={1000}
+      width={1200}
     >
       {Row}
     </StickyList>
