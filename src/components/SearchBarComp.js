@@ -12,8 +12,6 @@ function SearchBarComp({ ...props }) {
     setSearchedSite(event.target.value);
   };
 
-  // console.log("searchedSites renders");
-
   return (
     <InputGroup className="search-input">
       <FormControl

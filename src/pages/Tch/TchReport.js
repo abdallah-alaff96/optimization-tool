@@ -15,9 +15,9 @@ function TchReport({ ...props }) {
   const [downCells, setdownCells] = useState([]);
   const [haltedCells, setHaltedCells] = useState([]);
   const [excelData, setexcelData] = useState([]);
-
-  // states for active|search|Extraction
   const [activeArr, setActiveArr] = useState([]);
+
+  // states for search|Extraction
   const [search, setSearch] = useState("");
   const [activateSearch, setActivateSearch] = useState(true);
   const [activeExtractButton, setActiveExtractButton] = useState(false);
@@ -105,10 +105,9 @@ function TchReport({ ...props }) {
       setHaltedCells(temporaryHaltedCells);
       setexcelData(temporaryExcelData);
       setActiveArr(temporaryAllAffectedCellsArr);
-
-      console.log("useEffect renders", temporaryExcelData);
-
       setActiveExtractButton(true);
+
+      console.log("useEffect renders");
     }
   }, [data]);
 
