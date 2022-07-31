@@ -58,15 +58,7 @@ function TableComp({ ...props }) {
   const innerElementType = forwardRef(({ children, ...rest }, ref) => (
     <StickyListContext.Consumer>
       {({ stickyIndices }) => (
-        <Table
-          ref={ref}
-          {...rest}
-          striped
-          bordered
-          hover
-          className="my_table"
-          size="sm"
-        >
+        <Table ref={ref} {...rest} striped bordered hover size="sm">
           {stickyIndices.map((index) => (
             <StickyRow
               index={index}
@@ -129,7 +121,7 @@ function TableComp({ ...props }) {
   //   );
   // }
 
-  // console.log("hasMore? ", hasMore);
+  console.log("TableComp renders");
   return (
     <StickyList
       height={500}
@@ -137,7 +129,7 @@ function TableComp({ ...props }) {
       itemCount={dataLength}
       itemSize={30}
       stickyIndices={[0]}
-      width={1200}
+      width={1000}
     >
       {Row}
     </StickyList>

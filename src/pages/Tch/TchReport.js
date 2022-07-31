@@ -67,6 +67,9 @@ function TchReport({ ...props }) {
         row.subscriber_percived_tch_congestion__ = parseFloat(
           row?.subscriber_percived_tch_congestion__
         )?.toFixed(2);
+        row.cell_down_time_min = parseFloat(row?.cell_down_time_min)?.toFixed(
+          2
+        );
         row.date = moment(row.date).add(1, "hours")._d;
         row.date = new Date(Date.parse(row.date)).toDateString();
       });
@@ -80,7 +83,7 @@ function TchReport({ ...props }) {
       );
 
       const temporaryLowTchAvaCells = temporaryFilteredData?.filter(
-        (row) => row.cell_down_time_min === 0 && row.tch_availability__ < 92
+        (row) => row.cell_down_time_min == 0 && row.tch_availability__ < 92
       );
 
       const temporaryHaltedCells = temporaryFilteredData?.filter(
@@ -136,7 +139,7 @@ function TchReport({ ...props }) {
     setActivateSearch(false);
   };
 
-  // console.log("component rendered", excelData, current);
+  console.log("TchReport rendered");
 
   // Seach button handler
   const searchButtonHandler = (searchedSite) => {
