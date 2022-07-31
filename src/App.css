@@ -197,16 +197,21 @@ a:active {
 }
 
 /* --------TableComp styles-------- */
-.report_tbody {
+/* .report_tbody {
   position: relative;
   top: -31px;
-}
+} */
 
-.row_header {
+.sticky_header {
+  position: sticky !important;
+  position: -webkit-sticky !important;
+  z-index: 2;
   display: flex;
+  flex: 1;
+  background-color: white;
 }
 
-.row_header > * {
+.sticky_header > * {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -224,7 +229,7 @@ a:active {
   flex: 1;
 }
 
-.date_header,
+.date_sticky_header,
 .date_data {
   flex: 1.5;
 }
