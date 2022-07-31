@@ -27,7 +27,7 @@ function TableComp({ ...props }) {
   const Row = ({ index, style }) => (
     <tr key={index} style={style} className="row_data">
       <td>{dataArr[index].cell_name}</td>
-      <td>{dataArr[index].date}</td>
+      <td className="date_data">{dataArr[index].date}</td>
       <td>{dataArr[index].hour}</td>
       <td>{dataArr[index].number_of_tch_s}</td>
       <td>{dataArr[index].tch_drop_rate__}</td>
@@ -44,7 +44,11 @@ function TableComp({ ...props }) {
     <thead>
       <tr style={style} className="row_header">
         {headerArr?.map((headerName, index) => {
-          return <th key={index}>{headerName}</th>;
+          return (
+            <th key={index} className={index === 1 ? "date_header" : ""}>
+              {headerName}
+            </th>
+          );
         })}
       </tr>
     </thead>
@@ -131,7 +135,7 @@ function TableComp({ ...props }) {
       height={500}
       innerElementType={innerElementType}
       itemCount={dataLength}
-      itemSize={20}
+      itemSize={30}
       stickyIndices={[0]}
       width={1200}
     >

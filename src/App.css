@@ -196,9 +196,10 @@ a:active {
   flex: 0.5;
 }
 
+/* --------TableComp styles-------- */
 .report_tbody {
   position: relative;
-  top: -21px;
+  top: -31px;
 }
 
 .row_header {
@@ -221,4 +222,9 @@ a:active {
   justify-content: center;
   align-items: center;
   flex: 1;
+}
+
+.date_header,
+.date_data {
+  flex: 1.5;
 }
