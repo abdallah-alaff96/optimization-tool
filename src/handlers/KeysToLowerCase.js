@@ -4,7 +4,7 @@ export function KeysToLowerCase(obj) {
   var n = myKeys.length;
   while (n--) {
     var key = myKeys[n]; // "cache" it, for less lookups to the array
-    if (key !== key.toLowerCase().replace(/[^a-zA-Z0-9]/g, "_")) {
+    if (key) {
       // might already be in its lower case version
       obj[
         key

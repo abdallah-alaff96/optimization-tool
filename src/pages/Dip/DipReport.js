@@ -142,4 +142,4 @@ function DipTable({ ...props }) {
   );
 }
 
-export default DipTable;
+export default React.memo(DipTable);

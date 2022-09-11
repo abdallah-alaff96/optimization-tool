@@ -70,6 +70,18 @@ function TchReport({ ...props }) {
         row.cell_down_time_min = parseFloat(row?.cell_down_time_min)?.toFixed(
           2
         );
+        row.sdcch_mean_holding_time_sec = parseFloat(
+          row?.sdcch_mean_holding_time_sec
+        )?.toFixed(2);
+
+        row.tch_traffic_fr_erlang = parseFloat(
+          row?.tch_traffic_fr_erlang
+        )?.toFixed(2);
+
+        row.tch_traffic_hr_erlang = parseFloat(
+          row?.tch_traffic_hr_erlang
+        )?.toFixed(2);
+
         row.date = moment(row.date).add(1, "hours")._d;
         row.date = new Date(Date.parse(row.date)).toDateString();
       });
@@ -106,8 +118,6 @@ function TchReport({ ...props }) {
       setexcelData(temporaryExcelData);
       setActiveArr(temporaryAllAffectedCellsArr);
       setActiveExtractButton(true);
-
-      console.log("useEffect renders");
     }
   }, [data]);
 
@@ -116,7 +126,6 @@ function TchReport({ ...props }) {
       setActiveArr(
         allAffectedCellsArr.filter((row) => row.cell_name.includes(search))
       );
-      // console.log("useEffect Search");
     }
   }, [search]);
 
@@ -139,7 +148,7 @@ function TchReport({ ...props }) {
   };
 
   console.log("TchReport rendered");
-
+  console.log(allAffectedCellsArr);
   // Seach button handler
   const searchButtonHandler = (searchedSite) => {
     setSearch(searchedSite);
@@ -182,4 +191,4 @@ function TchReport({ ...props }) {
   );
 }
 
-export default TchReport;
+export default React.memo(TchReport);

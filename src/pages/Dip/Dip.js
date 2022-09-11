@@ -50,4 +50,4 @@ function Dip() {
   );
 }
 
-export default Dip;
+export default React.memo(Dip);

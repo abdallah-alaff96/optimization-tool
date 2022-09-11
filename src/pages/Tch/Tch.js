@@ -37,4 +37,4 @@ function Tch() {
   );
 }
 
-export default Tch;
+export default React.memo(Tch);
