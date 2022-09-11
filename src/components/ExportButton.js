@@ -8,7 +8,7 @@ function ExportButton({ ...props }) {
   const excelDMod = JSON?.parse(JSON?.stringify(excelD));
 
   //Write an Excel file
-  const handleExport = (excelData, refReprot) => {
+  const handleExport = (excelData) => {
     // function to order the object keys for extraction to excel
     const orderHandler = (arr) => {
       arr.map((row) => {
@@ -23,34 +23,58 @@ function ExportButton({ ...props }) {
     // create excelData
     excelData.map((arr, index) => {
       // call order function
-      const orderArr = orderHandler(arr, refReprot);
+      const orderArr = orderHandler(arr);
       // CONVERT FROM JSON TO SHEET
       var sheet = XLSX.utils.json_to_sheet(orderArr);
       // 2
-      const widthHandler = (sheet) => {
-        sheet["!cols"] = [
-          { wch: 10 },
-          { wch: 7 },
-          { wch: 18 },
-          { wch: 15 },
-          { wch: 7 },
-          { wch: 10 },
-          { wch: 10 },
-          { wch: 10 },
-          { wch: 7 },
-          { wch: 9 },
-          { wch: 9 },
-          { wch: 6 },
-          { wch: 6 },
-          { wch: 6 },
-          { wch: 6 },
-          { wch: 6 },
-          { wch: 6 },
-          { wch: 6 },
-          { wch: 6 },
-        ];
+      const widthHandler = (sheet, refReprot) => {
+        if (refReprot === "dip") {
+          sheet["!cols"] = [
+            { wch: 10 },
+            { wch: 7 },
+            { wch: 18 },
+            { wch: 15 },
+            { wch: 7 },
+            { wch: 10 },
+            { wch: 10 },
+            { wch: 10 },
+            { wch: 7 },
+            { wch: 9 },
+            { wch: 9 },
+            { wch: 6 },
+            { wch: 6 },
+            { wch: 6 },
+            { wch: 6 },
+            { wch: 6 },
+            { wch: 6 },
+            { wch: 6 },
+            { wch: 6 },
+          ];
+        } else if (refReprot === "tch") {
+          sheet["!cols"] = [
+            { wch: 10 },
+            { wch: 15 },
+            { wch: 5 },
+            { wch: 15 },
+            { wch: 15 },
+            { wch: 15 },
+            { wch: 15 },
+            { wch: 15 },
+            { wch: 15 },
+            { wch: 15 },
+            { wch: 15 },
+            { wch: 15 },
+            { wch: 15 },
+            { wch: 15 },
+            { wch: 15 },
+            { wch: 15 },
+            { wch: 15 },
+            { wch: 15 },
+            { wch: 15 },
+          ];
+        }
       };
-      widthHandler(sheet);
+      widthHandler(sheet, refReprot);
       // 3
       const namingHandler = (index, refReprot) => {
         if (refReprot === "dip") {
