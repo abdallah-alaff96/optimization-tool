@@ -44,44 +44,21 @@ function TchReport({ ...props }) {
 
       // create shallow copy of data arr for editing
       const temporaryAllAffectedCellsArr = JSON?.parse(JSON?.stringify(data));
+
       temporaryAllAffectedCellsArr?.map((row) => {
-        // to add one 1 day to the entered date (fixing sheetJS date)
-        row.sdcch_traffic__erlang_ = parseFloat(
-          row?.sdcch_traffic__erlang_
-        )?.toFixed(2);
-        row.tch_availability__ = parseFloat(row?.tch_availability__)?.toFixed(
-          2
-        );
-        row.sdcch_drop_rate__ = parseFloat(row?.sdcch_drop_rate__)?.toFixed(2);
-        row.number_of_tch_s = parseFloat(row?.number_of_tch_s)?.toFixed(2);
-        row.sdcch_availability = parseFloat(row?.sdcch_availability)?.toFixed(
-          2
-        );
-        row.call_setup_success_rate = parseFloat(
-          row?.call_setup_success_rate
-        )?.toFixed(2);
-        row.tch_traffic_erlang = parseFloat(row?.tch_traffic_erlang)?.toFixed(
-          2
-        );
-        row.tch_drop_rate__ = parseFloat(row?.tch_drop_rate__)?.toFixed(2);
-        row.subscriber_percived_tch_congestion__ = parseFloat(
-          row?.subscriber_percived_tch_congestion__
-        )?.toFixed(2);
-        row.cell_down_time_min = parseFloat(row?.cell_down_time_min)?.toFixed(
-          2
-        );
-        row.sdcch_mean_holding_time_sec = parseFloat(
-          row?.sdcch_mean_holding_time_sec
-        )?.toFixed(2);
+        for (const property in row) {
+          console.log(property);
+          if (
+            property !== "lac" &&
+            property !== "cell_name" &&
+            property !== "date" &&
+            property !== "hour"
+          )
+            row[property] = parseFloat(row?.[property])?.toFixed(2);
+        }
+      });
 
-        row.tch_traffic_fr_erlang = parseFloat(
-          row?.tch_traffic_fr_erlang
-        )?.toFixed(2);
-
-        row.tch_traffic_hr_erlang = parseFloat(
-          row?.tch_traffic_hr_erlang
-        )?.toFixed(2);
-
+      temporaryAllAffectedCellsArr?.map((row) => {
         row.date = moment(row.date).add(1, "hours")._d;
         row.date = new Date(Date.parse(row.date)).toDateString();
       });
