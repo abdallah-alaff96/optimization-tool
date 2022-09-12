@@ -16,13 +16,10 @@ function Sidebar() {
         onClick={() => {
           activeBarHandler(item.title);
         }}
-        className={
-          item.title === activeBar ? item.cName + " active" : item.cName
-        }
       >
-        <NavLink to={item.path} className="list-icon">
-          {item.icon}
-          <span className="list-text">{item.title}</span>
+        <NavLink to={item.path}>
+          <span>{item.icon}</span>
+          <span>{item.title}</span>
         </NavLink>
       </li>
     );
@@ -31,7 +28,7 @@ function Sidebar() {
   return (
     <>
       <nav className="nav">
-        <ul className="nav-list">{listComponents}</ul>
+        <ul className="nav-links">{listComponents}</ul>
       </nav>
       <div className="legal">
         &copy; Eng.Abdallah Alaff. All rights reserved.

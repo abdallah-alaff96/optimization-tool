@@ -74,56 +74,6 @@ a:active {
 .close-button {
   display: flex;
 }
-.nav-list {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  margin-top: 3rem;
-  padding-left: 0;
-}
-.nav-list-item {
-  display: flex;
-  padding: 0.5rem;
-  list-style: none;
-  transition: all 0.3s;
-  border-radius: 12px;
-  font-size: 25px;
-  background-color: var(--clr-darkWhite);
-}
-.nav-list-item:hover {
-  background-color: var(--clr-blue);
-  cursor: pointer;
-}
-.nav-list-item.active {
-  background-color: var(--clr-blue);
-  cursor: pointer;
-}
-
-/* all the children of .nav-list-item */
-.nav-list-item.active > * {
-  color: var(--clr-darkWhite);
-}
-
-.list-icon {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  gap: 0.5rem;
-  color: var(--clr-gray);
-  transition: all 0.3s;
-  margin-left: 0.4rem;
-}
-.list-text {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
-}
-
-/* all the children of .nav-list-item */
-.nav-list-item:hover > * {
-  color: var(--clr-darkWhite);
-}
 
 .legal {
   font-size: 11px;
