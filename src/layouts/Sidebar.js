@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { sidebarData } from "../pages/Dip/SidebarData";
 import "./Sidebar.css";
 
@@ -20,10 +20,10 @@ function Sidebar() {
           item.title === activeBar ? item.cName + " active" : item.cName
         }
       >
-        <Link to={item.path} className="list-icon">
+        <NavLink to={item.path} className="list-icon">
           {item.icon}
           <span className="list-text">{item.title}</span>
-        </Link>
+        </NavLink>
       </li>
     );
   });
