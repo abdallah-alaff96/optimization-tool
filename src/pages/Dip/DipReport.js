@@ -4,6 +4,7 @@ import { KeysToLowerCase } from "../../handlers/KeysToLowerCase";
 import ExportButton from "../../components/ExportButton";
 import ButtonGroupComp from "../../components/ButtonGroupComp";
 import SearchBarComp from "../../components/SearchBarComp";
+import EmailSyntax from "../../components/EmailSyntax";
 import moment from "moment";
 
 function DipTable({ ...props }) {
@@ -15,6 +16,11 @@ function DipTable({ ...props }) {
   const [sesArr, setSesArr] = useState([]);
   const [esArr, setEsArr] = useState([]);
   const [activeArr, setActiveArr] = useState([]);
+
+  // Email-Syntax
+  const [uniqueUasArr, setUniqueUasArr] = useState([]);
+  const [uniqueSesArr, setUniqueSesArr] = useState([]);
+  const [uniqueEsArr, setUniqueEsArr] = useState([]);
 
   // states for search|Extraction
   const [search, setSearch] = useState("");
@@ -113,6 +119,35 @@ function DipTable({ ...props }) {
     setSearch(searchedSite);
   };
 
+  // Email Syntax
+  useEffect(() => {
+    let bufferUas = [];
+    let bufferSes = [];
+    let bufferEs = [];
+
+    uasArr?.map((row) => {
+      for (const property in row) {
+        if (property === "site_name") bufferUas.push(row[property]);
+      }
+    });
+
+    sesArr?.map((row) => {
+      for (const property in row) {
+        if (property === "site_name") bufferSes.push(row[property]);
+      }
+    });
+
+    esArr?.map((row) => {
+      for (const property in row) {
+        if (property === "site_name") bufferEs.push(row[property]);
+      }
+    });
+
+    setUniqueUasArr([...new Set(bufferUas)]);
+    setUniqueSesArr([...new Set(bufferSes)]);
+    setUniqueEsArr([...new Set(bufferEs)]);
+  }, [uasArr, sesArr, esArr]);
+
   let excelData = [filteredData, uasArr, sesArr, esArr];
 
   return (
@@ -128,6 +163,12 @@ function DipTable({ ...props }) {
               <SearchBarComp onClickHandler={searchButtonHandler} />
             )}
             <ExportButton excelD={excelData} refReprot={"dip"} />
+            <EmailSyntax
+              uasArr={uniqueUasArr}
+              sesArr={uniqueSesArr}
+              esArr={uniqueEsArr}
+              report={"dip"}
+            />
           </div>
 
           <TableComp

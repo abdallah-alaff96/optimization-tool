@@ -5,8 +5,7 @@ import ExportButton from "../../components/ExportButton";
 import ButtonGroupComp from "../../components/ButtonGroupComp";
 import moment from "moment";
 import SearchBarComp from "../../components/SearchBarComp";
-import MyModal from "../../components/MyModal";
-import Button from "react-bootstrap/Button";
+import EmailSyntax from "../../components/EmailSyntax";
 
 function TchReport({ ...props }) {
   const { tableContent: data } = props;
@@ -19,15 +18,15 @@ function TchReport({ ...props }) {
   const [excelData, setexcelData] = useState([]);
   const [activeArr, setActiveArr] = useState([]);
 
+  // Email-Syntax
+  const [uniqueLowTchAvaCells, setUniqueLowTchAvaCells] = useState([]);
+  const [uniqueDownCells, setUniqueDownCells] = useState([]);
+  const [uniqueHaltedCells, setUniqueHaltedCells] = useState([]);
+
   // states for search|Extraction
   const [search, setSearch] = useState("");
   const [activateSearch, setActivateSearch] = useState(true);
   const [activeExtractButton, setActiveExtractButton] = useState(false);
-
-  // Modal state and handlers
-  const [showModal, setShowModal] = useState(false);
-  const openModalHandler = () => setShowModal(true);
-  const closeModalHandler = () => setShowModal(false);
 
   // other constants
   const today = new Date().toDateString();
@@ -54,7 +53,6 @@ function TchReport({ ...props }) {
 
       temporaryAllAffectedCellsArr?.map((row) => {
         for (const property in row) {
-          console.log(property);
           if (
             property !== "lac" &&
             property !== "cell_name" &&
@@ -131,12 +129,39 @@ function TchReport({ ...props }) {
     setActivateSearch(false);
   };
 
-  console.log("TchReport rendered");
-  console.log(allAffectedCellsArr);
   // Seach button handler
   const searchButtonHandler = (searchedSite) => {
     setSearch(searchedSite);
   };
+
+  // Email Syntax
+  useEffect(() => {
+    let bufferLow = [];
+    let bufferDown = [];
+    let bufferHalted = [];
+
+    lowTchAvaCells?.map((row) => {
+      for (const property in row) {
+        if (property === "cell_name") bufferLow.push(row[property]);
+      }
+    });
+
+    downCells?.map((row) => {
+      for (const property in row) {
+        if (property === "cell_name") bufferDown.push(row[property]);
+      }
+    });
+
+    haltedCells?.map((row) => {
+      for (const property in row) {
+        if (property === "cell_name") bufferHalted.push(row[property]);
+      }
+    });
+
+    setUniqueLowTchAvaCells([...new Set(bufferLow)]);
+    setUniqueDownCells([...new Set(bufferDown)]);
+    setUniqueHaltedCells([...new Set(bufferHalted)]);
+  }, [lowTchAvaCells, downCells, haltedCells]);
 
   return (
     <React.Fragment>
@@ -161,19 +186,12 @@ function TchReport({ ...props }) {
               <SearchBarComp onClickHandler={searchButtonHandler} />
             )}
             <ExportButton excelD={excelData} refReprot={"tch"} />
-            <MyModal
-              show={showModal}
-              onCancel={closeModalHandler}
-              header="TCH Report"
-              contentClass="place-item__modal-content"
-              footerClass="place-item__modal-actions"
-              footer={<Button onClick={closeModalHandler}>CLOSE</Button>}
-            >
-              <div className="map-container">Email Syntax Here!!</div>
-            </MyModal>
-            <Button variant="secondary" onClick={openModalHandler}>
-              Email-text
-            </Button>
+            <EmailSyntax
+              lowTchAvaCells={uniqueLowTchAvaCells}
+              downCells={uniqueDownCells}
+              haltedCells={uniqueHaltedCells}
+              report={"tch"}
+            />
           </div>
 
           <TableComp
