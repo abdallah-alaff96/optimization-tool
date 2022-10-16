@@ -140,6 +140,7 @@ a:active {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.7rem;
+  position: relative;
 }
 
 .search-input {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { sidebarData } from "../pages/Dip/SidebarData";
+import { sidebarData } from "./SidebarData";
 import "./Sidebar.css";
 
 function Sidebar() {

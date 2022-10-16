@@ -23,6 +23,7 @@
   border-radius: 7px;
   display: flex;
   gap: 5px;
+  width: 150px;
 }
 
 .nav-links a span {
@@ -36,4 +37,11 @@
   background: var(--clr-blue);
   border-color: #292929;
   color: var(--clr-darkWhite);
+  transition: all 0.7s;
+}
+
+.nav-links a.active {
+  display: flex;
+  justify-content: center;
+  width: 190px;
 }

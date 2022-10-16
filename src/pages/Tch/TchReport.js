@@ -5,6 +5,8 @@ import ExportButton from "../../components/ExportButton";
 import ButtonGroupComp from "../../components/ButtonGroupComp";
 import moment from "moment";
 import SearchBarComp from "../../components/SearchBarComp";
+import MyModal from "../../components/MyModal";
+import Button from "react-bootstrap/Button";
 
 function TchReport({ ...props }) {
   const { tableContent: data } = props;
@@ -21,6 +23,11 @@ function TchReport({ ...props }) {
   const [search, setSearch] = useState("");
   const [activateSearch, setActivateSearch] = useState(true);
   const [activeExtractButton, setActiveExtractButton] = useState(false);
+
+  // Modal state and handlers
+  const [showModal, setShowModal] = useState(false);
+  const openModalHandler = () => setShowModal(true);
+  const closeModalHandler = () => setShowModal(false);
 
   // other constants
   const today = new Date().toDateString();
@@ -132,7 +139,7 @@ function TchReport({ ...props }) {
   };
 
   return (
-    <>
+    <React.Fragment>
       {activeExtractButton && (
         <div className="table-container">
           <div className="buttons-container">
@@ -154,6 +161,19 @@ function TchReport({ ...props }) {
               <SearchBarComp onClickHandler={searchButtonHandler} />
             )}
             <ExportButton excelD={excelData} refReprot={"tch"} />
+            <MyModal
+              show={showModal}
+              onCancel={closeModalHandler}
+              header="TCH Report"
+              contentClass="place-item__modal-content"
+              footerClass="place-item__modal-actions"
+              footer={<Button onClick={closeModalHandler}>CLOSE</Button>}
+            >
+              <div className="map-container">Email Syntax Here!!</div>
+            </MyModal>
+            <Button variant="secondary" onClick={openModalHandler}>
+              Email-text
+            </Button>
           </div>
 
           <TableComp
@@ -164,7 +184,7 @@ function TchReport({ ...props }) {
           />
         </div>
       )}
-    </>
+    </React.Fragment>
   );
 }
 

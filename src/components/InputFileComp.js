@@ -31,7 +31,7 @@ function InputFileComp({ ...props }) {
   return (
     <>
       <Form.Group controlId="formFile" className="mb-3 input-file-dip">
-        <Form.Label>{`Enter "${fileName}" file here ⬇️`}</Form.Label>
+        <Form.Label>{`Select your "${fileName}" file ⬆️`}</Form.Label>
         <Form.Control type="file" onChange={fileHandle} size="sm" />
       </Form.Group>
     </>
