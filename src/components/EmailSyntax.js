@@ -3,13 +3,13 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 function MyVerticallyCenteredModal(props) {
-  const report = props.data.report;
-  const lowTchAvaCells = props.data.lowTchAvaCells;
-  const downCells = props.data.downCells;
-  const haltedCells = props.data.haltedCells;
-  const uasArr = props.data.uasArr;
-  const sesArr = props.data.sesArr;
-  const esArr = props.data.esArr;
+  const { report } = props.data;
+  const { lowTchAvaCells } = props.data;
+  const { downCells } = props.data;
+  const { haltedCells } = props.data;
+  const { uasArr } = props.data;
+  const { sesArr } = props.data;
+  const { esArr } = props.data;
 
   console.log("EmailSyntax rendered");
 

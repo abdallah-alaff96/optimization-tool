@@ -7,6 +7,7 @@ function Dip() {
   const [myFile, setMyFile] = useState([]);
   const [transFile, setTransFile] = useState([]);
   const [filesToggle, setFilesToggle] = useState(true);
+  const [transToggle, setTransToggle] = useState(false);
 
   // Dip file Handler
   const dipInputFileHandler = (data) => {
@@ -21,6 +22,8 @@ function Dip() {
   useEffect(() => {
     if (myFile.length !== 0 && transFile.length !== 0) {
       setFilesToggle(false);
+    } else if (transFile.length !== 0) {
+      setTransToggle(true);
     }
   }, [myFile, transFile]);
 
@@ -31,16 +34,16 @@ function Dip() {
         <div className="input-files-container">
           {filesToggle && (
             <InputFileComp
-              onHandler={dipInputFileHandler}
-              refSheetNumber={0}
-              fileName={"DIP"}
-            />
-          )}
-          {filesToggle && (
-            <InputFileComp
               onHandler={transInputFileHandler}
               refSheetNumber={1}
               fileName={"Transmission update"}
+            />
+          )}
+          {filesToggle && transToggle && (
+            <InputFileComp
+              onHandler={dipInputFileHandler}
+              refSheetNumber={0}
+              fileName={"DIP"}
             />
           )}
         </div>

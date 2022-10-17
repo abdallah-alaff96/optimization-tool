@@ -68,6 +68,7 @@ function DipTable({ ...props }) {
             : transData.find((elm) => elm.con_ == row.bsc_dip)?.site_id ||
               "Does not belong to Gaza sites";
         row.date = moment(row.date).add(1, "hours")._d;
+        row.date = new Date(Date.parse(row.date)).toDateString();
       });
 
       // filtering conditions the 4 sheets
@@ -79,13 +80,13 @@ function DipTable({ ...props }) {
       setActiveArr(data.filter((row) => row.site_name.startsWith("G")));
       setActiveExtractButton(true);
 
-      // console.log("useEffect renders");
+      console.log("useEffect renders");
     }
   }, [data, transData]);
 
   useEffect(() => {
     if (data.length !== 0 && transData.length !== 0) {
-      // console.log("useEffect renders");
+      console.log("Search useEffect renders");
       setActiveArr(
         filteredData.filter((row) => row.site_name.includes(search))
       );
@@ -146,6 +147,7 @@ function DipTable({ ...props }) {
     setUniqueUasArr([...new Set(bufferUas)]);
     setUniqueSesArr([...new Set(bufferSes)]);
     setUniqueEsArr([...new Set(bufferEs)]);
+    console.log("Email-Syntx useEffect rendered");
   }, [uasArr, sesArr, esArr]);
 
   let excelData = [filteredData, uasArr, sesArr, esArr];

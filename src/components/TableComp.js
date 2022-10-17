@@ -39,7 +39,7 @@ function TableComp({ ...props }) {
     Row = ({ index, style }) => (
       <tr key={index} style={style} className="row_data">
         <td>{dataArr[index].site_name}</td>
-        <td className="date_data">{dataArr[index]?.date?.toDateString()}</td>
+        <td className="date_data">{dataArr[index].date}</td>
         <td>{dataArr[index].hour}</td>
         <td>{dataArr[index].sf}</td>
         <td>{dataArr[index].es}</td>
