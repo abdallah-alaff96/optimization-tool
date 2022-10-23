@@ -11,7 +11,6 @@ function InputFileComp({ ...props }) {
 
   // File Handler Function
   const fileHandle = (e) => {
-    // setActiveSpinner(true);
     console.log("start read fileHandler");
     var file = e.target.files[0];
     var reader = new FileReader();

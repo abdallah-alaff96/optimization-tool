@@ -28,9 +28,6 @@ function DipTable({ ...props }) {
   const [activateSearch, setActivateSearch] = useState(true);
   const [activeExtractButton, setActiveExtractButton] = useState(false);
 
-  // loading spinner
-  const [activeSpinner, setActiveSpinner] = useState(false);
-
   // other constants
   const dipheaderArr = [
     "Site Name",
@@ -83,8 +80,6 @@ function DipTable({ ...props }) {
       setEsArr(modData.filter((row) => row.es > 100 || row.esr > 100));
       setActiveArr(data.filter((row) => row.site_name.startsWith("G")));
 
-      console.log("finish mainProcess promise !");
-
       const error = false;
       if (!error) {
         resolve();
@@ -97,32 +92,18 @@ function DipTable({ ...props }) {
   useEffect(() => {
     if (data.length && transData.length) {
       const init = async () => {
-        //start spinning
-
-        setActiveSpinner(true);
-        console.log(activeSpinner);
-
         // call the promise
         await mainProcess();
-
-        // stop spinning
-        // setActiveSpinner(false);
-        // console.log(activeSpinner);
 
         // show table
         setActiveExtractButton(true);
       };
 
       init().catch((error) => {
-        setActiveSpinner(false);
         console.log(error.message);
       });
     }
   }, [data, transData]);
-
-  useEffect(() => {
-    console.log("useEffect active spinner", activeSpinner);
-  }, [activeSpinner]);
 
   useEffect(() => {
     if (data.length !== 0 && transData.length !== 0) {
@@ -194,7 +175,6 @@ function DipTable({ ...props }) {
 
   return (
     <>
-      {activeSpinner && <LoadingSpinner />}
       {activeExtractButton && (
         <div className="table-container">
           <div className="buttons-container">
