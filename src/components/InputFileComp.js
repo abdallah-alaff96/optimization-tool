@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import * as XLSX from "xlsx";
+import LoadingSpinner from "./LoadingSpinner";
 
 function InputFileComp({ ...props }) {
   const { onHandler, refSheetNumber, fileName } = props;
 
+  // loading spinner
+  const [activeSpinner, setActiveSpinner] = useState(false);
+
   // File Handler Function
   const fileHandle = (e) => {
+    // setActiveSpinner(true);
     console.log("start read fileHandler");
     var file = e.target.files[0];
     var reader = new FileReader();
@@ -27,7 +32,9 @@ function InputFileComp({ ...props }) {
 
       onHandler(wsData);
       console.log("finish onloading data");
+      setActiveSpinner(false);
     };
+    setActiveSpinner(true);
     reader.readAsArrayBuffer(file);
     console.log("finish read fileHandler");
   };
@@ -37,6 +44,8 @@ function InputFileComp({ ...props }) {
       <Form.Group controlId="formFile" className="mb-3 input-file-dip">
         <Form.Label>{`Select your "${fileName}" file ⬆️`}</Form.Label>
         <Form.Control type="file" onChange={fileHandle} size="sm" />
+        <br />
+        {activeSpinner && <LoadingSpinner />}
       </Form.Group>
     </>
   );
