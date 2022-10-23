@@ -6,6 +6,7 @@ import ButtonGroupComp from "../../components/ButtonGroupComp";
 import SearchBarComp from "../../components/SearchBarComp";
 import EmailSyntax from "../../components/EmailSyntax";
 import moment from "moment";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 function DipTable({ ...props }) {
   const { tableContent: data, tableTrans: transData } = props;
@@ -27,6 +28,9 @@ function DipTable({ ...props }) {
   const [activateSearch, setActivateSearch] = useState(true);
   const [activeExtractButton, setActiveExtractButton] = useState(false);
 
+  // loading spinner
+  const [activeSpinner, setActiveSpinner] = useState(false);
+
   // other constants
   const dipheaderArr = [
     "Site Name",
@@ -44,8 +48,8 @@ function DipTable({ ...props }) {
     "BSC",
   ];
 
-  useEffect(() => {
-    if (data.length !== 0 && transData.length !== 0) {
+  function mainProcess() {
+    return new Promise((resolve, reject) => {
       // Edit trans Arr
       transData.map((row) => {
         KeysToLowerCase(row);
@@ -78,11 +82,47 @@ function DipTable({ ...props }) {
       setSesArr(modData.filter((row) => row.ses > 2 || row.sesr > 2));
       setEsArr(modData.filter((row) => row.es > 100 || row.esr > 100));
       setActiveArr(data.filter((row) => row.site_name.startsWith("G")));
-      setActiveExtractButton(true);
 
-      console.log("useEffect renders");
+      console.log("finish mainProcess promise !");
+
+      const error = false;
+      if (!error) {
+        resolve();
+      } else {
+        reject("Error: Something went wrong");
+      }
+    });
+  }
+
+  useEffect(() => {
+    if (data.length && transData.length) {
+      const init = async () => {
+        //start spinning
+
+        setActiveSpinner(true);
+        console.log(activeSpinner);
+
+        // call the promise
+        await mainProcess();
+
+        // stop spinning
+        // setActiveSpinner(false);
+        // console.log(activeSpinner);
+
+        // show table
+        setActiveExtractButton(true);
+      };
+
+      init().catch((error) => {
+        setActiveSpinner(false);
+        console.log(error.message);
+      });
     }
   }, [data, transData]);
+
+  useEffect(() => {
+    console.log("useEffect active spinner", activeSpinner);
+  }, [activeSpinner]);
 
   useEffect(() => {
     if (data.length !== 0 && transData.length !== 0) {
@@ -154,6 +194,7 @@ function DipTable({ ...props }) {
 
   return (
     <>
+      {activeSpinner && <LoadingSpinner />}
       {activeExtractButton && (
         <div className="table-container">
           <div className="buttons-container">

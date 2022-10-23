@@ -11,7 +11,9 @@ function Dip() {
 
   // Dip file Handler
   const dipInputFileHandler = (data) => {
+    // console.log("start setting data into state");
     setMyFile(data);
+    // console.log("finish setting data into state");
   };
 
   // Trans file Handler

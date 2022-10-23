@@ -7,10 +7,12 @@ function InputFileComp({ ...props }) {
 
   // File Handler Function
   const fileHandle = (e) => {
+    console.log("start read fileHandler");
     var file = e.target.files[0];
     var reader = new FileReader();
 
     reader.onload = (e) => {
+      console.log("start onloading data");
       var data = e.target.result;
       var workbook = XLSX.read(data, {
         type: "binary",
@@ -24,8 +26,10 @@ function InputFileComp({ ...props }) {
       const wsData = XLSX.utils.sheet_to_json(ws);
 
       onHandler(wsData);
+      console.log("finish onloading data");
     };
     reader.readAsArrayBuffer(file);
+    console.log("finish read fileHandler");
   };
 
   return (
