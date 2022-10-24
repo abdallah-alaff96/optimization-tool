@@ -106,7 +106,7 @@ function DipTable({ ...props }) {
   }, [data, transData]);
 
   useEffect(() => {
-    if (data.length !== 0 && transData.length !== 0) {
+    if (data.length && transData.length) {
       console.log("Search useEffect renders");
       setActiveArr(
         filteredData.filter((row) => row.site_name.includes(search))
