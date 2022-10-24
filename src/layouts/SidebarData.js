@@ -15,10 +15,10 @@ export const sidebarData = [
     icon: <TbIcons.TbReportAnalytics />,
     cName: "nav-list-item",
   },
-  {
-    title: "Complaints",
-    path: "/complaints",
-    icon: <IoIcons.IoIosPeople />,
-    cName: "nav-list-item",
-  },
+  // {
+  //   title: "Complaints",
+  //   path: "/complaints",
+  //   icon: <IoIcons.IoIosPeople />,
+  //   cName: "nav-list-item",
+  // },
 ];
