@@ -96,6 +96,17 @@ a:active {
   transition: all 0.3s;
   margin-left: 0.5rem;
 }
+.title,
+.title span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+.title span path {
+  stroke: #00a6ed;
+}
+
 .header .title {
   padding-left: 2rem;
 }

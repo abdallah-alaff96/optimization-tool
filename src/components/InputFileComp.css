@@ -1,0 +1,14 @@
+.form-label,
+.form-label span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+.form-label span path {
+  stroke: #00a6ed;
+}
+
+.form-label span {
+  font-size: 24px;
+}

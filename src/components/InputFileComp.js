@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import * as XLSX from "xlsx";
+import * as FcIcons from "react-icons/fc";
 import LoadingSpinner from "./LoadingSpinner";
+import "./InputFileComp.css";
 
 function InputFileComp({ ...props }) {
   const { onHandler, refSheetNumber, fileName } = props;
@@ -41,7 +43,12 @@ function InputFileComp({ ...props }) {
   return (
     <>
       <Form.Group controlId="formFile" className="mb-3 input-file-dip">
-        <Form.Label>{`Select your "${fileName}" file ⬆️`}</Form.Label>
+        <Form.Label className="form-label">
+          {`Select your "${fileName}" file`}
+          <span>
+            <FcIcons.FcUpload />
+          </span>
+        </Form.Label>
         <Form.Control type="file" onChange={fileHandle} size="sm" />
         <br />
         {activeSpinner && <LoadingSpinner />}
