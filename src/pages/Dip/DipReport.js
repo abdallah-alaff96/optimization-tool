@@ -76,8 +76,13 @@ function DipTable({ ...props }) {
       const modData = data.filter((row) => row.site_name.startsWith("G"));
       setFilteredData(modData);
       setUasArr(modData.filter((row) => row.uas > 0 || row.uasr > 0));
-      setSesArr(modData.filter((row) => row.ses > 2 || row.sesr > 2));
-      setEsArr(modData.filter((row) => row.es > 100 || row.esr > 100));
+      setSesArr(
+        modData.filter(
+          (row) =>
+            (row.ses > 2 || row.sesr > 2) && row.uas === 0 && row.uasr === 0
+        )
+      );
+      setEsArr(modData.filter((row) => row.es > 500 || row.esr > 500));
       setActiveArr(data.filter((row) => row.site_name.startsWith("G")));
 
       const error = false;
