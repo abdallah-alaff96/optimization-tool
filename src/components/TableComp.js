@@ -57,11 +57,13 @@ function TableComp({ ...props }) {
 
   const StickyRow = ({ index, style }) => (
     <tr className="sticky_header" style={style}>
-      {headerArr.map((header, index) => (
-        <th key={index} className={index === 1 ? "date_sticky_header" : ""}>
-          {header}
-        </th>
-      ))}
+      <div className="table-header">
+        {headerArr.map((header, index) => (
+          <th key={index} className={index === 1 ? "date_sticky_header" : ""}>
+            {header}
+          </th>
+        ))}
+      </div>
     </tr>
   );
 
@@ -75,7 +77,7 @@ function TableComp({ ...props }) {
               <StickyRow
                 index={index}
                 key={index}
-                style={{ top: index * 35, left: 0, width: "100%", height: 60 }}
+                style={{ top: index * 35, left: 0, width: "100%", height: 30 }}
               />
             ))}
           </thead>
@@ -99,7 +101,7 @@ function TableComp({ ...props }) {
   console.log("TableComp renders");
   return (
     <StickyList
-      height={500}
+      height={window.innerHeight - 200}
       innerElementType={innerElementType}
       itemCount={dataLength}
       itemSize={30}

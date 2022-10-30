@@ -144,9 +144,15 @@ a:active {
   margin-bottom: 0.7rem;
   position: relative;
 }
+.buttons-container_inner {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: space-between;
+}
 
 .search-input {
-  flex: 0.5;
+  flex: 0.7;
 }
 
 /* --------TableComp styles-------- */
@@ -156,14 +162,27 @@ a:active {
 }
 
 .sticky_header {
-  display: flex;
+  position: sticky;
+  position: -webkit-sticky;
+  background-color: #6c757d;
+  z-index: 100;
 }
 
-.sticky_header > * {
+.table-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-header th {
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 1;
+}
+
+.date_data,
+.date_sticky_header {
+  flex: 1.5 !important;
 }
 
 .row_data {
@@ -175,9 +194,4 @@ a:active {
   justify-content: center;
   align-items: center;
   flex: 1;
-}
-
-.date_sticky_header,
-.date_data {
-  flex: 1.5;
 }

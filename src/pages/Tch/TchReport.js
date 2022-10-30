@@ -185,13 +185,15 @@ function TchReport({ ...props }) {
             {activateSearch && (
               <SearchBarComp onClickHandler={searchButtonHandler} />
             )}
-            <ExportButton excelD={excelData} refReprot={"tch"} />
-            <EmailSyntax
-              lowTchAvaCells={uniqueLowTchAvaCells}
-              downCells={uniqueDownCells}
-              haltedCells={uniqueHaltedCells}
-              report={"tch"}
-            />
+            <div className="buttons-container_inner">
+              <ExportButton excelD={excelData} refReprot={"tch"} />
+              <EmailSyntax
+                lowTchAvaCells={uniqueLowTchAvaCells}
+                downCells={uniqueDownCells}
+                haltedCells={uniqueHaltedCells}
+                report={"tch"}
+              />
+            </div>
           </div>
 
           <TableComp

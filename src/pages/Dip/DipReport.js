@@ -185,13 +185,15 @@ function DipTable({ ...props }) {
             {activateSearch && (
               <SearchBarComp onClickHandler={searchButtonHandler} />
             )}
-            <ExportButton excelD={excelData} refReprot={"dip"} />
-            <EmailSyntax
-              uasArr={uniqueUasArr}
-              sesArr={uniqueSesArr}
-              esArr={uniqueEsArr}
-              report={"dip"}
-            />
+            <div className="buttons-container_inner">
+              <ExportButton excelD={excelData} refReprot={"dip"} />
+              <EmailSyntax
+                uasArr={uniqueUasArr}
+                sesArr={uniqueSesArr}
+                esArr={uniqueEsArr}
+                report={"dip"}
+              />
+            </div>
           </div>
 
           <TableComp
