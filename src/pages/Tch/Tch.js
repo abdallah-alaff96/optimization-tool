@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import InputFileComp from "../../components/InputFileComp";
 import TchReport from "./TchReport";
+import * as BsIcons from "react-icons/bs";
 import "./Tch.css";
 
 function Tch() {
@@ -20,7 +21,12 @@ function Tch() {
 
   return (
     <>
-      <div className="page-title"> ➡️ TCH Report</div>
+      <div className="page-title">
+        <span>
+          <BsIcons.BsFillArrowRightCircleFill />
+        </span>
+        TCH Report
+      </div>
       <div className="content tch">
         <div className="input-files-container">
           {filesToggle && (

@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import "./EmailSyntax.css";
 
 function MyVerticallyCenteredModal(props) {
   const { report } = props.data;
@@ -15,8 +16,8 @@ function MyVerticallyCenteredModal(props) {
 
   const tchMail = (
     <Modal.Body>
-      <h5>{`Dears in Operation / D&M`}</h5>
-      <h6> Kindly, find attached today's report for this morning: </h6>
+      <p>{`Dears in Operation / D&M`}</p>
+      <p> Kindly, find attached today's report for this morning: </p>
       <br />
       <p>{`- Low TCH Availability: ${lowTchAvaCells}`}</p>
       <p>{`- Morning Down Cells: ${downCells}`}</p>
@@ -27,10 +28,10 @@ function MyVerticallyCenteredModal(props) {
 
   const dipMail = (
     <Modal.Body>
-      <h5>{`Dears in D&M`}</h5>
-      <h6>
+      <p>{`Dears in D&M`}</p>
+      <p>
         Kindly, the following sites has DIP issues, please check and feedback.
-      </h6>
+      </p>
       <br />
       <p>{`- UAS/UASR: ${uasArr}`}</p>
       <p>{`- SES/SESR: ${sesArr}`}</p>

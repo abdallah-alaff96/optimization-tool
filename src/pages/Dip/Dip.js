@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import InputFileComp from "../../components/InputFileComp";
 import DipReport from "./DipReport";
+import * as BsIcons from "react-icons/bs";
 import "./Dip.css";
 
 function Dip() {
@@ -31,7 +32,12 @@ function Dip() {
 
   return (
     <>
-      <div className="page-title"> ➡️ DIP Report</div>
+      <div className="page-title">
+        <span>
+          <BsIcons.BsFillArrowRightCircleFill />
+        </span>
+        DIP Report
+      </div>
       <div className="content dip">
         <div className="input-files-container">
           {filesToggle && (

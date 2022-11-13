@@ -124,9 +124,15 @@ a:active {
 .page-title {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   padding: 1rem 0 0 1rem;
   text-decoration: underline;
   font-style: italic;
+  gap: 7px;
+}
+
+.page-title span svg {
+  fill: #00a6ed;
 }
 
 /* TchReport & DipReprot styles */

@@ -14,7 +14,7 @@ function Header({ ...props }) {
         </Link>
 
         <div className="title">
-          <div>RF Optimization Tool</div>
+          <div>Optimization Web Tool</div>
           <span>
             <GrIcons.GrOptimize />
           </span>

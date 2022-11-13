@@ -6,7 +6,6 @@ import ButtonGroupComp from "../../components/ButtonGroupComp";
 import SearchBarComp from "../../components/SearchBarComp";
 import EmailSyntax from "../../components/EmailSyntax";
 import moment from "moment";
-import LoadingSpinner from "../../components/LoadingSpinner";
 
 function DipTable({ ...props }) {
   const { tableContent: data, tableTrans: transData } = props;
