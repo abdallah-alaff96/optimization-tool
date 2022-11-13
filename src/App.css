@@ -34,7 +34,7 @@
 
 ::-webkit-scrollbar-thumb {
   background: #6c757d;
-  -webkit-border-radius: 1ex;
+  /* -webkit-border-radius: 1ex; */
 }
 
 a:link,
