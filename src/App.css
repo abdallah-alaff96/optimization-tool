@@ -26,6 +26,17 @@
   font-family: "Manrope", sans-serif;
 }
 
+/* scrollbar styles */
+::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6c757d;
+  -webkit-border-radius: 1ex;
+}
+
 a:link,
 a:visited,
 a:hover,
@@ -85,7 +96,7 @@ a:active {
   flex: 1;
   height: 20%;
   padding: 1rem;
-
+  font-weight: 900;
   background-color: var(--clr-darkWhite);
   font-size: var(--fz-large);
 }
@@ -225,4 +236,47 @@ a:active {
   justify-content: center;
   align-items: center;
   flex: 1;
+}
+
+/* 4K screens */
+@media only screen and (min-width: 1800px) {
+  body {
+    font-size: 20px !important;
+  }
+
+  .legal {
+    font-size: 15px !important;
+  }
+  .header {
+    font-size: 30px !important;
+    font-weight: 900;
+  }
+  .nav {
+    max-width: 250px;
+  }
+  .content {
+    font-size: 20px;
+  }
+  .content .form-control {
+    font-size: 20px;
+  }
+  .buttons-container {
+    max-width: 1400px;
+  }
+  .buttons-container .btn-group-sm > .btn,
+  .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 20px;
+    border-radius: 0.2rem;
+  }
+
+  .buttons-container .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 20px;
+    border-radius: 0.2rem;
+  }
+
+  .search-input .btn {
+    border-radius: 20px;
+  }
 }

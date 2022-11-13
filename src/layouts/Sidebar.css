@@ -47,3 +47,17 @@
 .nav-links a.active {
   width: 190px;
 }
+
+/* 4K screens */
+@media only screen and (min-width: 1800px) {
+  .nav-links svg {
+    width: 2rem;
+    height: 2rem;
+  }
+  .nav-links a {
+    width: 200px;
+  }
+  .nav-links a.active {
+    width: 250px;
+  }
+}

@@ -106,7 +106,7 @@ function TableComp({ ...props }) {
       itemCount={dataLength}
       itemSize={30}
       stickyIndices={[0]}
-      width={1200}
+      width={window.innerWidth - window.innerWidth * 0.22}
     >
       {Row}
     </StickyList>
