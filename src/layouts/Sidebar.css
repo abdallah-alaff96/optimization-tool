@@ -22,7 +22,7 @@
   padding: 0.5rem;
   border-radius: 7px;
   display: flex;
-  gap: 5px;
+  gap: 7px;
   width: 150px;
   transition: all 0.7s;
 }
@@ -30,6 +30,10 @@
 .nav-links a span {
   display: flex;
   align-items: center;
+}
+.nav-links svg {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 .nav-links a:hover,

@@ -117,7 +117,7 @@ function ExportButton({ ...props }) {
       onClick={() => handleExport(excelDMod, refReprot)}
       className="dip-extract-button"
     >
-      Extract Data
+      Download Excel
     </Button>
   );
 }

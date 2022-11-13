@@ -133,6 +133,8 @@ a:active {
 
 .page-title span svg {
   fill: #00a6ed;
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 /* TchReport & DipReprot styles */
@@ -156,6 +158,7 @@ a:active {
 .buttons-container {
   display: flex;
   width: 100%;
+  max-width: 1200px;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.7rem;
@@ -170,6 +173,16 @@ a:active {
 
 .search-input {
   flex: 0.7;
+  fill: #f4f4f4;
+}
+
+.search-input .form-control {
+  border: 0px solid #ced4da;
+  border-radius: 20px;
+}
+.search-input .btn {
+  border: 0.1px solid #ced4da;
+  border-radius: 20px;
 }
 
 /* --------TableComp styles-------- */
@@ -188,6 +201,7 @@ a:active {
 .table-header {
   display: flex;
   justify-content: space-between;
+  color: #fff;
 }
 
 .table-header th {
