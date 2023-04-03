@@ -28,6 +28,7 @@ function DipTable({ ...props }) {
   const [activeExtractButton, setActiveExtractButton] = useState(false);
 
   // other constants
+  const today = new Date().toDateString();
   const dipheaderArr = [
     "Site Name",
     "Date",
@@ -71,7 +72,11 @@ function DipTable({ ...props }) {
       });
 
       // filtering conditions the 4 sheets
-      const modData = data.filter((row) => row.site_name.startsWith("G"));
+      const modData = data
+        .filter((row) => row.site_name.startsWith("G"))
+        ?.filter(
+          (row) => row.date === today || (row.date !== today && row.hour >= 8)
+        );
       setFilteredData(modData);
       setUasArr(modData.filter((row) => row.uas > 0 || row.uasr > 0));
       setSesArr(
@@ -80,7 +85,12 @@ function DipTable({ ...props }) {
             (row.ses > 2 || row.sesr > 2) && row.uas === 0 && row.uasr === 0
         )
       );
-      setEsArr(modData.filter((row) => row.es > 500 || row.esr > 500));
+      setEsArr(
+        modData.filter(
+          (row) =>
+            (row.es > 500 || row.esr > 500) && row.uas === 0 && row.uasr === 0
+        )
+      );
       setActiveArr(data.filter((row) => row.site_name.startsWith("G")));
 
       const error = false;
@@ -175,7 +185,7 @@ function DipTable({ ...props }) {
   }, [uasArr, sesArr, esArr]);
 
   let excelData = [filteredData, uasArr, sesArr, esArr];
-
+  console.log(data);
   return (
     <>
       {activeExtractButton && (
