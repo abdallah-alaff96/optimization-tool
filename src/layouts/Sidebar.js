@@ -24,7 +24,7 @@ function Sidebar() {
       </li>
     );
   });
-
+  console.log(activeBar);
   return (
     <>
       <nav className="nav">

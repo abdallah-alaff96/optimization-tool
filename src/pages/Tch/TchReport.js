@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from "react";
 import TableComp from "../../components/TableComp";
 import { KeysToLowerCase } from "../../handlers/KeysToLowerCase";
@@ -77,7 +78,7 @@ function TchReport({ ...props }) {
       );
 
       const temporaryLowTchAvaCells = temporaryFilteredData?.filter(
-        (row) => row.cell_down_time_min == 0 && row.tch_availability__ < 92
+        (row) => row.cell_down_time_min === 0 && row.tch_availability__ < 92
       );
 
       const temporaryHaltedCells = temporaryFilteredData?.filter(
@@ -103,7 +104,7 @@ function TchReport({ ...props }) {
       setActiveArr(temporaryAllAffectedCellsArr);
       setActiveExtractButton(true);
     }
-  }, [data]);
+  }, [data, today]);
 
   useEffect(() => {
     if (data.length !== 0) {
@@ -111,7 +112,7 @@ function TchReport({ ...props }) {
         allAffectedCellsArr.filter((row) => row.cell_name.includes(search))
       );
     }
-  }, [search]);
+  }, [allAffectedCellsArr, data.length, search]);
 
   // Active Button Handlers
   const dataHandler = () => {

@@ -1,5 +1,5 @@
 import * as FaIcons from "react-icons/fa";
-import * as IoIcons from "react-icons/io";
+// import * as IoIcons from "react-icons/io";
 import * as TbIcons from "react-icons/tb";
 
 export const sidebarData = [

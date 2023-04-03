@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React from "react";
 import * as XLSX from "xlsx";
 import KeysToUpperCase from "../handlers/KeysToUpperCase";

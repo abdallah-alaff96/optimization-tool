@@ -1,4 +1,3 @@
-"use strict";
 import React, { useState } from "react";
 import Sidebar from "./layouts/Sidebar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
