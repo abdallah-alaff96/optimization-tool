@@ -48,9 +48,8 @@ function DipTable({ ...props }) {
     return new Promise((resolve, reject) => {
       // Edit trans Arr
       transData.map((row) => {
-        KeysToLowerCase(row);
+        return KeysToLowerCase(row);
       });
-
       // Edit data Arr
       data.map((row) => {
         // Keys TO LOWERCASE

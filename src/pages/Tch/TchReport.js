@@ -81,7 +81,9 @@ function TchReport({ ...props }) {
       );
 
       const temporaryHaltedCells = temporaryFilteredData?.filter(
-        (row) => !row.cell_down_time_min && row.cell_down_time_min !== 0
+        (row) =>
+          (!row.cell_down_time_min && row.cell_down_time_min !== 0) ||
+          isNaN(row.cell_down_time_min)
       );
       temporaryHaltedCells?.map((row) => (row.cell_down_time_min = "Halted"));
 
