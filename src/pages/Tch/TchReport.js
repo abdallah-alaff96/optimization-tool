@@ -78,7 +78,7 @@ function TchReport({ ...props }) {
       );
 
       const temporaryLowTchAvaCells = temporaryFilteredData?.filter(
-        (row) => row.cell_down_time_min === 0 && row.tch_availability__ < 92
+        (row) => row.cell_down_time_min == 0 && row.tch_availability__ < 92
       );
 
       const temporaryHaltedCells = temporaryFilteredData?.filter(
@@ -112,7 +112,7 @@ function TchReport({ ...props }) {
         allAffectedCellsArr.filter((row) => row.cell_name.includes(search))
       );
     }
-  }, [allAffectedCellsArr, data.length, search]);
+  }, [search]);
 
   // Active Button Handlers
   const dataHandler = () => {

@@ -67,7 +67,7 @@ function DipTable({ ...props }) {
         row.site_name =
           transData.length === 0
             ? "Waiting Trans. file update"
-            : transData.find((elm) => elm.con_ === row.bsc_dip)?.site_id ||
+            : transData.find((elm) => elm.con_ == row.bsc_dip)?.site_id ||
               "Does not belong to Gaza sites";
         row.date = moment(row.date).add(1, "hours")._d;
         row.date = new Date(Date.parse(row.date)).toDateString();
